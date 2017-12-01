@@ -171,6 +171,7 @@ class ResidentialListingsController < ApplicationController
   end
 
   def update
+    exit
     unit_updated = nil
     listing_updated = nil
     is_now_active = nil
@@ -491,6 +492,7 @@ class ResidentialListingsController < ApplicationController
         :has_fee, :op_fee_percentage, :tp_fee_percentage,
         :available_starting, :available_before, :custom_amenities,
         :roomsharing_filter, :unassigned_filter, :tenant_occupied_filter, :streeteasy_filter,
+        :no_description,:no_images,
         :primary_agent_id, :favorites, :show,
         :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
         :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,

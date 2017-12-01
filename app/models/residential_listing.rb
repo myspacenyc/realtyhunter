@@ -179,7 +179,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.lease_end', 'residential_listings.has_fee',
         'residential_listings.op_fee_percentage','residential_listings.tp_fee_percentage',
         'residential_listings.tenant_occupied', 'residential_listings.created_at',
-        'residential_listings.updated_at',
+        'residential_listings.updated_at','residential_listings.streeteasy_flag','residential_listings.show',
         'neighborhoods.name AS neighborhood_name', 'neighborhoods.id AS neighborhood_id',
         'landlords.code',
         'landlords.id AS landlord_id',
@@ -214,7 +214,7 @@ class ResidentialListing < ApplicationRecord
         'landlords.id AS landlord_id',
         'units.listing_id', 'units.available_by', 'units.public_url', 'units.exclusive',
         'users.name')
-
+      #abort running_list.inspect
     if !params && !building_id
       running_list
     elsif !params && building_id
@@ -405,6 +405,15 @@ class ResidentialListing < ApplicationRecord
     if !params[:has_stock_photos_filter].blank?
       running_list = running_list.where(
           'units.has_stock_photos = ?', params[:has_stock_photos_filter])
+    end
+
+    if params[:no_description] == 'true'
+      running_list = running_list.where("length(description) < 20")
+    end
+
+    if params[:no_images] == 'true'
+        running_list = running_list.select { |list_item| list_item.unit.images.count < 2 }
+        #abort running_list.inspect
     end
 
     # primary agent

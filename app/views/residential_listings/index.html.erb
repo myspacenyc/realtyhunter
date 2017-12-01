@@ -268,6 +268,27 @@
           </div>
 
           <div class="row vertical-padding">
+            <div class="col-xs-6">
+              <div class="checkbox checkbox-warning inline">
+                <%= check_box_tag :no_description, "".freeze, params[:no_description] == "true".freeze ? true : false,
+                    class: 'styled' %>
+                <label for="no_description">
+                  No Description
+                </label>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="checkbox checkbox-warning inline">
+                <%= check_box_tag :no_images, "".freeze, params[:no_images] == "true".freeze ? true : false,
+                    class: 'styled' %>
+                <label for="no_images">
+                  No Images
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row vertical-padding">
             <div class="col-xs-11 selectize-wrapper">
               <select id="neighborhood-select-multiple" placeholder="Neighborhoods...">
                 <% @neighborhoods.each do |borough, list| %>

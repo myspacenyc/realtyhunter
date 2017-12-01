@@ -44,6 +44,8 @@
         unassigned_filter: $('#unassigned_filter').prop('checked'),
         tenant_occupied_filter: $('#tenant_occupied_filter').prop('checked'),
         has_stock_photos_filter: $('#has_stock_photos_filter').prop('checked'),
+        no_description: $('#no_description').prop('checked'),
+        no_images: $('#no_images').prop('checked'),
         streeteasy_filter: $('#streeteasy_filter').val(),
         primary_agent_id:  $('#primary_agent_id').val(),
         sort_by: sortByCol,
