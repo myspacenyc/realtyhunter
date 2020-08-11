@@ -81,8 +81,11 @@
 
             <br />
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <p><strong>Edit current photos (drag to reorder):</strong></p>
+              </div>
+              <div class="col-md-6">
+                <%= link_to "Delete All Images", delete_all_image_path(@residential_unit), style: "float:right;" %>
               </div>
             </div>
             <div class="row">
@@ -187,6 +190,17 @@
           </div>
           <div class="col-xs-9 col-md-4">
             <%= unit_form.text_field :streeteasy_unit, class: 'form-control' %>
+          </div>
+        </div>
+        <% end %>
+
+        <%= f.fields_for @residential_unit.unit do |unit_form| %>
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-2">
+            <%= f.label :applications, "Applications" %>
+          </div>
+          <div class="col-xs-9 col-md-4">
+            <%= unit_form.number_field :applications, class: 'form-control' %>
           </div>
         </div>
         <% end %>

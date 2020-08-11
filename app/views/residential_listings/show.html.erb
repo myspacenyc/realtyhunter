@@ -257,6 +257,18 @@
 		    			</div>
 		    			<div class="row">
 		    				<div class="col-xs-5">
+		    					<strong>Applications</strong>
+		    				</div>
+		    				<div class="col-xs-7">
+		    					<% if !@residential_unit.unit.applications.blank? %>
+		    						<%= @residential_unit.unit.applications %>
+		    					<% else %>
+		    						---
+		    					<% end %>
+		    				</div>
+		    			</div>
+		    			<div class="row">
+		    				<div class="col-xs-5">
 				    			<strong>Price:</strong>
 				    		</div>
 				    		<div class="col-xs-7">

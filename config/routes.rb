@@ -129,12 +129,14 @@ Rails.application.routes.draw do
   get 'residential_listings/agent_rental' => "residential_listings#agent_rental", as: :agent_rental
   get 'residential_listings/media_index' => "residential_listings#media_index", as: :media_index
   get 'residential_listings/room_index' => "residential_listings#room_index", as: :room_index
+  get 'residential_listings/download_image/:id' => "residential_listings#download_image", as: :download_image
   post 'residential_listings/generate_custom_email' => "residential_listings#generate_custom_email", as: :generate_custom_email
   get 'residential_listings/send_custom_email' => "residential_listings#send_custom_email", as: :send_custom_email
   post 'residential_listings/send_email_to_tenant/:id' => "residential_listings#send_email_to_tenant", as: :send_email_to_tenant
   post 'residential_listings/send_sms_to_tenant/:id' => "residential_listings#send_sms_to_tenant", as: :send_sms_to_tenant
   post 'residential_listings/add_to_photog_list/:id' => "residential_listings#add_to_photog_list", as: :add_to_photog_list
   get 'residential_listings/photographer_todo' => "residential_listings#photographer_todo", as: :photographer_todo
+  get 'residential_listings/delete_all_image/:id' => "residential_listings#delete_all_image", as: :delete_all_image
   post 'residential_listings/photo_status_update/:id' => "residential_listings#photo_status_update", as: :photo_status_update
   get 'residential_listings/delete_from_photo_tag_list/:id' => "residential_listings#delete_from_photo_tag_list", as: :delete_from_photo_tag_list
   get 'residential_listings/claim_for_streeteasy' => "residential_listings#claim_for_streeteasy", as: :claim_for_streeteasy

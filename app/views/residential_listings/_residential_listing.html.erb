@@ -543,6 +543,11 @@
                 </div>
               <% end %><!-- roomsharing icons -->
             </span>
+            <% if !residential_listing.unit.applications.blank? %>
+              <%= residential_listing.unit.applications %>
+            <% else %>
+              ---
+            <% end %>
             <% if !residential_listing.notes.blank? || !residential_listing.dimensions.blank? %>
               <span class="glyphicon glyphicon-info-sign green" data-toggle="modal" data-target="#myModal"  data-whatever="<%= 'Private Unit Notes ' + residential_listing.notes.html_safe %><%= residential_listing.unit.building.landlord.notes.html_safe %> <%= '<br> ---- <br> Dimensions<br> ' + residential_listing.dimensions %>"></span>
               <div class="modal fade" id="myModal" role="dialog">
@@ -953,6 +958,11 @@
               </div>
             <% end %><!-- roomsharing icons -->
           </span>
+          <% if !residential_listing.unit.applications.blank? %>
+              Applications: <%= residential_listing.unit.applications %>
+            <% else %>
+              ---
+            <% end %>
           <% if !residential_listing.notes.blank?  || !residential_listing.dimensions.blank?%>
             <span class="glyphicon glyphicon-info-sign green" data-toggle="modal" data-target="#myModal" data-whatever="<%= '<strong>Private Unit Notes</strong> <br>' + residential_listing.notes.html_safe if !residential_listing.notes.nil? %><%= residential_listing.unit.building.landlord.notes if !residential_listing.unit.building.landlord.notes.nil? %><%= !residential_listing.dimensions.blank? ? '<br> ---- <br><strong> Dimensions </strong><br><br> ' + residential_listing.dimensions : '' %>"></span>
               <div class="modal fade" id="myModal" role="dialog">

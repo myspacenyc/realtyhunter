@@ -1286,6 +1286,14 @@ class ResidentialListingsController < ApplicationController
     end
   end
 
+  def delete_all_image
+    @delete_all_img = ResidentialListing.find(params[:id]).unit.images
+    if !@delete_all_img.blank?
+      @delete_all_img.delete_all
+      redirect_to residential_listing_url
+    end
+  end
+
   def fee_options
     building = Building.find(params[:building_id])
     if building
@@ -1626,7 +1634,7 @@ class ResidentialListingsController < ApplicationController
         :primary_agent_id, :favorites, :show,:claim_for_naked_apartment, :claim_for_individual_syndication_page, :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
         :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,
         :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment,
-        unit: [:building_unit, :streeteasy_unit, :third_tier, :streeteasy_primary_agent_id, :streeteasy_listing_email, :streeteasy_listing_number, :rent, :gross_price, :maths_free, :available_by, :access_info, :status,
+        unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, :streeteasy_listing_number, :rent, :gross_price, :maths_free, :available_by, :access_info, :status,
           :exclusive, :featured, :hide_on_website, :hide_from_agent, :building_id, :primary_agent_id, :primary_agent2_id, :listing_agent_id,
           :syndication_status, :has_stock_photos, :is_exclusive_agreement_signed,
           :exclusive_agreement_expires_at, :public_url, :price_calculation,
