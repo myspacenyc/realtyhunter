@@ -146,7 +146,7 @@
 					  				user_id: @residential_unit.unit.primary_agent),
 				    			class: 'btn btn-warning btn-sm link-as-button vertical-margin-sm' %>
 				    		<% if !@residential_unit.unit.images.blank? %>
-				    			<a onclick="downloadAll(<%= @residential_unit.unit.images.all.map{|a| a.file.url} %>)" class="mod-cancel">Download Images</a>
+				    			<a onclick="downloadAll(<%= @residential_unit.unit.images.all.map{|a| a.file.url(:large)} %>)" class="mod-cancel">Download Images</a>
 				    		<% end %>
 					  	<% end %>
 			  		</div>
@@ -257,7 +257,7 @@
 		    			</div>
 		    			<div class="row">
 		    				<div class="col-xs-5">
-		    					<strong>Applications</strong>
+		    					<strong>No. of Apps</strong>
 		    				</div>
 		    				<div class="col-xs-7">
 		    					<% if !@residential_unit.unit.applications.blank? %>

@@ -1299,8 +1299,8 @@ class ResidentialListingsController < ApplicationController
     @delete_all_img = ResidentialListing.find(params[:id]).unit.images
     if !@delete_all_img.blank?
       @delete_all_img.delete_all
-      redirect_to residential_listing_url
     end
+    redirect_to edit_residential_listing_path(params[:id])
   end
 
   def fee_options

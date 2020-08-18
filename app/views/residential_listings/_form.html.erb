@@ -197,7 +197,7 @@
         <%= f.fields_for @residential_unit.unit do |unit_form| %>
         <div class="row vertical-margin-lg">
           <div class="col-xs-3 col-md-2">
-            <%= f.label :applications, "Applications" %>
+            <%= f.label :applications, "No. of Apps" %>
           </div>
           <div class="col-xs-9 col-md-4">
             <%= unit_form.number_field :applications, class: 'form-control' %>
