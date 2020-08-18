@@ -851,11 +851,20 @@ class ResidentialListingsController < ApplicationController
           end
 
           if !@accs_info.nil?
-            if params[:residential_listing][:unit][:hide_from_agent] != "1"
-              client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
-            end
-            if params[:residential_listing][:roomshare_department] == "1"
-              client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+            if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
+              if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                client.chat_postMessage(channel: '#updates_manhattan', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+              end
+              if params[:residential_listing][:roomshare_department] == "1"
+                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+              end
+            else
+              if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+              end
+              if params[:residential_listing][:roomshare_department] == "1"
+                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+              end
             end
           end
           if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57
