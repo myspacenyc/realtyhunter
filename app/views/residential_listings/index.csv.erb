@@ -1,4 +1,4 @@
-<%- headers = [ 'Neighborhood', 'Address', 'Unit', 'Zipcode', 'Beds' , 'Baths', 'Price','Date Available', 'Description', "Access", 'Landlord','Listing Agent', 'Last Updated', 'Price Changes', "Price Changes Date", 'Appartment Has Description', 'Appartment Has Photos', 'Previous Units in Building'] -%>
+<%- headers = [ 'Neighborhood', 'Address', 'Unit', 'Zipcode', 'Beds' , 'Baths', 'Price','Date Available', 'Description', "Access", 'Public URL', 'Landlord','Listing Agent', 'Last Updated', 'Price Changes', "Price Changes Date", 'Appartment Has Description', 'Appartment Has Photos', 'Previous Units in Building'] -%>
 <%= CSV.generate_line(headers).strip %>
 <%- @residential_units.each do |listing| -%>
 	<% @retVal = [] %>
@@ -12,5 +12,5 @@
 	<% end %>
 	<% aa = Building.find(listing.unit.building_id) %>
 	<% aa = aa.units.each.map(&:building_unit) - [listing.building_unit] %>
-  <%= [listing.neighborhood_name ? listing.neighborhood_name : '', "#{listing.street_number} #{listing.route}", listing.building_unit, listing.unit.building.postal_code, listing.beds, listing.baths, listing.rent, listing.unit.available_by, listing.description, listing.unit.access_info, listing.unit.building.landlord.code, listing.unit.building.landlord.listing_agent ? listing.unit.building.landlord.listing_agent.name : '', listing.updated_at, @retVal.blank? ? "No" : "Yes", @retVal.blank? ? "" : @last_price_change_date , listing.description.nil? ? "No" : "Yes", listing.unit.images.blank? ? "No" : "Yes", aa.join(", ")].to_csv.strip.html_safe %>
+  <%= [listing.neighborhood_name ? listing.neighborhood_name : '', "#{listing.street_number} #{listing.route}", listing.building_unit, listing.unit.building.postal_code, listing.beds, listing.baths, listing.rent, listing.unit.available_by, listing.description, listing.unit.access_info, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.landlord.code, listing.unit.building.landlord.listing_agent ? listing.unit.building.landlord.listing_agent.name : '', listing.updated_at, @retVal.blank? ? "No" : "Yes", @retVal.blank? ? "" : @last_price_change_date , listing.description.nil? ? "No" : "Yes", listing.unit.images.blank? ? "No" : "Yes", aa.join(", ")].to_csv.strip.html_safe %>
 <%- end -%>
