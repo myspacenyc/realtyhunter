@@ -500,6 +500,24 @@
 			    			<%= @residential_unit.photo_video_access %>
 			    		</div>
 			    <% end %>
+			    <br>
+			    <div class="row">
+			    	<div class= "col-xs-12 col-md-3">
+			    		<strong>Touring Options</strong>
+			    	</div>
+			    	<div class="col-xs-12 col-md-9">
+				        <% if @residential_unit.virtual_tours_available == true %>
+				       		<div>Virtual Tours Available</div>
+				        <% end %>
+				        <% if @residential_unit.in_person_tours_available == true %>
+				        	<div>In-Person Tours Available</div>
+				        <% end %>
+				        <% if @residential_unit.no_access_until_vacant == true %>
+				        	<div>No Access Until Vacant</div>
+				        <% end %>
+				    </div>
+			    </div>
+			    
 
 					<!-- Open House Schedule Section - START -->
 					<% open_houses = @residential_unit.unit.open_houses %>
