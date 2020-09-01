@@ -40,6 +40,7 @@ Buildings = {};
 
     var data = {
       filter: $('#filter').val(),
+      filter_dotsignal_code: $('#filter_dotsignal_code').val(),
       status: $('#status').val(),
       rating: $('#rating').val(),
       streeteasy_eligibility: $('#streeteasy_eligibility').val(),
@@ -235,6 +236,7 @@ Buildings = {};
     $('#filter').change(Buildings.throttledBldgSearch);
     $('#rating').change(Buildings.throttledBldgSearch);
     $('#streeteasy_eligibility').change(Buildings.throttledBldgSearch);
+    $('#filter_dotsignal_code').change(Buildings.throttledBldgSearch);
     $('#status').change(Buildings.throttledBldgSearch);
   }
 

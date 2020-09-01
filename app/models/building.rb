@@ -96,12 +96,16 @@ class Building < ApplicationRecord
     Image.where(building_id: building_ids).to_a.group_by(&:building_id)
   end
 
-  def self._filter_query(running_list, query_str, status, rating, streeteasy_eligibility)
+  def self._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
     if query_str
       @terms = query_str.split(" ")
       @terms.each do |term|
         running_list = running_list.where('buildings.formatted_street_address ILIKE ? OR buildings.sublocality ILIKE ?', "%#{term}%", "%#{term}%")
       end
+    end
+
+    if !filter_dotsignal_code.nil?
+      running_list = running_list.where("CAST(buildings.dotsignal_code AS TEXT) ILIKE ?", "%#{filter_dotsignal_code}%")
     end
 
     if !streeteasy_eligibility.nil?
@@ -145,7 +149,7 @@ class Building < ApplicationRecord
     running_list
   end
 
-	def self.search(query_str, status, rating, streeteasy_eligibility)
+	def self.search(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
     running_list = Building
       .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
       .where('buildings.archived = false')
@@ -154,14 +158,14 @@ class Building < ApplicationRecord
         'buildings.dotsignal_code', 'buildings.streeteasy_eligibility',
         'buildings.id', 'buildings.street_number', 'buildings.route','buildings.rating', 'buildings.streeteasy_eligibility',
         'buildings.sublocality', 'buildings.neighborhood_id', 'neighborhoods.name as neighborhood_name',
-        'buildings.administrative_area_level_2_short',
+        'buildings.administrative_area_level_2_short', 'buildings.dotsignal_code',
         'buildings.administrative_area_level_1_short', 'buildings.postal_code',
         'buildings.updated_at', 'buildings.created_at',
         'buildings.last_unit_updated_at',
         'buildings.total_unit_count',
         'buildings.active_unit_count')
 
-    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility)
+    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
     running_list
 	end
 

@@ -61,6 +61,13 @@
               <%#= select_tag :rating, options_for_select([['Any','Any'],['NA', 0], ['Excellent', 1], ['Good', 2], ['Fair', 3]], {class: "form-control"})%>
             </div> -->
           <%# end %>
+          <div style="clear: both;"></div>
+            <div class="col-md-6 vertical-padding">
+              <%= text_field_tag :filter_dotsignal_code, params[:filter_dotsignal_code],
+                update_elements: {},
+                placeholder: "Filter by dotsignal code",
+                size: 25, class:'form-control' %>
+            </div>
 
           <% if current_user.is_company_admin? || current_user.is_super_admin? || current_user.is_listings_manager? %>
             <div class="col-sm-5 col-md-4 form-label-responsive">
