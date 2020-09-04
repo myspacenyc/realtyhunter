@@ -290,6 +290,7 @@ Rails.application.routes.draw do
       get 'zumper'
       get 'zumper_backup'
       get 'external_feed'
+      get 'external_feed_no_rooms'
       get 'renthop'
       get 'test_watermark'
       get 'all_active_users'

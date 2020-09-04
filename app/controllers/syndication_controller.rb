@@ -60,6 +60,10 @@
     set_listings
   end
 
+  def external_feed_no_rooms
+    set_listings
+  end
+
   def all_active_users
     @users = User.where(archived: false)
     respond_to do |format|
@@ -94,6 +98,8 @@
         @listings = zumper_backup_listings(@company.id, syndication_params)
       elsif syndication_params[:action] == 'external_feed'
         @listings = external_feed_listings(@company.id, syndication_params)
+      elsif syndication_params[:action] == 'external_feed_no_rooms'
+        @listings = external_feed_no_rooms_listings(@company.id, syndication_params)
       elsif syndication_params[:action] == 'test_watermark'
         @listings = test_watermark_listings(@company.id, syndication_params)
       elsif syndication_params[:action] == 'renthop'
