@@ -901,7 +901,7 @@
 			    <% sorted_changelist = pretty_audit_changes(@residential_unit) %>
 			    <% if sorted_changelist.keys.length > 0 %>
 			    	<div class="row history-report">
-					<div class="col-xs-6">
+						<div class="col-xs-6">
 			    			<h3>Recent Changes</h3>
 					    	<% sorted_changelist.each do |k, record_list| %>
 					    		<% for i in 0..record_list.length - 1 %>
@@ -928,6 +928,32 @@
 						</div>
 					</div><!-- row -->
 				<% end %>
+				<div class="row history-report">
+					<div class="col-xs-6">
+		    			<h3>Recent Keys Changes</h3>
+		    			<% @residential_unit.unit.audits.each do |audt| %>
+		    				<% if !audt.audited_changes['unit_key_status'].nil? %>
+			    				<% if !audt.audited_changes['unit_key_status'][1].nil? %>
+			    					<% if audt.audited_changes['unit_key_status'][0] == nil && audt.audited_changes['unit_key_status'][1] != nil %>
+			    						<%= User.find(audt['user_id']).name %> Change key status <%= audt.audited_changes['unit_key_status'][1] %>
+			    					<% else %>
+			    						<br>
+			    						<%= User.find(audt['user_id']).name %> Change key status from <%= audt.audited_changes['unit_key_status'][0] %> to <%= audt.audited_changes['unit_key_status'][1] %>
+			    					<% end %>
+			    				<% end %>
+			    			<% end %>
+		    			<% end %>
+				    	<%# sorted_changelist.each do |k, record_list| %>
+				    		<%# for i in 0..record_list.length - 1 %>
+				    			<!-- <div class="row">
+				    				<div class="col-xs-12">
+						    			<%#= record_list[i] %>
+						    		</div>
+					    		</div> -->
+				    		<%# end %>
+				    	<%# end %>
+				  	</div>
+				</div>
 
 				</div><!-- panel body -->
 			</div><!-- runit-panel -->

@@ -391,6 +391,8 @@ class BuildingsController < ApplicationController
         :administrative_area_level_1_short, :inaccuracy_description, :request_price_drop,
         :postal_code, :country_short, :lat, :lng, :place_id, :landlord_id, :file,
         building: [:lock_version, :formatted_street_address, :dotsignal_code, :point_of_contact,
+          :building_tag_number, :building_key_status, :building_office_location, :building_master,
+          :building_commercial_property, :building_key_active, :building_signout_key, :building_case_name,
          :push_to_zumper, :building_website, :building_name, :section_8, :income_restricted, :year_build, :featured, 
          :rating, :notes, :description, :landlord_id, :user_id, :third_tier,
           :inaccuracy_description, :pet_policy_id, :rental_term_id, :custom_rental_term, :file,

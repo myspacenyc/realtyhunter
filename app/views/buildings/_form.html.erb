@@ -144,6 +144,132 @@
       <div id="map-canvas" data-address="<%= @building.formatted_street_address %>"></div>
     </div>
 
+    <br>
+    <div class="row">
+      <div class="col-xs-12 form-section-header">
+        <hr class="thin-line" />
+        <h4>Keys</h4>
+        <hr class="thin-line" />
+      </div>
+    </div>
+
+    <div class="col-xm-12" style="margin-left: 20px;">
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_tag_number, "Tag Number" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.number_field :building_tag_number, class: "form-control"%>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_key_status, "Key Status" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.select(:building_key_status,
+                  options_for_select([['in office', 'in office'], ['taken out', 'taken out'], ['handed off', 'handed off']],
+                    [@building.building_key_status ? @building.building_key_status : '']),
+                  {prompt: "Choose one..."},
+                  class: 'form-control',
+                  :include_blank => true) %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_office_location, "Office Location" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.select(:building_office_location,
+                  options_for_select([['Bushwick', 'Bushwick'], ['Crown Heights', 'Crown Heights'], ['Lefferts Gardens', 'Lefferts Gardens']],
+                    [@building.building_office_location ? @building.building_office_location : '']),
+                  {prompt: "Choose one..."},
+                  class: 'form-control',
+                  :include_blank => true) %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_master, "Is a master?" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.radio_button :building_master,true %>
+          <%= f.label :building_master, "Yes" %>
+          <%= f.radio_button :building_master,false %>
+          <%= f.label :building_master, "No" %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_commercial_property, "Is for a commercial property?" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.radio_button :building_commercial_property,true %>
+          <%= f.label :building_commercial_property, "Yes" %>
+          <%= f.radio_button :building_commercial_property,false %>
+          <%= f.label :building_commercial_property, "No" %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_key_active, "Is active?" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.radio_button :building_key_active,true %>
+          <%= f.label :building_key_active, "Yes" %>
+          <%= f.radio_button :building_key_active,false %>
+          <%= f.label :building_key_active, "No" %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_signout_key, "Is a sign out key?" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.radio_button :building_signout_key,true %>
+          <%= f.label :building_signout_key, "Yes" %>
+          <%= f.radio_button :building_signout_key,false %>
+          <%= f.label :building_signout_key, "No" %>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :building_case_name, "Case Name" %>
+        </div>
+        <div class="col-sm-9">
+          <%= f.select(:building_case_name,
+                  options_for_select([['active keys', 'active keys'], ['commercial', 'commercial'], ['inactive 1', 'inactive 1'], ['inactive 2', 'inactive 2'], ['inactive 3', 'inactive 3'], ['inactive 4', 'inactive 4'], ['inactive 5', 'inactive 5'], ['manager box', 'manager box'], ['multilock and master keys', 'multilock and master keys'], ['new box', 'new box'], ['signout keys', 'signout keys']],
+                    [@building.building_case_name ? @building.building_case_name : '']),
+                  {prompt: "Choose one..."},
+                  class: 'form-control',
+                  :include_blank => true) %>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-xs-12 form-section-header">
+        <hr class="thin-line" />
+        <hr class="thin-line" />
+      </div>
+    </div>
+
     <br />
     <div class="row">
       <div class="col-md-12">
