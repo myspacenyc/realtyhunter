@@ -342,6 +342,16 @@
 					    		<% end %>
 				    		</div>
 				    	</div>
+				    	<div class="row">
+				    		<div class="col-xs-5">
+				    			<strong>Pending SE:</strong>
+				    		</div>
+				    		<div class="col-xs-7">
+				    			<% if @residential_unit.pending_se == true %>
+				    				<span class="glyphicon glyphicon-warning-sign red" aria-hidden="true"></span><br>
+				    			<% end %>
+				    		</div>
+				    	</div>
 		    		</div>
 
 		    		<div class="col-md-6">
@@ -452,6 +462,28 @@
 				    		</div>
 				    		<div class="col-xs-7">
 				    			<%= @residential_unit.unit.listing_id %>
+				    		</div>
+		    			</div>
+		    			<div class="row">
+							<div class="col-xs-5">
+				    			<strong>On Streeteasy:</strong>
+				    		</div>
+				    		<div class="col-xs-7">
+				    			<% if @residential_unit.streeteasy_flag == true || @residential_unit.streeteasy_flag_one == true %>
+				    				Yes
+				    			<% else %>
+				    				No
+				    			<% end %>
+				    		</div>
+		    			</div>
+		    			<div class="row">
+							<div class="col-xs-5">
+				    			<strong>Managed Listing:</strong>
+				    		</div>
+				    		<div class="col-xs-7">
+				    			<% if @residential_unit.managed_listing == true %>
+				    				<span class="glyphicon glyphicon-paste blue" aria-hidden="true"></span><br>
+				    			<% end %>
 				    		</div>
 		    			</div>
 		    		</div>

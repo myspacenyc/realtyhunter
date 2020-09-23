@@ -412,6 +412,9 @@ class ResidentialListingsController < ApplicationController
       if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
         @se_text = "On Streeteasy"
       end
+      if params[:residential_listing][:pending_se] == "1"
+        @se_text = "Pending Streeteasy"
+      end
       if @bb.neighborhood.parent_neighborhood_id == 55 || @bb.neighborhood.parent_neighborhood_id == 57
         if params[:residential_listing][:unit][:hide_from_agent] != "1"
           client.chat_postMessage(channel: '#updates', text: "*New* *Unit* \n #{@bb.street_number} #{@bb.route}, #{params[:residential_listing][:unit][:building_unit]} \n #{@bb.neighborhood.name} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Net #{params[:residential_listing][:unit][:rent]} / Gross #{params[:residential_listing][:unit][:gross_price]} \n Avail: #{@avail_date} \n Lease: #{@lease_st} to #{@lease_ed} Months \n #{@has_fee} \n #{@se_text} \n LLC: #{@ll_code} \n POC: #{@poc} \n Access: #{params[:residential_listing][:unit][:access_info]} \n #{current_user.name} Added New Unit \n ---", as_user: true)
@@ -672,6 +675,9 @@ class ResidentialListingsController < ApplicationController
         if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
           @se_text = "On Streeteasy"
         end
+        if params[:residential_listing][:pending_se] == "1"
+          @se_text = "Pending Streeteasy"
+        end
         
         if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57
           if params[:residential_listing][:unit][:hide_from_agent] != "1"
@@ -717,6 +723,9 @@ class ResidentialListingsController < ApplicationController
       end
       if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
         @se_text = "On Streeteasy"
+      end
+      if params[:residential_listing][:pending_se] == "1"
+        @se_text = "Pending Streeteasy"
       end
       #Slack Message when status change from pending to active start
       if @residential_unit.unit.status == "pending" && params[:residential_listing][:unit][:status].downcase == "active"
@@ -806,6 +815,9 @@ class ResidentialListingsController < ApplicationController
     else
       if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
         @se_text = "On Streeteasy"
+      end
+      if params[:residential_listing][:pending_se] == "1"
+        @se_text = "Pending Streeteasy"
       end
       if(params[:residential_listing][:unit][:status] != "Off" && params[:residential_listing][:unit][:status] != "Pending")
         if ((@residential_unit.unit.access_info != params[:residential_listing][:unit][:access_info]) || (@residential_unit.unit.available_by.nil? || @residential_unit.unit.available_by.strftime("%m/%d/%Y") != params[:residential_listing][:unit][:available_by]) || (@residential_unit.unit.rent != params[:residential_listing][:unit][:rent].to_i) || (params[:residential_listing][:has_fee] == "0" || params[:residential_listing][:has_fee] == "1"))
@@ -1643,7 +1655,7 @@ class ResidentialListingsController < ApplicationController
         :no_description,:no_images, :roomshare_department, :renthop, :private_bathroom, :watermark, :watermark_in_use,
         :primary_agent_id, :favorites, :show,:claim_for_naked_apartment, :claim_for_individual_syndication_page, :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
         :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,
-        :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment,
+        :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment, :pending_se, :managed_listing,
         unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, :streeteasy_listing_number, :rent, :gross_price, :maths_free, :available_by, :access_info, :status,
           :unit_tag_number, :unit_key_status, :unit_office_location, :unit_master, :unit_commercial_property, :unit_key_active,
           :unit_signout_key, :unit_case_name,

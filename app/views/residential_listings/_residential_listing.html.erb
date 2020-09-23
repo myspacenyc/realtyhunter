@@ -570,6 +570,12 @@
                 </div>
               </div>
             <% end %>
+            <% if residential_listing.pending_se == true %>
+              <span class="glyphicon glyphicon-warning-sign red" aria-hidden="true"></span><br>
+            <% end %>
+            <% if residential_listing.managed_listing == true %>
+              <span class="glyphicon glyphicon-paste blue" aria-hidden="true"></span><br>
+            <% end %>
             <%# if !residential_listing.dimensions.blank? %>
               <!-- <span class="glyphicon glyphicon-info-sign dark-blue" data-toggle="modal" data-target="#myModalDimension"  data-whatever="<%#= residential_listing.dimensions %>"></span>
               <div class="modal fade" id="myModalDimension" role="dialog">
@@ -994,6 +1000,12 @@
                   
                 </div>
               </div>
+          <% end %>
+          <% if residential_listing.pending_se == true %>
+            <span class="glyphicon glyphicon-warning-sign red" aria-hidden="true" style="float: left;"></span><br>
+          <% end %>
+          <% if residential_listing.managed_listing == true %>
+            <span class="glyphicon glyphicon-paste blue" aria-hidden="true" style="float: left;margin-left: 10px !important;"></span><br>
           <% end %>
           <%# if !residential_listing.dimensions.blank? %>
             <!-- <span class="glyphicon glyphicon-info-sign dark-blue" data-toggle="modal" data-target="#myModalDimension"  data-whatever="<%#= residential_listing.dimensions %>"></span>

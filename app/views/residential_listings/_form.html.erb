@@ -1273,6 +1273,32 @@
           </div>
         </div>
 
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :pending_se, "Pending SE" %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+            <div class="checkbox checkbox-warning checkbox-inline">
+              <%= f.check_box :pending_se, class: "styled",
+                  checked: @residential_unit ? @residential_unit.pending_se : false %>
+              <label></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :managed_listing, "Managed Listing" %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+            <div class="checkbox checkbox-warning checkbox-inline">
+              <%= f.check_box :managed_listing, class: "styled",
+                  checked: @residential_unit ? @residential_unit.managed_listing : false %>
+              <label></label>
+            </div>
+          </div>
+        </div>
+
         <%= f.fields_for @residential_unit.unit do |unit_form| %>
           <div class="row vertical-margin-lg">
             <div class="col-xs-3 col-md-4">
