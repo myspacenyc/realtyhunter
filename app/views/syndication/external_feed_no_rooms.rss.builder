@@ -335,26 +335,24 @@ xml.streeteasy :version => "1.6" do
 								pb_description = ""
 								if listing.building.landlord
 									if !listing.building.landlord.ll_public_description.nil?
-										pb_description = listing.building.landlord.ll_public_description
+										pb_description = strip_tags(listing.building.landlord.ll_public_description)
 									end
 								end
 								b_description = ""
 								if listing.building
 									if !listing.building.description.blank?
-										b_description = listing.building.description
+										b_description = strip_tags(listing.building.description)
 									end
 								end
 								t_description = ""
 								if !listing.residential_listing.tenant_description.nil?  && !listing.residential_listing.tenant_description.blank?
-									t_description = "Tenant Quote " + listing.residential_listing.tenant_description
+									t_description = "Tenant Quote " + strip_tags(listing.residential_listing.tenant_description)
 								end
 
 								if listing.r_id
-									xml.description h raw sanitize t_description + " " + b_description + " " + listing.description + " " + pb_description,
-					        		tags: %w(h1 h2 h3 h4 h5 h6 p i b strong em a ol ul li q blockquote font span br div)
+									xml.description h raw sanitize t_description + " " + b_description + " " + strip_tags(listing.description) + " " + pb_description
 					      elsif listing.s_id
-					        xml.description h raw sanitize listing.public_description,
-					        		tags: %w(h1 h2 h3 h4 h5 h6 p i b strong em a ol ul li q blockquote font span br div)
+					        xml.description h raw sanitize strip_tags(listing.public_description)
 								end
 
 								if listing.r_id
@@ -778,26 +776,24 @@ xml.streeteasy :version => "1.6" do
 								pb_description = ""
 								if listing.building.landlord
 									if !listing.building.landlord.ll_public_description.nil?
-										pb_description = listing.building.landlord.ll_public_description
+										pb_description = strip_tags(listing.building.landlord.ll_public_description)
 									end
 								end
 								b_description = ""
 								if listing.building
 									if !listing.building.description.blank?
-										b_description = listing.building.description
+										b_description = strip_tags(listing.building.description)
 									end
 								end
 								t_description = ""
 								if !listing.residential_listing.tenant_description.nil?  && !listing.residential_listing.tenant_description.blank?
-									t_description = "Tenant Quote " + listing.residential_listing.tenant_description
+									t_description = "Tenant Quote " + strip_tags(listing.residential_listing.tenant_description)
 								end
 
 								if listing.r_id
-									xml.description h raw sanitize t_description + " " + b_description + " " + listing.description + " " + pb_description,
-					        		tags: %w(h1 h2 h3 h4 h5 h6 p i b strong em a ol ul li q blockquote font span br div)
+									xml.description h raw sanitize t_description + " " + b_description + " " + strip_tags(listing.description) + " " + pb_description
 					      elsif listing.s_id
-					        xml.description h raw sanitize listing.public_description,
-					        		tags: %w(h1 h2 h3 h4 h5 h6 p i b strong em a ol ul li q blockquote font span br div)
+					        xml.description h raw sanitize strip_tags(listing.public_description)
 								end
 
 								if listing.r_id
