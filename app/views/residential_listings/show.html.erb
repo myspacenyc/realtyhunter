@@ -987,11 +987,7 @@
 				  	</div>
 				  	<div class="col-xs-6">
 		    			<h3>Managed listing Changes</h3>
-		    			<% @residential_unit.audits.each do |audt| %>
-		    				<% if !audt.audited_changes['managed_listing'].nil? %>
-			    				<%= User.find(audt['user_id']).name %> Change key status from <%= audt.audited_changes['managed_listing'][0] %> to <%= audt.audited_changes['managed_listing'][1] %>
-			    			<% end %>
-		    			<% end %>
+		    			
 				  	</div>
 				</div>
 
