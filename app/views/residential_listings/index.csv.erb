@@ -1,4 +1,4 @@
-<%- headers = [ 'Neighborhood', 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Tenant Occupied', 'Zipcode', 'Beds' , 'Baths', 'Price','Date Available', 'Description', "Access", 'Public URL', 'Landlord','Listing Agent', 'Last Updated', 'Price Changes', "Price Changes Date", 'Appartment Has Description', 'Appartment Has Photos', 'Previous Units in Building'] -%>
+<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Net Price', 'Gross Price', 'Beds' , 'Baths', 'Dimensions', 'Listing Id', 'Landlord', 'LL Class', 'Point Of Contact', 'On Streeteasy', 'Video Present Or Not', 'Private Video Present Or Not', '3D Video Present Or Not','Available', 'Neighborhood', 'Stock Photos', 'Description', 'Public URL', 'Zip Code', 'Tenant Occupied', "Access"] -%>
 <%= CSV.generate_line(headers).strip %>
 <%- @residential_units.each do |listing| -%>
 	<% @retVal = [] %>
@@ -10,7 +10,37 @@
 	<% if !@retVal.blank? %>
 		<% @last_price_change_date = Audit.find(@retVal.last).created_at %>
 	<% end %>
+	<% if listing.streeteasy_flag == true || listing.streeteasy_flag_one == true %>
+		<% @streeteasy = "Yes" %>
+	<% else %>
+		<% @streeteasy = "No" %>
+	<% end %>
+	<% if !listing.youtube_video_url.blank? %>
+		<% @video_present = "Video Present" %>
+	<% else %>
+		<% @video_present = "Not Video Present" %>
+	<% end %>
+	<% if !listing.private_youtube_url.blank? %>
+		<% @video_present_private = "Video Present" %>
+	<% else %>
+		<% @video_present_private = "Not Video Present" %>
+	<% end %>
+	<% if !listing.tour_3d.blank? %>
+		<% @tour_3d = "3D Tour Present" %>
+	<% else %>
+		<% @tour_3d = "Not 3D Tour Present" %>
+	<% end %>
+	<% if listing.unit.has_stock_photos == true %>
+		<% @stock_photo = "Yes" %>
+	<% else %>
+		<% @stock_photo = "No" %>
+	<% end %>
+	<% if listing.tenant_occupied == true %>
+		<% @t_occ = "Yes" %>
+	<% else %>
+		<% @t_occ = "No" %>
+	<% end %>
 	<% aa = Building.find(listing.unit.building_id) %>
 	<% aa = aa.units.each.map(&:building_unit) - [listing.building_unit] %>
-  <%= [listing.neighborhood_name ? listing.neighborhood_name : '', "#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.tenant_occupied ? 'Occupied' : 'Not Occupied', listing.unit.building.postal_code, listing.beds, listing.baths, listing.rent, listing.unit.available_by, listing.description, listing.unit.access_info, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.landlord.code, listing.unit.building.landlord.listing_agent ? listing.unit.building.landlord.listing_agent.name : '', listing.updated_at, @retVal.blank? ? "No" : "Yes", @retVal.blank? ? "" : @last_price_change_date , listing.description.nil? ? "No" : "Yes", listing.unit.images.blank? ? "No" : "Yes", aa.join(", ")].to_csv.strip.html_safe %>
+  <%= ["#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.unit.status,listing.rent, listing.unit.gross_price, listing.beds, listing.baths, listing.dimensions, listing.unit.listing_id, listing.unit.building.landlord.code, listing.unit.building.landlord.ll_importance, listing.unit.building.point_of_contact ? User.find(listing.unit.building.point_of_contact).name : '', @streeteasy, @video_present, @video_present_private, @tour_3d, listing.unit.available_by, listing.neighborhood_name, @stock_photo, listing.description, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.postal_code ? listing.unit.building.postal_code : "", @t_occ, listing.unit.access_info ].to_csv.strip.html_safe %>
 <%- end -%>

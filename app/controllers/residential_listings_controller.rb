@@ -727,6 +727,44 @@ class ResidentialListingsController < ApplicationController
       if params[:residential_listing][:pending_se] == "1"
         @se_text = "Pending Streeteasy"
       end
+
+      #Slack message when status Deal Pending end
+
+      if @residential_unit.unit.status != params[:residential_listing][:unit][:status].downcase && params[:residential_listing][:unit][:status].downcase == "deal_pending" 
+        if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57
+          if params[:residential_listing][:unit][:hide_from_agent] != "1"
+            client.chat_postMessage(channel: '#updates', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          end
+          if params[:residential_listing][:roomshare_department] == "1"
+            client.chat_postMessage(channel: '#rooms_updates', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)            
+          end
+          # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
+          #   defaults channel: "#default",
+          #            username: "notifier"
+          # end
+        elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
+          if params[:residential_listing][:unit][:hide_from_agent] != "1"
+            client.chat_postMessage(channel: '#updates_manhattan', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          end
+          if params[:residential_listing][:roomshare_department] == "1"
+            client.chat_postMessage(channel: '#rooms_updates', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          end
+        elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 54
+          if params[:residential_listing][:unit][:hide_from_agent] != "1"
+            client.chat_postMessage(channel: '#updates', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          end
+          if params[:residential_listing][:roomshare_department] == "1"
+            client.chat_postMessage(channel: '#rooms_updates', text: "*App* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          end
+          # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
+          #   defaults channel: "#default",
+          #            username: "notifier"
+          # end
+        end
+      end
+
+      #Slack message when status Deal Pending end
+
       #Slack Message when status change from pending to active start
       if @residential_unit.unit.status == "pending" && params[:residential_listing][:unit][:status].downcase == "active"
         if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57

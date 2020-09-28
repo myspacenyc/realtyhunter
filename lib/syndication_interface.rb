@@ -185,7 +185,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 					[Unit.statuses["active"], Unit.statuses["pending"]])
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
+					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["deal_pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
 					Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
@@ -200,7 +200,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			listings = listings.where("residential_listings.roomshare_department = TRUE AND residential_listings.room_syndication = TRUE")
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["rsonly"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
+					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["rsonly"], Unit.statuses["deal_pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
 					Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
@@ -223,7 +223,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			listings = listings.where("residential_listings.roomshare_department = TRUE AND units.status IN (?)", [0, 3])
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
+					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["deal_pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
 					Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
@@ -235,7 +235,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			listings = listings.where('units.status =?', Unit.statuses["active"])
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]], Unit.syndication_statuses['Force syndicate'])
+					[Unit.statuses["active"], Unit.statuses["contract_out"], Unit.statuses["deal_pending"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]], Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
 					Unit.syndication_statuses['Force syndicate']
@@ -248,7 +248,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["rsonly"]])
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
+					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["deal_pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]],
 					Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
@@ -266,7 +266,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 		end
 
 		if is_true?(search_params[:must_have_status_inbetween])
-			listings = listings.where('units.status IN (?)', [Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]])
+			listings = listings.where('units.status IN (?)', [Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"], Unit.statuses["deal_pending"]])
 		end
 
 		if is_true?(search_params[:push_to_zumper_active])
@@ -278,7 +278,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 		end
 
 		if is_true?(search_params[:must_have_status_for_zumper])
-			listings = listings.where('units.status IN (?) OR buildings.push_to_zumper =?', [Unit.statuses["active"], Unit.statuses["rsonly"]], true)
+			listings = listings.where('units.status IN (?) OR buildings.push_to_zumper =?', [Unit.statuses["active"], Unit.statuses["rsonly"], Unit.statuses["deal_pending"]], true)
 		end
 
 		if is_true?(search_params[:has_primary_agent])
