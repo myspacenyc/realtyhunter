@@ -90,7 +90,7 @@ RHMapbox = {};
           doubleClickZoom: true,
           scrollWheelZoom: true,
           tap: true
-        });
+        }).addLayer(L.mapbox.styleLayer('mapbox://styles/rakelblujeans/ckg0assyj20uq19qvut6w9vu9'));
         // .setView([40.6739591, -73.9570342], 13);
       RHMapbox.overlays = L.layerGroup().addTo(RHMapbox.map);
       RHMapbox.updateOverviewMap(null, buildContentStringFn);
