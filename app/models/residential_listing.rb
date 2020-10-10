@@ -658,6 +658,14 @@ class ResidentialListing < ApplicationRecord
       running_list = running_list.where("units.third_tier =?", params[:third_tier])
     end
 
+    if !params[:pending_se].blank?
+      running_list = running_list.where("residential_listings.pending_se =?", params[:pending_se])
+    end
+
+    if !params[:managed_listing].blank?
+      running_list = running_list.where("residential_listings.managed_listing =?", params[:managed_listing])
+    end
+
     if params[:no_images] == 'true'
         less_two = Unit.joins(:images).group("units.id").having("count(units.id)<3")
         find_less_two = less_two.all.map(&:id)

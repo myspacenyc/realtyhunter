@@ -463,19 +463,39 @@
                     
                   </div> -->
                 </div>
-                <% if current_user.is_management? %>
-                  <div class="row vertical-padding">
+                <div class="row vertical-padding">
+                  <% if current_user.is_management? %>
                     <div class="col-xs-6">
                       <div class="checkbox checkbox-warning inline">
                         <%= check_box_tag :third_tier, "".freeze, params[:third_tier] == "true".freeze ? true : false,
                             class: 'styled' %>
-                        <label for="no_description">
+                        <label for="third_tier">
                           Third Tier
                         </label>
                       </div>
                     </div>
+                  <% end %>
+                  <div class="col-xs-6">
+                    <div class="checkbox checkbox-warning inline">
+                      <%= check_box_tag :pending_se, "".freeze, params[:pending_se] == "true".freeze ? true : false,
+                          class: 'styled' %>
+                      <label for="pending_se">
+                        Pending Se
+                      </label>
+                    </div>
                   </div>
-                <% end %>
+                </div>
+                <div class="row vertical-padding">
+                  <div class="col-xs-6">
+                    <div class="checkbox checkbox-warning inline">
+                      <%= check_box_tag :managed_listing, "".freeze, params[:managed_listing] == "true".freeze ? true : false,
+                          class: 'styled' %>
+                      <label for="managed_listing">
+                        Managed Listing
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <!-- <div class="row vertical-padding">
                   <div class="col-xs-5">
                     <%#= label_tag :parent_neighborhoods, "Parent Neighborhoods" %>
