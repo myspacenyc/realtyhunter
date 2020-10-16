@@ -148,13 +148,13 @@ class User < ApplicationRecord
 
   # Sends activation email.
   def send_activation_email
-    UserMailer.account_activation(self.id).deliver
+    UserMailer.account_activation(self.id).deliver!
   end
 
   # sends the company admin a notification, asking to
   # approve this user
   def send_company_approval_email
-    UserMailer.account_approval_needed(self.id, self.company.id).deliver
+    UserMailer.account_approval_needed(self.id, self.company.id).deliver!
   end
 
   # Sets the password reset attributes.
@@ -173,7 +173,7 @@ class User < ApplicationRecord
         .where(activated: true)
         .first
     if @user
-      UserMailer.password_reset(id, reset_token).deliver
+      UserMailer.password_reset(id, reset_token).deliver!
     end
   end
 
@@ -185,7 +185,7 @@ class User < ApplicationRecord
   # Sends password reset email.
   def send_added_by_admin_email(company)
     create_reset_digest
-    UserMailer.added_by_admin(company.id, id, reset_token).deliver
+    UserMailer.added_by_admin(company.id, id, reset_token).deliver!
   end
 
   # Returns true if a password reset has expired.
