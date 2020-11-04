@@ -76,6 +76,13 @@
       </div>
       <div class="row">
         <div class="col-md-6">
+          <%= f.label :agent_hide, "Agent Display On Website" %>
+          <%= f.check_box :agent_hide %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
           <%= f.label :role_ids, "Enabled permissions", class: 'required' %><br>
           <%= f.select(:role_ids,
             options_for_select(Role.all.collect {|t| [t.name.titleize, t.id]},
