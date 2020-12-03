@@ -773,7 +773,27 @@
               <%#end%>
             </td>
           <% end %>
-          
+          <% if [505,255,555].include? current_user.id %>
+            <td>
+              <% if residential_listing.unit.unit_claim_key == false %>
+                <%= link_to "Claim Key", claim_unit_key_path(residential_listing) %>
+              <% else %>
+                <% if current_user.id == residential_listing.unit.unit_key_claim_user_id %>
+                  <%= select_tag "Offices", options_for_select(["Bushwick","Crown Heights","Lefferts Gardens"]),:prompt => "Select Office", onchange: "return_link_enable(#{residential_listing.id})", class: "office_#{residential_listing.id}" %>
+                  <br>
+                  <br>
+                  <%= link_to "Return Key", return_unit_key_path(residential_listing), style: "display:none;", id: "ret_key_val_#{residential_listing.id}" %>
+                  <br>
+                  <br>
+                  Swap Key:
+                  <br>
+                  <%= select_tag "Key Swap", options_from_collection_for_select(User.where("archived =?", false), "id", "name"), onchange: "swap_key_to_agent(#{residential_listing.id})", prompt: "Select Any One Agent", class: "swap_agent_#{residential_listing.id}" %>
+                <% else %>
+                  <%= User.find(residential_listing.unit.unit_key_claim_user_id).name %> already claim key.
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
           <% if action_name == "agent_rental" %>
             <td class="hidden-print">
               <%= link_to 'Edit', agent_edit_path(residential_listing) %>
@@ -1211,7 +1231,27 @@
             <%= link_to 'Edit', agent_edit_path(residential_listing) %>
           </td>
         <% end %>
-
+        <% if [505,255,555].include? current_user.id %>
+          <td>
+            <% if residential_listing.unit.unit_claim_key == false %>
+              <%= link_to "Claim Key", claim_unit_key_path(residential_listing) %>
+            <% else %>
+              <% if current_user.id == residential_listing.unit.unit_key_claim_user_id %>
+                <%= select_tag "Offices", options_for_select(["Bushwick","Crown Heights","Lefferts Gardens"]),:prompt => "Select Office", onchange: "return_link_enable(#{residential_listing.id})", class: "office_#{residential_listing.id}" %>
+                <br>
+                <br>
+                <%= link_to "Return Key", return_unit_key_path(residential_listing), style: "display:none;", id: "ret_key_val_#{residential_listing.id}" %>
+                <br>
+                <br>
+                Swap Key:
+                <br>
+                <%= select_tag "Key Swap", options_from_collection_for_select(User.where("archived =?", false), "id", "name"), onchange: "swap_key_to_agent(#{residential_listing.id})", prompt: "Select Any One Agent", class: "swap_agent_#{residential_listing.id}" %>
+              <% else %>
+                <%= User.find(residential_listing.unit.unit_key_claim_user_id).name %> already claim key.
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
         <% if current_user.is_management? ||
               current_user.is_listings_manager? ||
               current_user.is_photo_manager? || current_user.id == residential_listing.unit.building.point_of_contact %>
@@ -1266,6 +1306,30 @@
       modal.find('.modal-body p').html(recipient)
     })
   });
+  function return_link_enable(id){
+      if ($(".office_"+ id).val() != "" ){
+        $("#ret_key_val_"+ id).show();
+        $.ajax({ method: "get",
+             url: "residential_listings/store_office_for_return_key",
+             data: {"id": id, "office": $(".office_"+ id).val()},
+             dataType: 'json'
+          })
+      }
+      else{
+        $("#ret_key_val_"+ id).hide();
+      }
+
+    }
+  function swap_key_to_agent(id){
+    $.ajax({ method: "get",
+      url: "residential_listings/swap_key_to_agent",
+      data: {"id": id, "swap_key_agent": $(".swap_agent_"+ id).val()},
+      dataType: 'json',
+      success: function() {
+        location.reload();
+      }
+    })
+  }
   // var upics = $(".rakshit-test").text();
 
   // var upics = ["https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/774/original/IMG_0935.jpg?1594225168", "https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/777/original/IMG_0934.jpg?1594225171", "https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/778/original/IMG_0937.jpg?1594225175", "https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/779/original/IMG_0940.jpg?1594225180", "https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/780/original/IMG_0941.jpg?1594225183", "https://s3.amazonaws.com/realty-monster-avatars-new/images/files/000/331/781/original/IMG_0942.jpg?1594225187"]

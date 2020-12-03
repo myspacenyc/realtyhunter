@@ -1161,6 +1161,28 @@ class ResidentialListingsController < ApplicationController
     TenantInfo.find(params[:tenant_info_id]).delete
   end
 
+  def claim_unit_key
+    @residential_listing_unit = ResidentialListing.find(params[:id]).unit
+    @residential_listing_unit.update(unit_claim_key: true, unit_return_key: false, unit_key_claim_user_id: current_user.id)
+    redirect_to residential_listings_path
+  end
+
+  def return_unit_key
+    @residential_listing_unit = ResidentialListing.find(params[:id]).unit
+    @residential_listing_unit.update(unit_claim_key: false, unit_return_key: true)
+    redirect_to residential_listings_path
+  end
+
+  def store_office_for_return_key
+    @residential_unit_find = ResidentialListing.find(params[:id]).unit
+    @residential_unit_find.update(unit_office_location: params[:office])
+  end
+
+  def swap_key_to_agent
+    @residential_unit_find = ResidentialListing.find(params[:id]).unit
+    @residential_unit_find.update(swap_key_agent: params[:swap_key_agent], unit_key_claim_user_id: params[:swap_key_agent])
+  end
+
   def individual_se_list
     @residential_listings = []
 

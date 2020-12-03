@@ -898,6 +898,9 @@
             <% if current_user.is_management? %>
               <th data-sort="residential_listings.updated_at" class="th-sortable">Syndicated</th>
             <% end %>
+            <% if [505,255,555].include? current_user.id %>
+              <th data-sort="residential_listings.updated_at" class="th-sortable">Key</th>
+            <% end %>
             <!-- <th data-sort="units.status" class="th-sortable">Status</th>
             <th data-sort="featured" class="th-sortable">Featured</th> -->
             <% if current_user.is_management? || current_user.is_listings_manager? %>
