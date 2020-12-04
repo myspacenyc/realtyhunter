@@ -744,7 +744,7 @@ xml.streeteasy :version => "1.6" do
               end
 
             end # property
-          else
+          # else
             xml.property type: @ptype, status: @status, id: listing.listing_id, url: public_url do
               xml.location do
                 # note we don't want to give out the building number for rentals!
@@ -769,7 +769,7 @@ xml.streeteasy :version => "1.6" do
                 xml.neighborhood listing.neighborhood_name
               end
 
-              xml.details do
+          #     xml.details do
                 
                 if listing.residential_listing
                   if listing.residential_listing.tenant_occupied == true
@@ -1092,7 +1092,7 @@ xml.streeteasy :version => "1.6" do
                 end
               end
 
-            end # property
+          #   end # property
           end          
         end
         if listing.residential_listing.roomshare_department == true && listing.status == "active"
