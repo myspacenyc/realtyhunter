@@ -1165,12 +1165,19 @@ class ResidentialListingsController < ApplicationController
     @residential_listing_unit = ResidentialListing.find(params[:id]).unit
     @residential_listing_unit.update(unit_claim_key: true, unit_return_key: false, unit_key_claim_user_id: current_user.id)
     redirect_to residential_listings_path
+
+    client = Slack::Web::Client.new
+    client.auth_test
+    client.chat_postMessage(channel: '#valtesting-grounds', text: "*Key* *Out* \n #{current_user.name} has claimed key for \n #{@residential_listing_unit.building.street_number} #{@residential_listing_unit.building.route}, # #{@residential_listing_unit.building_unit}. \n ---", as_user: true)
   end
 
   def return_unit_key
     @residential_listing_unit = ResidentialListing.find(params[:id]).unit
     @residential_listing_unit.update(unit_claim_key: false, unit_return_key: true)
     redirect_to residential_listings_path
+    client = Slack::Web::Client.new
+    client.auth_test
+    client.chat_postMessage(channel: '#valtesting-grounds', text: "*Key* *In* \n #{current_user.name} has return key for \n #{@residential_listing_unit.building.street_number} #{@residential_listing_unit.building.route}, # #{@residential_listing_unit.building_unit}. \n ---", as_user: true)
   end
 
   def store_office_for_return_key
@@ -1180,6 +1187,12 @@ class ResidentialListingsController < ApplicationController
 
   def swap_key_to_agent
     @residential_unit_find = ResidentialListing.find(params[:id]).unit
+
+    @agent = User.find(@residential_unit_find.unit_key_claim_user_id).name
+    @swap_agent = User.find(params[:swap_key_agent]).name
+    client = Slack::Web::Client.new
+    client.auth_test
+    client.chat_postMessage(channel: '#valtesting-grounds', text: "*Key* *Swap* \n #{@agent} has swaped key for \n #{@residential_unit_find.building.street_number} #{@residential_unit_find.building.route}, # #{@residential_unit_find.building_unit} to #{@swap_agent}. \n ---", as_user: true)
     @residential_unit_find.update(swap_key_agent: params[:swap_key_agent], unit_key_claim_user_id: params[:swap_key_agent])
   end
 
