@@ -258,8 +258,8 @@
       if (window.location.pathname == '/residential_listings/room_index'){
         var rooms_url = 'https://realtyhunter.org:3000/rooms/' + unit.id
         contentString += '<div class="contentRow" style="float: left;margin-left: 10px;" '+ (shouldHighlightRow ? ' active' : '') +' style="text-align: left;"><a href=' + rooms_url + '>' + key + ', #' + unit.building_unit+ '</a> <div class="un-main-content"><div>' + unit.beds + ' beds | ' + unit.baths + ' baths </div> '+ '<div> Net: $' + unit.rent + ' | Gross: $' + unit.gross + '</div><div> Avail: ' + unit.avail + '</div></div></div>' 
-        for (var j=0; j<info['rooms']['0']['a'].length; j++) {
-          room = info['rooms']['0']['a'][j];
+        for (var j=0; j<info['rooms'][i]['a'].length; j++) {
+          room = info['rooms'][i]['a'][j];
           if (room.status == 2){
             contentString += '<div class="contentRowroom" style="clear: both;text-align: left;color:#cdcdcd;margin-left: 110px;"' +'">'
             + ''+set_iconss+'disabled>'
