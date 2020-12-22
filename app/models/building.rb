@@ -170,7 +170,7 @@ class Building < ApplicationRecord
 	end
 
   # adds in landlord
-  def self.export_all(query_str, status, rating)
+  def self.export_all(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
     running_list = Building.joins(:landlord).joins(:rental_term)
       .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
       .where('buildings.archived = false')
@@ -187,7 +187,7 @@ class Building < ApplicationRecord
         'buildings.active_unit_count',
         'rental_terms.id as rental_term_id', 'rental_terms.name')
 
-    running_list = Building._filter_query(running_list, query_str, status, rating)
+    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
     running_list
   end
 
