@@ -1032,8 +1032,16 @@ class ResidentialListingsController < ApplicationController
       end
     end
     if params[:residential_listing][:streeteasy_flag_one] == "0"
-        @residential_unit.unit.update(streeteasy_primary_agent_id: nil, updated_at: Time.now())
+      @residential_unit.unit.update(streeteasy_primary_agent_id: nil, updated_at: Time.now())
+    end
+    if params[:residential_listing][:beds].to_i != @residential_unit.beds && params[:residential_listing][:beds].to_i > @residential_unit.beds
+      @add_room_count = params[:residential_listing][:beds].to_i - @residential_unit.beds
+      for r in @residential_unit.rooms.count .. params[:residential_listing][:beds].to_i - 1 do
+        #abort r.inspect
+        room_name = "Room #{(r + 1).to_s(26).tr("123456789abcdefghijklmnopq", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")}"
+        room = Room.create(name: room_name, rent: 0, status: 0, residential_listing_id: params[:id].to_i)
       end
+    end
     # if params[:residential_listing][:streeteasy_flag_one] == "0" and params[:residential_listing][:streeteasy_flag] == "0" and params[:residential_listing][:unit][:status] == "Active"
     #   abort (@residential_unit.streeteasy_flag != params[:residential_listing][:streeteasy_flag]).inspect
     #   if @residential_unit.streeteasy_flag != params[:residential_listing][:streeteasy_flag]
@@ -1164,20 +1172,21 @@ class ResidentialListingsController < ApplicationController
   def claim_unit_key
     @residential_listing_unit = ResidentialListing.find(params[:id]).unit
     @residential_listing_unit.update(unit_claim_key: true, unit_return_key: false, unit_key_claim_user_id: current_user.id)
-    redirect_to residential_listings_path
+    
 
     client = Slack::Web::Client.new
     client.auth_test
     client.chat_postMessage(channel: '#valtesting-grounds', text: "*Key* *Out* \n #{current_user.name} has claimed key for \n #{@residential_listing_unit.building.street_number} #{@residential_listing_unit.building.route}, # #{@residential_listing_unit.building_unit}. \n ---", as_user: true)
+    redirect_to residential_listings_path
   end
 
   def return_unit_key
     @residential_listing_unit = ResidentialListing.find(params[:id]).unit
     @residential_listing_unit.update(unit_claim_key: false, unit_return_key: true)
-    redirect_to residential_listings_path
     client = Slack::Web::Client.new
     client.auth_test
     client.chat_postMessage(channel: '#valtesting-grounds', text: "*Key* *In* \n #{current_user.name} has return key for \n #{@residential_listing_unit.building.street_number} #{@residential_listing_unit.building.route}, # #{@residential_listing_unit.building_unit}. \n ---", as_user: true)
+    redirect_to residential_listings_path
   end
 
   def store_office_for_return_key
