@@ -175,7 +175,7 @@ class ResidentialListing < ApplicationRecord
       .where('companies.id = ?', user.company_id)
       .select('buildings.formatted_street_address',
         'units.listing_id', 'units.building_unit', 'units.status','units.rent', 'units.archived',
-        'units.available_by', 'units.public_url', 'units.access_info', 'units.exclusive',
+        'units.available_by', 'units.public_url', 'units.access_info', 'units.exclusive', 'units.gross_price',
         'units.id AS unit_id', 'units.primary_agent_id', 'units.has_stock_photos', 'units.streeteasy_primary_agent_id',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route', 'buildings.point_of_contact',
         'buildings.lat', 'buildings.lng', 'buildings.rating',
@@ -317,6 +317,30 @@ class ResidentialListing < ApplicationRecord
     elsif !params[:rent_min] && params[:rent_max]
       rent_max = params[:rent_max].to_i
       running_list = running_list.where("rent <= ?", rent_max)
+    end
+
+    if params[:net_min] && params[:net_max]
+      net_min = params[:net_min].to_i
+      net_max = params[:net_max].to_i
+      running_list = running_list.where("rent >= ? AND rent <= ?", net_min, net_max)
+    elsif params[:net_min] && !params[:net_max]
+      net_min = params[:net_min].to_i
+      running_list = running_list.where("rent >= ?", net_min)
+    elsif !params[:net_min] && params[:net_max]
+      net_max = params[:net_max].to_i
+      running_list = running_list.where("rent <= ?", net_max)
+    end
+
+    if params[:gross_min] && params[:gross_max]
+      gross_min = params[:gross_min].to_i
+      gross_max = params[:gross_max].to_i
+      running_list = running_list.where("gross_price >= ? AND gross_price <= ?", gross_min, gross_max)
+    elsif params[:gross_min] && !params[:gross_max]
+      gross_min = params[:gross_min].to_i
+      running_list = running_list.where("gross_price >= ?", gross_min)
+    elsif !params[:gross_min] && params[:gross_max]
+      gross_max = params[:gross_max].to_i
+      running_list = running_list.where("gross_price <= ?", gross_max)
     end
 
     # search beds
