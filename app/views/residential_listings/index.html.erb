@@ -521,6 +521,15 @@
                       </label>
                     </div>
                   </div>
+                  <div class="col-xs-6">
+                    <div class="checkbox checkbox-warning inline">
+                      <%= check_box_tag :featured, "".freeze, params[:featured] == "true".freeze ? true : false,
+                          class: 'styled' %>
+                      <label for="featured">
+                        Featured
+                      </label>
+                    </div>
+                  </div>
                 </div>
                 <!-- <div class="row vertical-padding">
                   <div class="col-xs-5">

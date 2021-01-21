@@ -174,7 +174,7 @@ class ResidentialListing < ApplicationRecord
       .where('units.archived = false')
       .where('companies.id = ?', user.company_id)
       .select('buildings.formatted_street_address',
-        'units.listing_id', 'units.building_unit', 'units.status','units.rent', 'units.archived',
+        'units.listing_id','units.featured', 'units.building_unit', 'units.status','units.rent', 'units.archived',
         'units.available_by', 'units.public_url', 'units.access_info', 'units.exclusive', 'units.gross_price',
         'units.id AS unit_id', 'units.primary_agent_id', 'units.has_stock_photos', 'units.streeteasy_primary_agent_id',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route', 'buildings.point_of_contact',
@@ -690,6 +690,10 @@ class ResidentialListing < ApplicationRecord
       running_list = running_list.where("residential_listings.managed_listing =?", params[:managed_listing])
     end
 
+    if !params[:featured].blank?
+      running_list = running_list.where("units.featured =?", params[:featured])
+    end
+
     if params[:no_images] == 'true'
         less_two = Unit.joins(:images).group("units.id").having("count(units.id)<3")
         find_less_two = less_two.all.map(&:id)
@@ -1039,7 +1043,7 @@ class ResidentialListing < ApplicationRecord
       .where('units.archived = false')
       .select('buildings.formatted_street_address',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route',
-        'units.building_unit', 'units.status','units.rent', 'units.id AS unit_id',
+        'units.building_unit','units.featured', 'units.status','units.rent', 'units.id AS unit_id',
         'units.has_stock_photos', 'units.primary_agent_for_rs', 'residential_listings.notes', 'residential_listings.private_bathroom',
         'residential_listings.beds', 'residential_listings.id', 'residential_listings.lease_start', 'residential_listings.dimensions',
         'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one', 'units.gross_price',
@@ -1083,7 +1087,7 @@ class ResidentialListing < ApplicationRecord
       .where('units.archived = false')
       .select('buildings.formatted_street_address',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route',
-        'units.building_unit', 'units.status','units.rent', 'units.id AS unit_id',
+        'units.building_unit','units.featured', 'units.status','units.rent', 'units.id AS unit_id',
         'units.has_stock_photos', 'units.primary_agent_for_rs', 'units.gross_price', 'residential_listings.notes',
         'residential_listings.beds', 'residential_listings.id', 'residential_listings.lease_start', 'residential_listings.dimensions',
         'residential_listings.baths','units.access_info', 'residential_listings.streeteasy_flag', 'residential_listings.private_bathroom',
