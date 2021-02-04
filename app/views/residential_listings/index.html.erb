@@ -80,6 +80,22 @@
           </div>
           <div class="row vertical-padding">
             <div class="col-xs-3">
+              <%= label_tag(:unit, "Alt Address") %>
+            </div>
+            <div class="col-xs-8 col-sm-left-padding">
+              <%= text_field_tag :alt_address, params[:alt_address], class:"form-control" %>
+            </div>
+          </div>
+          <div class="row vertical-padding">
+            <div class="col-xs-3">
+              <%= label_tag(:unit, "Alt Unit") %>
+            </div>
+            <div class="col-xs-8 col-sm-left-padding">
+              <%= text_field_tag :alt_unit, params[:alt_unit], class:"form-control" %>
+            </div>
+          </div>
+          <div class="row vertical-padding">
+            <div class="col-xs-3">
               <%= label_tag(:unit, "Rent") %>
             </div>
             <div class="col-xs-4 col-sm-left-padding">

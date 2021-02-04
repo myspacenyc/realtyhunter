@@ -265,11 +265,22 @@ class ResidentialListing < ApplicationRecord
        running_list.where('buildings.formatted_street_address ILIKE ? OR residential_listings.alt_address ILIKE ?', "%#{address}%", "%#{address}%" )
     end
 
+    if params[:alt_address]
+      address = params[:alt_address][0, 500]
+      running_list =
+       running_list.where('residential_listings.alt_address ILIKE ?', "%#{address}%" )
+    end
+
     # search by unit
     if params[:unit]
       # cap query string length for security reasons
       address = params[:unit][0, 50]
       running_list = running_list.where("building_unit ILIKE ?", "%#{params[:unit]}%")
+    end
+
+    if params[:alt_unit]
+      address = params[:alt_unit][0, 50]
+      running_list = running_list.where("units.streeteasy_unit ILIKE ?", "%#{params[:alt_unit]}%")
     end
 
 

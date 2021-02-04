@@ -27,6 +27,8 @@
     var data = {
         address: $('#address').val(),
         unit: $('#unit').val(),
+        alt_address: $('#alt_address').val(),
+        alt_unit: $('#alt_unit').val(),
         rent_min: $('#rent_min').val(),
         rent_max: $('#rent_max').val(),
         net_min: $('#net_min').val(),
