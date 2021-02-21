@@ -123,6 +123,9 @@
                 <% if current_user.is_management? %>
                   <li><%= link_to "New/Reactivated Listings Tracker", weekly_track_path %></li>
                 <% end %>
+                <% if current_user.is_management? %>
+                  <li><%= link_to "Neighborhood", neighborhoods_path %></li>
+                <% end %>
                 <% if current_user.is_photo_manager? %>
                   <li><%= link_to "Media Dashboard", media_index_path %></li></li>
                 <% end %>
