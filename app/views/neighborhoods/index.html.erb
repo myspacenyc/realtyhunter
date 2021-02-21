@@ -1,3 +1,53 @@
+<style>
+  table {width: 100%;}
+  thead {display: none;}
+  tbody tr {
+    display: inline-block;
+    width: 23%;
+    border: solid 1px #ccc;
+    padding: 10px 10px 20px;
+    margin: 1%;
+    }
+    tbody tr td {
+      width: 100%;
+      padding: 1% 0;
+      font-size: 12px;
+      display: inline;
+    }
+    tbody tr td:nth-child(1){
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
+    }
+    tbody tr td:nth-child(2){
+      font-size: 14px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 15px;
+    }
+    tbody tr td:nth-child(3){
+      font-size: 14px;
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  tbody tr td:nth-child(4),
+  tbody tr td:nth-child(5),
+  tbody tr td:nth-child(6){
+    width: 33.33%;
+    padding: 5px 5px 15px 0px;
+    text-align:center;
+  }
+  tbody tr td a,
+  tobdy tr td a:visited {
+    border: solid 1px #ccc;
+    padding: 5px;
+    background: #eee;
+  }
+</style>
+
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Neighborhoods</h1>
@@ -16,6 +66,7 @@
       <tr>
         <td><%= neighborhood.name %></td>
         <td><%= neighborhood.borough %></td>
+        <td><%= neighborhood.youtube_url %></td>
         <td><%= link_to 'Show', neighborhood %></td>
         <td><%= link_to 'Edit', edit_neighborhood_path(neighborhood) %></td>
         <td><%= link_to 'Destroy', neighborhood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
