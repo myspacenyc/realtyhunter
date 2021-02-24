@@ -52,11 +52,11 @@ xml.instruct! :xml, :version => "1.0"
 				xml.Location do
 					# note we don't want to give out the building number for rentals!
 					if listing.residential_listing
-						if	listing.residential_listing.alt_address.blank?
+						if	!listing.residential_listing.alt_address.blank?
 	                  		xml.StreetAddress listing.residential_listing.alt_address
+	                  	else
+	                  		xml.StreetAddress listing.street_number + " " + listing.route
 	                  	end
-	                else
-					  xml.StreetAddress listing.street_number + " " + listing.route
 					end
 					if !listing.streeteasy_unit.blank?
 						xml.UnitNumber listing.streeteasy_unit
@@ -306,15 +306,15 @@ xml.instruct! :xml, :version => "1.0"
 						#unit = Unit.where(listing_id: listing.listing_id)[0].residential_listing
 						#abort listing.residential_listing.inspect
 						#if listing.residential_listing.streeteasy_flag == true
-			              xml.Office do #id: 114
-			                xml.Name "Myspace NYC"
-			                xml.EmailAddress "info+streeteasy@myspacenyc.com"
-			                #xml.lead_email "info+streeteasy@myspacenyc.com"
-			                xml.OfficeLineNumber "9292748181"
-			                # xml.phone_numbers do
-			                #   xml.office "9292748181"
-			                # end
-			              end
+			              # xml.Office do #id: 114
+			              #   xml.Name "Myspace NYC"
+			              #   xml.EmailAddress "info+streeteasy@myspacenyc.com"
+			              #   #xml.lead_email "info+streeteasy@myspacenyc.com"
+			              #   xml.OfficeLineNumber "9292748181"
+			              #   # xml.phone_numbers do
+			              #   #   xml.office "9292748181"
+			              #   # end
+			              # end
 			              if !listing.primary_agent_id.nil?
 									user = User.find(listing.primary_agent_id)
 								xml.Agent do #id: agent.id
