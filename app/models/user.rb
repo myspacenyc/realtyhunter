@@ -295,6 +295,10 @@ class User < ApplicationRecord
     self.has_role? :third_tier_agent
   end
 
+  def is_s_agents?
+    self.has_role? :s_agents
+  end
+
   def is_listings_manager?
     has_role? :listings_manager
   end

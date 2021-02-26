@@ -1,4 +1,4 @@
-<% if (residential_listing.unit.hide_from_agent == true && !current_user.is_manager?) || (residential_listing.unit.hide_from_agent == true && !current_user.is_company_admin?) || (residential_listing.unit.hide_from_agent == true && !current_user.is_third_tier_agent?) %>
+<% if (residential_listing.unit.hide_from_agent == true && !current_user.is_manager?) || (residential_listing.unit.hide_from_agent == true && !current_user.is_company_admin?) || (residential_listing.unit.hide_from_agent == true && !current_user.is_third_tier_agent?) || (residential_listing.unit.hide_from_agent == true && !current_user.is_s_agents?) %>
 <% else %>
   <div class="row-no-padding row-list-view <%= cycle("even", "odd") %>">
     <!-- thumbnail image -->
