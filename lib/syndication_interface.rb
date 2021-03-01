@@ -235,7 +235,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			listings = listings.where('units.status =?', Unit.statuses["active"])
 		else
 			listings = listings.where('units.status IN (?) OR units.syndication_status = ?',
-					[Unit.statuses["active"], Unit.statuses["contract_out"], Unit.statuses["deal_pending"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]], Unit.syndication_statuses['Force syndicate'])
+					[Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["deal_pending"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"]], Unit.syndication_statuses['Force syndicate'])
 				.where('units.syndication_status IN (?)', [
 					Unit.syndication_statuses['Syndicate if matches criteria'],
 					Unit.syndication_statuses['Force syndicate']
