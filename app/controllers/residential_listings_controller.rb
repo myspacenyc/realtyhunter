@@ -1675,7 +1675,11 @@ class ResidentialListingsController < ApplicationController
           end
         else 
           if !params[:ll_importance]
-            params[:ll_importance] = "gold".freeze
+            if current_user.is_management?
+              params[:ll_importance] = "any".freeze
+            else
+              params[:ll_importance] = "gold".freeze
+            end
           end
         end
         if action_name == "media_index"
