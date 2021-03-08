@@ -1524,10 +1524,10 @@
   });
 
   $("#residential_listing_streeteasy_flag_one").click(function(){
-    if($("#residential_listing_streeteasy_flag_one").prop("checked") == true && $("#residential_listing_unit_streeteasy_primary_agent_id").val() == ""){
-      alert("You are not allow to claim this property")
-      return false;
-    }
+    // if($("#residential_listing_streeteasy_flag_one").prop("checked") == true && $("#residential_listing_unit_streeteasy_primary_agent_id").val() == ""){
+    //   alert("You are not allow to claim this property")
+    //   return false;
+    // }
     if($("#residential_listing_streeteasy_flag").prop("checked") == false){
       $("#residential_listing_streeteasy_flag").prop("disabled", false);
     }
@@ -1535,6 +1535,28 @@
       $("#residential_listing_streeteasy_flag").prop("disabled", true);
     }
   });
+
+  //Streeteasy agent auto select when primary agent select
+  (function () {
+    var previous;
+
+    $("#residential_listing_unit_primary_agent_id").focus(function () {
+          // Store the current value on focus, before it changes
+          previous = this.value;
+      }).change(function() {
+          // Do soomething with the previous value after the change
+        var userSelect = $(this).find(":selected").val();
+        if (userSelect == "555"){
+          alert("Not allow to select this user please select any other user.")
+          $("#residential_listing_unit_primary_agent_id").val(previous);
+          return false;
+        }
+        else{
+          $('select#residential_listing_unit_streeteasy_primary_agent_id').val(userSelect);
+          $('select#residential_listing_unit_primary_agent_id').val(userSelect);
+        }
+      });
+  })();
 
   if($("#residential_listing_streeteasy_flag").prop("checked") == true){
     $("#residential_listing_streeteasy_flag_one").prop("disabled", true);
