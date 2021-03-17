@@ -1596,8 +1596,10 @@ class ResidentialListingsController < ApplicationController
           .where(state: current_user.office.administrative_area_level_1_short)
           .to_a
           .group_by(&:borough_cat)
-      @building_amenities = BuildingAmenity.where(company: current_user.company)
-      @unit_amenities = ResidentialAmenity.where(company: current_user.company)
+      building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage"]
+      @building_amenities = BuildingAmenity.where(company: current_user.company, name: building_amenities_name)
+      unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups"]
+      @unit_amenities = ResidentialAmenity.where(company: current_user.company, name: unit_amenities_name)
 
       do_search
       @bldg_images = Building.get_bldg_images_from_units(@residential_units)

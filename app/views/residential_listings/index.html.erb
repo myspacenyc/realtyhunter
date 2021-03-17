@@ -619,25 +619,25 @@
                 <a href="javascript:;" class="test_p" data-target="#demo">Unit features</a>
                 <div class="row vertical-padding test_c" id="demo" style="display: none;">
                   <!-- <div class="col-xs-11 selectize-wrapper"> -->
-                      <% @unit_amenities.where(parent_amenity_id: 0).each do |amenity| %>
-                        <div class="col-sm-6" id="unit-amenities-select-multiple">
-                          <input type="checkbox" name="features[]" value="<%= amenity.id %>" id="parent_<%= amenity.id %>" onClick = "parent_amenities_check(<%= amenity.id %>)" ><b><%= amenity.name.titleize %></b>
+                      <%# @unit_amenities.where(parent_amenity_id: 0).each do |amenity| %>
+                        <!-- <div class="col-sm-6" id="unit-amenities-select-multiple"> -->
+                          <input type="checkbox" name="features[]" value="" id="parent" onClick = "select_all_unit_amenities(this)" ><b>Select All</b>
                           <br>
                           <%# abort params[:parent_amenities].split(",").inspect %>
-                          <% @unit_amenities.where(parent_amenity_id: amenity.id).each do |child_amenity| %>
+                          <% @unit_amenities.each do |amenity| %>
                             <% if params[:parent_amenities] %>
-                              <% if params[:parent_amenities].split(",").include? "#{child_amenity.id}" %>
-                                <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.parent_amenity_id %>" id="child_with_parent_<%= child_amenity.id %>" checked="true" onClick = "child_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
+                              <% if params[:parent_amenities].split(",").include? "#{amenity.id}" %>
+                                <span class="child-input"><input type="checkbox" name="unit_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.parent_amenity_id %>" id="child_with_parent_<%= amenity.id %>" checked="true" onClick = "child_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
                               <% else %>
-                                <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.parent_amenity_id %>" id="child_with_parent_<%= child_amenity.id %>" onClick = "child_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
+                                <span class="child-input"><input type="checkbox" name="unit_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.parent_amenity_id %>" id="child_with_parent_<%= amenity.id %>" onClick = "child_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
                               <% end %>
                             <% else %>
-                              <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.parent_amenity_id %>" id="child_with_parent_<%= child_amenity.id %>" onClick = "child_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
+                              <span class="child-input"><input type="checkbox" name="unit_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.parent_amenity_id %>" id="child_with_parent_<%= amenity.id %>" onClick = "child_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
                             <% end %>
                           <% end %>
                           <br>
-                        </div>
-                      <% end %>
+                        <!-- </div> -->
+                      <%# end %>
                   <!-- </div> -->
                 </div>
 
@@ -649,24 +649,20 @@
                 <a href="javascript:;" class="test_p" data-target="#demo_build_feat">Building features</a>
                 <div class="row vertical-padding test_c" id="demo_build_feat" style="display: none;">
                   <!-- <div class="col-xs-11 selectize-wrapper"> -->
-                      <% @building_amenities.where(building_parent_amenity_id: 0).each do |amenity| %>
-                        <div class="col-sm-6" id= "building-amenities-select-multiple">
-                          <input type="checkbox" name="features[]" value="<%= amenity.id %>" id="parent_<%= amenity.id %>" onClick = "parent_building_amenities_check(<%= amenity.id %>)" ><b><%= amenity.name.titleize %></b>
-                          <br>
-                          <%# abort params[:parent_amenities].split(",").inspect %>
-                          <% @building_amenities.where(building_parent_amenity_id: amenity.id).each do |child_amenity| %>
-                            <% if params[:parent_building_amenities] %>
-                              <% if params[:parent_building_amenities].split(",").include? "#{child_amenity.id}" %>
-                                <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.building_parent_amenity_id %>" id="child_with_parent_building_<%= child_amenity.id %>" checked="true" onClick = "child_building_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
-                              <% else %>
-                                <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.building_parent_amenity_id %>" id="child_with_parent_building_<%= child_amenity.id %>" onClick = "child_building_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
-                              <% end %>
-                            <% else %>
-                              <span class="child-input"><input type="checkbox" name="features[]" value="<%= child_amenity.id %>" data-parent-id= "<%= child_amenity.building_parent_amenity_id %>" id="child_with_parent_building_<%= child_amenity.id %>" onClick = "child_building_amenities_uncheck(<%= child_amenity.id %>)"><%= child_amenity.name.titleize %></span>
-                            <% end %>
+                      <input type="checkbox" name="features[]" value="" id="parent" onClick = "select_all_building_amenities(this)" ><b>Select All</b>
+                      <br>
+                      <% @building_amenities.each do |amenity| %>
+                        <!-- <div class="col-sm-6" id= "building-amenities-select-multiple"> -->
+                        <% if params[:parent_building_amenities] %>
+                          <% if params[:parent_building_amenities].split(",").include? "#{amenity.id}" %>
+                            <span class="child-input"><input type="checkbox" name="building_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.id %>" class= "child_with_parent_building" checked="true" id="child_with_parent_building_<%= amenity.id %>" onClick = "child_building_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
+                          <% else %>
+                            <span class="child-input"><input type="checkbox" name="building_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.id %>" class= "child_with_parent_building" id="child_with_parent_building_<%= amenity.id %>" onClick = "child_building_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
                           <% end %>
-                          <br>
-                        </div>
+                        <% else %>
+                          <span class="child-input"><input type="checkbox" name="building_features[]" value="<%= amenity.id %>" data-parent-id= "<%= amenity.id %>" class= "child_with_parent_building" id="child_with_parent_building_<%= amenity.id %>" onClick = "child_building_amenities_uncheck(<%= amenity.id %>)"><%= amenity.name.titleize %></span>
+                        <% end %>
+                        <!-- </div> -->
                       <% end %>
                   <!-- </div> -->
                 </div>

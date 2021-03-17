@@ -1152,6 +1152,36 @@ function parent_building_amenities_check(parent_amenity){
   // document.getElementById("parent_amenities").value = name;
 }
 
+function select_all_building_amenities(source){
+  checkboxes = document.getElementsByName('building_features[]');
+  sel_all = ""
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+    if (checkboxes[i].checked){
+      sel_all += checkboxes[i].value + ",";
+    }
+    else{
+     sel_all = "";
+    }
+    document.getElementById("parent_building_amenities").value = sel_all.replace(/,(?=[^,]*$)/, '');
+  }
+}
+
+function select_all_unit_amenities(source){
+  checkboxes = document.getElementsByName('unit_features[]');
+  unit_all = ""
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+    if (checkboxes[i].checked){
+      unit_all += checkboxes[i].value + ",";
+    }
+    else{
+     unit_all = "";
+    }
+    document.getElementById("parent_amenities").value = unit_all.replace(/,(?=[^,]*$)/, '');
+  }
+}
+
 function child_building_amenities_uncheck(id){
   var check_value = "child_with_parent_building_"+ id;
   if (document.getElementById(check_value).checked == true){
