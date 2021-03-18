@@ -669,7 +669,8 @@
             <div class="row">
 
               <% i = 0 %>
-              <%= f.collection_check_boxes(:residential_amenity_ids, current_user.company.residential_amenities.where.not(parent_amenities: 1), :id, :name) do |b| %>
+              <% unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups"] %>
+              <%= f.collection_check_boxes(:residential_amenity_ids, current_user.company.residential_amenities.where(name: unit_amenities_name), :id, :name) do |b| %>
 
                 <% if i % 3 == 0 && i > 0 %>
                   </div>
