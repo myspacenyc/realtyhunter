@@ -348,7 +348,8 @@
     <!-- for bigger screens -->
       <div class="row">
         <% i = 0 %>
-        <%= f.collection_check_boxes(:utility_ids, current_user.company.utilities, :id, :name) do |b| %>
+        <% buildings_utilities_not_required = ["$125/mo utility charge","$150 monthly flat charge for all utilities","and cooking gas included","buisness center","cafateria","commnity wifi","each unit has per month utility fee","gas","heat","hot water","hvac & radiators","laundry on every floor,metal shop","washer/dryer allowed"] %>
+        <%= f.collection_check_boxes(:utility_ids, current_user.company.utilities.where.not(name: buildings_utilities_not_required), :id, :name) do |b| %>
 
           <% if i % 3 == 0 && i > 0 %>
             </div>
