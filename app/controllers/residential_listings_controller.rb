@@ -1527,7 +1527,7 @@ class ResidentialListingsController < ApplicationController
         end
       end
     end
-    @tb_all_new_reactivated_listings_count = ListingDetail.all
+    @tb_all_new_reactivated_listings_count = ListingDetail.all.order(a: :desc)
   end
 
   def download_csv_active_new_reactivated_listings
@@ -1598,7 +1598,7 @@ class ResidentialListingsController < ApplicationController
           .group_by(&:borough_cat)
       building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage"]
       @building_amenities = BuildingAmenity.where(company: current_user.company, name: building_amenities_name)
-      unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups"]
+      unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups", "shared outdoor space"]
       @unit_amenities = ResidentialAmenity.where(company: current_user.company, name: unit_amenities_name)
 
       do_search
