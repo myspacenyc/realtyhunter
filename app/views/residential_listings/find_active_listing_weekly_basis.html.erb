@@ -224,20 +224,20 @@
     // code end for reactivated listing table show more
     // ************************************************
     // code start for main new and reactivated listings weekly basis
-    if ($(".blogBox-main-active").length >=30) {
+    if ($(".blogBox-main-active").length >=20) {
       $("#loadMore-main-active").show()
     }
     else{
       $("#loadMore-main-active").hide()
     }
 
-    $(".moreBox-main-active").slice(0, 30).show();
+    $(".moreBox-main-active").slice(0, 20).show();
     if ($(".blogBox-main-active:hidden").length != 0) {
       $("#loadMore-main-reactive").show();
     }   
     $("#loadMore-main-active").on('click', function (e) {
       e.preventDefault();
-      $(".moreBox-main-active:hidden").slice(0, 30).slideDown();
+      $(".moreBox-main-active:hidden").slice(0, 20).slideDown();
       if ($(".moreBox-main-active:hidden").length == 0) {
         $("#loadMore-main-active").fadeOut('slow');
       }
