@@ -1151,6 +1151,10 @@ class ResidentialListingsController < ApplicationController
       @residential_unit.update(rental_term_id: new_rental_term.id)
     end
 
+    if params[:residential_listing][:unit][:status].downcase == "off"
+      @residential_unit.update(streeteasy_url: nil)
+    end
+
     if unit_updated && listing_updated
 
       Resque.enqueue(UpdateResidentialListing, @residential_unit.id, is_now_active) # send to Knack
