@@ -796,6 +796,21 @@
 					   </div>
 			    <% end %>
 
+			    <% if !@residential_unit.streeteasy_url.blank? %>
+			    	<br />
+			    	<div class="row">
+			    		<div class="col-xs-12 col-md-12">
+			    			<strong>Streeteasy URL:</strong>
+			    		</div>
+			    	</div>
+			    	<div class="row">
+			    		<div class="col-xs-12 col-md-12">
+					    	<a href="<%= @residential_unit.streeteasy_url %>" target="_blank">
+					    		<%= @residential_unit.streeteasy_url %>
+					    	</a>
+					    </div>
+				   	</div>
+			    <% end %>
 		    	<% if @residential_unit.unit.documents.count > 0 %>
 		    	<br />
 		    	<div class="row">

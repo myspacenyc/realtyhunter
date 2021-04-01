@@ -1671,19 +1671,19 @@ class ResidentialListingsController < ApplicationController
 
       if current_user.is_data_entry? || current_user.is_data_entry2?
       else
-        if action_name == "room_index" || action_name == "media_index"
-          if !params[:ll_importance]
-            params[:ll_importance] = "any".freeze
-          end
-        else 
-          if !params[:ll_importance]
-            if current_user.is_management?
-              params[:ll_importance] = "any".freeze
-            else
-              params[:ll_importance] = "gold".freeze
-            end
-          end
-        end
+        # if action_name == "room_index" || action_name == "media_index"
+        #   if !params[:ll_importance]
+        #     params[:ll_importance] = "any".freeze
+        #   end
+        # else 
+        #   if !params[:ll_importance]
+        #     if current_user.is_management?
+        #       params[:ll_importance] = "any".freeze
+        #     else
+        #       params[:ll_importance] = "gold".freeze
+        #     end
+        #   end
+        # end
         if action_name == "media_index"
           if !params[:youtube_video_url]
             params[:youtube_video_url] = "1".freeze
@@ -1747,7 +1747,7 @@ class ResidentialListingsController < ApplicationController
         :beds, :baths, :notes, :description, :rooms_description, :lease_start, :lease_end,
         :include_photos, :inaccuracy_description, :rental_term_id, :tenant_email_date, :tenant_sms_date,
         :has_fee, :op_fee_percentage, :tp_fee_percentage, :tenant_description,
-        :virtual_tours_available, :in_person_tours_available, :no_access_until_vacant,
+        :virtual_tours_available, :in_person_tours_available, :no_access_until_vacant, :streeteasy_url,
         :available_starting, :available_before, :custom_amenities, :youtube_video_url, :tour_3d, :private_youtube_url,
         :roomsharing_filter, :unassigned_filter, :tenant_occupied_filter, :streeteasy_filter,
         :no_description,:no_images, :roomshare_department, :renthop, :private_bathroom, :watermark, :watermark_in_use,
