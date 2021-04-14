@@ -1750,7 +1750,7 @@ class ResidentialListingsController < ApplicationController
         :tenant_occupied, :alt_address, :dimensions, :photo_video_access,
         :beds, :baths, :notes, :description, :rooms_description, :lease_start, :lease_end,
         :include_photos, :inaccuracy_description, :rental_term_id, :tenant_email_date, :tenant_sms_date,
-        :has_fee, :op_fee_percentage, :tp_fee_percentage, :tenant_description,
+        :has_fee, :op_fee_percentage, :tp_fee_percentage, :tenant_description, :tenant_credit_offered,
         :virtual_tours_available, :in_person_tours_available, :no_access_until_vacant, :streeteasy_url,
         :available_starting, :available_before, :custom_amenities, :youtube_video_url, :tour_3d, :private_youtube_url,
         :roomsharing_filter, :unassigned_filter, :tenant_occupied_filter, :streeteasy_filter,

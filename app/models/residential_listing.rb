@@ -180,7 +180,7 @@ class ResidentialListing < ApplicationRecord
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route', 'buildings.point_of_contact',
         'buildings.lat', 'buildings.lng', 'buildings.rating',
         'residential_listings.id',
-        'residential_listings.beds', 'residential_listings.baths', 'residential_listings.notes',
+        'residential_listings.beds', 'residential_listings.baths', 'residential_listings.notes', 'residential_listings.tenant_credit_offered',
         'residential_listings.description', 'residential_listings.lease_start', 'residential_listings.dimensions',
         'residential_listings.lease_end', 'residential_listings.has_fee', 'residential_listings.youtube_video_url',
         'residential_listings.private_youtube_url', 'residential_listings.tour_3d',
@@ -212,7 +212,7 @@ class ResidentialListing < ApplicationRecord
         'units.building_unit','units.featured', 'units.status','units.rent', 'residential_listings.beds','residential_listings.claim_for_naked_apartment',
         'residential_listings.claim_for_individual_syndication_page','residential_listings.renthop',
         'units.primary_agent_id',  'units.has_stock_photos', 'units.primary_agent_for_rs',
-        'buildings.street_number || \' \' || buildings.route as street_address_and_unit', 'residential_listings.dimensions',
+        'buildings.street_number || \' \' || buildings.route as street_address_and_unit', 'residential_listings.dimensions', 'residential_listings.tenant_credit_offered',
         'residential_listings.id', 'residential_listings.baths','units.access_info', 'units.gross_price', 'residential_listings.notes',
         'residential_listings.favorites','residential_listings.streeteasy_flag_one', 'residential_listings.lease_start', 'residential_listings.private_bathroom',
         'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_claim', 'residential_listings.couples_accepted',
@@ -701,6 +701,10 @@ class ResidentialListing < ApplicationRecord
       running_list = running_list.where("residential_listings.managed_listing =?", params[:managed_listing])
     end
 
+    if !params[:tenant_credit_offered].blank?
+      running_list = running_list.where("residential_listings.tenant_credit_offered =?", params[:tenant_credit_offered])
+    end
+
     if !params[:featured].blank?
       running_list = running_list.where("units.featured =?", params[:featured])
     end
@@ -1055,7 +1059,7 @@ class ResidentialListing < ApplicationRecord
       .select('buildings.formatted_street_address',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route',
         'units.building_unit','units.featured', 'units.status','units.rent', 'units.id AS unit_id',
-        'units.has_stock_photos', 'units.primary_agent_for_rs', 'residential_listings.notes', 'residential_listings.private_bathroom',
+        'units.has_stock_photos', 'units.primary_agent_for_rs', 'residential_listings.notes', 'residential_listings.private_bathroom', 'residential_listings.tenant_credit_offered',
         'residential_listings.beds', 'residential_listings.id', 'residential_listings.lease_start', 'residential_listings.dimensions',
         'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one', 'units.gross_price',
         'residential_listings.baths','units.access_info', 'residential_listings.renthop', 'residential_listings.couples_accepted',
@@ -1105,7 +1109,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.streeteasy_flag_one', 'residential_listings.renthop', 'residential_listings.couples_accepted',
         'residential_listings.has_fee', 'residential_listings.updated_at', 'residential_listings.youtube_video_url', 'residential_listings.private_youtube_url',
         'residential_listings.tenant_occupied', 'residential_listings.roomshare_department', 'residential_listings.tour_3d', 'residential_listings.alt_address',
-        'residential_listings.roomfill', 'residential_listings.partial_move_in', 'residential_listings.working_this_listing',
+        'residential_listings.roomfill', 'residential_listings.partial_move_in', 'residential_listings.working_this_listing', 'residential_listings.tenant_credit_offered',
         'residential_listings.photographer_user_id','residential_listings.photographer_update_date', 'residential_listings.pending_se', 'residential_listings.managed_listing',
         'residential_listings.virtual_tours_available', 'residential_listings.in_person_tours_available', 'residential_listings.no_access_until_vacant',
         'neighborhoods.name AS neighborhood_name',

@@ -547,6 +547,17 @@
                     </div>
                   </div>
                 </div>
+                <div class="row vertical-padding">
+                  <div class="col-xs-6">
+                    <div class="checkbox checkbox-warning inline">
+                      <%= check_box_tag :tenant_credit_offered, "".freeze, params[:tenant_credit_offered] == "true".freeze ? true : false,
+                          class: 'styled' %>
+                      <label for="tenant_credit_offered">
+                        Tenant Credit Offered
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <!-- <div class="row vertical-padding">
                   <div class="col-xs-5">
                     <%#= label_tag :parent_neighborhoods, "Parent Neighborhoods" %>

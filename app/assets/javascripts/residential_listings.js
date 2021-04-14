@@ -62,6 +62,7 @@
         no_images: $('#no_images').prop('checked'),
         pending_se: $('#pending_se').prop('checked'),
         managed_listing: $('#managed_listing').prop('checked'),
+        tenant_credit_offered: $('#tenant_credit_offered').prop('checked'),
         featured: $('#featured').prop('checked'),
         streeteasy_filter: $('#streeteasy_filter').val(),
         streeteasy_claim: $('#streeteasy_claim').val(),
