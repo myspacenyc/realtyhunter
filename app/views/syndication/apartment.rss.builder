@@ -18,7 +18,7 @@ xml.PhysicalProperty do
 	end
   #xml.properties do
   	#exit
-	  @listings.each do |listing|
+	  @listings.where.not(status: 1).each do |listing|
 
 	  	# NOTE: this is super hacky. We should filter this out before sending
 	  	# to the view.
