@@ -170,9 +170,16 @@
 								  	<!-- now display unit photos -->
 								  	<% @residential_unit.unit.images.each do |image| %>
 								  		<div class="item">
+								  			<% if @residential_unit.watermark_in_use == 0 %>
 								  				<%= image_tag image.file.url(:large), :class => 'img-responsive center-block',
 										      	alt: image.file.url(:large) %>
-
+										    <% elsif @residential_unit.watermark_in_use == 1 %>
+										    	<%= image_tag image.file.url(:large_marked_sbklyn), :class => 'img-responsive center-block',
+										      	alt: image.file.url(:large_marked_sbklyn) %>
+										    <% elsif @residential_unit.watermark_in_use == 2 %>
+										    	<%= image_tag image.file.url(:large_blankwatermark), :class => 'img-responsive center-block',
+										      	alt: image.file.url(:large_blankwatermark) %>
+										    <% end %>
 									    </div>
 								  	<% end %>
 								  </div>
