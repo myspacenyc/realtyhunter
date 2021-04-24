@@ -1600,9 +1600,9 @@ class ResidentialListingsController < ApplicationController
           .where(state: current_user.office.administrative_area_level_1_short)
           .to_a
           .group_by(&:borough_cat)
-      building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage"]
+      building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage", "gym", "wheelchair access", "bike room", "cold storage", "concierge", "courtyard", "live in super", "locker rooms", "media room", "package room", "recreation", "roof deck", "non smoking building", "valet", "virtual doorman"]
       @building_amenities = BuildingAmenity.where(company: current_user.company, name: building_amenities_name)
-      unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups", "shared outdoor space"]
+      unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups", "shared outdoor space", "garden", "garden views", "park views", "water views", "balcony/terrace", "hardwood floors", "private roof deck", "roof access", "skylight", "terrace"]
       @unit_amenities = ResidentialAmenity.where(company: current_user.company, name: unit_amenities_name)
 
       do_search

@@ -308,8 +308,8 @@
     <!--div class="hidden-xs"-->
       <div class="row">
         <% i = 0 %>
-        <% building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage"] %>
-        <%= f.collection_check_boxes(:building_amenity_ids, current_user.company.building_amenities.where(name: building_amenities_name), :id, :name) do |b| %>
+        <% building_amenities_name = ["children's play room", "doorman", "elevator", "fitness center", "garage parking", "fitness center", "laundry in building", "parking", "pool", "outdoor spaces", "storage", "gym", "wheelchair access", "bike room", "cold storage", "concierge", "courtyard", "live in super", "locker rooms", "media room", "package room", "recreation", "roof deck", "non smoking building", "valet", "virtual doorman"] %>
+        <%= f.collection_check_boxes(:building_amenity_ids, current_user.company.building_amenities.where(name: building_amenities_name).uniq!, :id, :name) do |b| %>
 
           <% if i % 3 == 0 && i > 0 %>
             </div>

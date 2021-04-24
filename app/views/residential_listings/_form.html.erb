@@ -669,7 +669,7 @@
             <div class="row">
 
               <% i = 0 %>
-              <% unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups", "shared outdoor space"] %>
+              <% unit_amenities_name = ["central a/c", "city views", "dishwasher", "duplex", "fireplace", "fully furnished", "heat + hot water included", "loft", "private outdoor space", "Triplex", "all utilities included", "washer/dryer in unit", "washer/dryer hookups", "shared outdoor space", "garden", "garden views", "park views", "water views", "balcony/terrace", "hardwood floors", "private roof deck", "roof access", "skylight", "terrace"] %>
               <%= f.collection_check_boxes(:residential_amenity_ids, current_user.company.residential_amenities.where(name: unit_amenities_name), :id, :name) do |b| %>
 
                 <% if i % 3 == 0 && i > 0 %>
