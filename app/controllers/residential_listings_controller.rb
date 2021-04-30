@@ -1622,7 +1622,7 @@ class ResidentialListingsController < ApplicationController
         else
           if current_user.is_special_agent? || current_user.is_streeteasy_agent?
             @map_infos = ResidentialListing.set_location_data(
-            @residential_units.where("units.hide_from_agent =?", false).to_a, @res_images, @bldg_images)
+            @residential_units.to_a, @res_images, @bldg_images)
           else
             @map_infos = ResidentialListing.set_location_data(
             @residential_units.to_a, @res_images, @bldg_images)
