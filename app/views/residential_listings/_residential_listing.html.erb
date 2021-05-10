@@ -1092,7 +1092,10 @@
         </td>
 
         <!-- ****** UPDATED_AT ****************************************** -->
-        <td>Updated: <%= time_ago_in_words(residential_listing.updated_at) %>
+        <td>Updated: 
+        <span id="current_update_dt_<%= residential_listing.id %>">
+          <%= time_ago_in_words(residential_listing.updated_at) %>
+        </span>
 
           <% if residential_listing.unit.audits %>
             <%# abort residential_listing.unit.audits.inspect %>
@@ -1276,6 +1279,7 @@
               <%# else %>
                 <%#= link_to 'Manage Photos', edit_residential_listing_path(residential_listing) %>
               <%# end %>
+              <%= link_to "Change Date", '#', onclick: "change_updated_date(#{residential_listing.id});return false;" %>
             <% end %>
           </td>
         <% end %>
@@ -1329,6 +1333,17 @@
         location.reload();
       }
     })
+  }
+
+  function change_updated_date(id){
+   $.ajax({ method: "get",
+      url: "residential_listings/change_updated_at_tday",
+      data: {"id": id},
+      dataType: 'json',
+      success: function(data) {
+        $("#current_update_dt_" + id).text("less than a minute")
+      }
+    }) 
   }
   // var upics = $(".rakshit-test").text();
 

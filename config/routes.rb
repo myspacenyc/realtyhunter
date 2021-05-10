@@ -111,6 +111,8 @@ Rails.application.routes.draw do
       get 'neighborhood_options'
     end
   end
+  get "residential_listings/change_updated_at_tday" => "residential_listings#change_updated_at_tday", as: :change_updated_at_tday
+  get "residential_listings/download_all_img/:id" => "residential_listings#download_all_img", as: :download_all_img
   get "residential_listings/swap_key_to_agent" => "residential_listings#swap_key_to_agent", as: :swap_key_to_agent
   get "residential_listings/store_office_for_return_key" => "residential_listings#store_office_for_return_key", as: :store_office_for_return_key
   get "residential_listings/claim_key/:id" => "residential_listings#claim_unit_key", as: :claim_unit_key
