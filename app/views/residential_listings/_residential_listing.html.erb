@@ -9,7 +9,7 @@
   <% else %>
     <tr class="<%= cycle('even', 'odd') -%>" data-id="<%= residential_listing.listing_id %>" style="background-color: <%= color%>" >
       <!-- ****** IMAGE ****************************************** -->
-      <td class="img-col" style="max-width: 120px;">
+      <td class="img-col" style="max-width: 155px;">
         <!-- display building image first, if any are found -->
         <%# if bldg_images[residential_listing.building_id] %>
           <%#= link_to(image_tag(bldg_images[residential_listing.building_id],
@@ -17,12 +17,12 @@
         <!-- otherwise, pick the first residential photo -->
         <% if res_images[residential_listing.unit_id] %>
           <%= link_to(image_tag(res_images[residential_listing.unit_id],
-              alt: res_images[residential_listing.unit_id]), residential_listing) %>
+              alt: res_images[residential_listing.unit_id], style: "width:150px;"), residential_listing) %>
         <% else %>
           <!-- otherwise, fall back on placeholder image -->
           <%= link_to(image_tag("listing_soon_thumb.png".freeze, alt: "Image coming soon",
               class: 'img-responsive',
-              size: "100x100"), residential_listing) %>
+              size: "150x100"), residential_listing) %>
         <% end %>
       </td>
 
@@ -438,7 +438,7 @@
           <% end %>
 
           <!-- ****** IMAGE ****************************************** -->
-          <td class="img-col" style="max-width: 120px;">
+          <td class="img-col" style="max-width: 155px;">
             <!-- display building image first, if any are found -->
             <%# if bldg_images[residential_listing.building_id] %>
               <%#= link_to(image_tag(bldg_images[residential_listing.building_id],
@@ -446,12 +446,12 @@
             <!-- otherwise, pick the first residential photo -->
             <% if res_images[residential_listing.unit_id] %>
               <%= link_to(image_tag(res_images[residential_listing.unit_id],
-                  alt: res_images[residential_listing.unit_id]), residential_listing) %>
+                  alt: res_images[residential_listing.unit_id], style: "width:150px;"), residential_listing) %>
             <% else %>
               <!-- otherwise, fall back on placeholder image -->
               <%= link_to(image_tag("listing_soon_thumb.png".freeze, alt: "Image coming soon",
                   class: 'img-responsive',
-                  size: "100x100"), residential_listing) %>
+                  size: "150x100"), residential_listing) %>
             <% end %>
           </td>
 
@@ -870,7 +870,7 @@
         <% end %>
 
         <!-- ****** IMAGE ****************************************** -->
-        <td class="img-col" style="max-width: 120px;">
+        <td class="img-col" style="max-width: 155px;">
           <!-- display building image first, if any are found -->
           <%# if bldg_images[residential_listing.building_id] %>
             <%#= link_to(image_tag(bldg_images[residential_listing.building_id],
@@ -878,12 +878,12 @@
           <!-- otherwise, pick the first residential photo -->
           <% if res_images[residential_listing.unit_id] %>
             <%= link_to(image_tag(res_images[residential_listing.unit_id],
-                alt: res_images[residential_listing.unit_id]), residential_listing) %>
+                alt: res_images[residential_listing.unit_id], style: "width:150px;"), residential_listing) %>
           <% else %>
             <!-- otherwise, fall back on placeholder image -->
             <%= link_to(image_tag("listing_soon_thumb.png".freeze, alt: "Image coming soon",
                 class: 'img-responsive',
-                size: "100x100"), residential_listing) %>
+                size: "150x100"), residential_listing) %>
           <% end %>
         </td>
 
