@@ -91,6 +91,20 @@ class ResidentialListingsController < ApplicationController
   end
 
   def show
+    @images_url = []
+    @images = ResidentialListing.find(params[:id]).unit.images
+    @listing_building = ResidentialListing.find(params[:id]).unit.building
+    @listing = ResidentialListing.find(params[:id])
+    @images.each do |attachment|
+      s3 = Aws::S3::Resource.new
+      if @listing.watermark_in_use == 1
+        obj = s3.bucket('realty-monster-avatars-new').object("#{attachment.file.path(:large_marked_sbklyn)[1..-1]}")
+      else
+        obj = s3.bucket('realty-monster-avatars-new').object("#{attachment.file.path(:large)[1..-1]}")
+      end
+      url = obj.presigned_url(:get, expires_in: 3600, response_content_disposition: "attachment; filename='#{attachment.file_file_name}'")
+      @images_url << url
+    end
   end
 
   def new
@@ -1404,35 +1418,35 @@ class ResidentialListingsController < ApplicationController
   end
 
   def download_all_img
-    folder_path = "#{Rails.root}/public/downloads/"
-    zipfile_name = "#{Rails.root}/public/archive.zip"
+    # folder_path = "#{Rails.root}/public/downloads/"
+    # zipfile_name = "#{Rails.root}/public/archive.zip"
 
-    FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
-    FileUtils.remove_entry(zipfile_name) if File.exist?(zipfile_name)
-    Dir.mkdir("#{Rails.root}/public/downloads")
+    # FileUtils.remove_dir(folder_path) if Dir.exist?(folder_path)
+    # FileUtils.remove_entry(zipfile_name) if File.exist?(zipfile_name)
+    # Dir.mkdir("#{Rails.root}/public/downloads")
+    # @images_url = []
+    # @images = ResidentialListing.find(params[:id]).unit.images
+    # @listing_building = ResidentialListing.find(params[:id]).unit.building
+    # @listing = ResidentialListing.find(params[:id])
+    # @images.each do |attachment|
+    #   # open(folder_path + "#{attachment.file_file_name}", 'wb') do |file|
+    #   #   if @listing.watermark_in_use == 1
+    #   #     file << open("#{attachment.file.url(:large_marked_sbklyn)}").read
+    #   #   else
+    #   #     file << open("#{attachment.file.url(:large)}").read
+    #   #   end
+    #   # end
+    # end
 
-    @images = ResidentialListing.find(params[:id]).unit.images
-    @listing_building = ResidentialListing.find(params[:id]).unit.building
-    @listing = ResidentialListing.find(params[:id])
-    @images.each do |attachment|
-      open(folder_path + "#{attachment.file_file_name}", 'wb') do |file|
-        if @listing.watermark_in_use == 1
-          file << open("#{attachment.file.url(:large_marked_sbklyn)}").read
-        else
-          file << open("#{attachment.file.url(:large)}").read
-        end
-      end
-    end
+    # input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
 
-    input_filenames = Dir.entries(folder_path).select {|f| !File.directory? f}
+    # Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+    #   input_filenames.each do |attachment|
+    #      zipfile.add(attachment,File.join(folder_path,attachment))
+    #   end
+    # end
 
-    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-      input_filenames.each do |attachment|
-         zipfile.add(attachment,File.join(folder_path,attachment))
-      end
-    end
-
-    send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{@listing_building.street_number}_#{@listing_building.route}_#{Time.now.to_date}.zip", disposition: 'inline')
+    # send_file(File.join("#{Rails.root}/public/", 'archive.zip'), :type => 'application/zip', :filename => "#{@listing_building.street_number}_#{@listing_building.route}_#{Time.now.to_date}.zip", disposition: 'inline')
   end
 
   def change_updated_at_tday
