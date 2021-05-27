@@ -463,7 +463,13 @@ class ResidentialListingsController < ApplicationController
         # end
       end
       #notifier.ping "*New* *Unit* \n #{current_user.name} Added New Unit \n #{@bb.street_number} #{@bb.route}, #{params[:residential_listing][:unit][:building_unit]} \n #{@bb.neighborhood.name} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Net #{params[:residential_listing][:unit][:rent]} / Gross #{params[:residential_listing][:unit][:gross_price]} \n Avail: #{@avail_date} \n Lease: #{@lease_st} to #{@lease_ed} Months \n #{@has_fee} \n LLC: #{@ll_code} \n POC: #{@poc} \n Access: #{params[:residential_listing][:unit][:access_info]} \n ---"
-
+      if @residential_unit.unit.building.landlord
+        if @residential_unit.unit.building.landlord.code == "wmm"
+          @residential_unit.update(watermark_in_use: 1)
+        else
+          @residential_unit.update(watermark_in_use: 0)
+        end
+      end
       UnitMailer.send_email_at_new_unit_create(params[:residential_listing][:unit][:building_id], params[:residential_listing][:unit][:building_unit],params[:residential_listing][:beds],params[:residential_listing][:baths],params[:residential_listing][:unit][:rent],params[:residential_listing][:residential_amenity_ids].reject(&:empty?),params[:residential_listing][:unit][:access_info],params[:residential_listing][:notes],params[:residential_listing][:unit][:available_by],params[:residential_listing][:has_fee],params[:residential_listing][:tp_fee_percentage],params[:residential_listing][:op_fee_percentage], params[:residential_listing][:lease_start], params[:residential_listing][:lease_end],current_user.name).deliver!
       # keep track of whether this listing just came on or off the market
       is_now_active = @residential_unit.unit.status == 'active'
@@ -1167,6 +1173,14 @@ class ResidentialListingsController < ApplicationController
 
     if params[:residential_listing][:unit][:status].downcase == "off"
       @residential_unit.update(streeteasy_url: nil)
+    end
+
+    if @residential_unit.unit.building.landlord
+      if @residential_unit.unit.building.landlord.code == "wmm"
+        @residential_unit.update(watermark_in_use: 1)
+      else
+        @residential_unit.update(watermark_in_use: 0)
+      end
     end
 
     if unit_updated && listing_updated
