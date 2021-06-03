@@ -1,20 +1,20 @@
 <br />
 <div class="row">
   <div class="col-sm-3">
-    <%= label_tag :neighborhood, "Neighborhood" %>
+    <%= label_tag :neighborhood, "Neighborhood", class: 'required' %>
   </div>
   <div class="col-sm-9">
   <% if action_name == "new" %>
     <%= select_tag(:neighborhood,
       options_for_select(Neighborhood.where.not(parent_neighborhood_id: 0).map(&:name)),
       {prompt: "Choose one...",
-      class: 'form-control'}) %>
+      class: 'form-control',required: true}) %>
   <% else %>
     <%= select_tag(:neighborhood,
       options_for_select(Neighborhood.where.not(parent_neighborhood_id: 0).collect {|n| [n.name]},
       [@building.neighborhood ? @building.neighborhood.name : '']),
       {prompt: "Choose one...",
-      class: 'form-control'}) %>
+      class: 'form-control', required: true}) %>
   <% end %>
   </div>
 </div>
