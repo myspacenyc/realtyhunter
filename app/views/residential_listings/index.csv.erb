@@ -42,6 +42,5 @@
 	<% end %>
 	<% aa = Building.find(listing.unit.building_id) %>
 	<% aa = aa.units.each.map(&:building_unit) - [listing.building_unit] %>
-	<% sorted_changelist = pretty_audit_changes(listing) %>
   <%= ["#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.unit.status,listing.rent, listing.unit.gross_price, listing.beds, listing.baths, listing.dimensions, listing.unit.listing_id, listing.unit.building.landlord.code, listing.unit.building.landlord.ll_importance, listing.unit.building.point_of_contact ? User.find(listing.unit.building.point_of_contact).name : '', listing.unit.primary_agent_id ? User.find(listing.unit.primary_agent_id).name : '', @streeteasy, @video_present, @video_present_private, @tour_3d, listing.unit.available_by, listing.neighborhood_name, @stock_photo, listing.description, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.postal_code ? listing.unit.building.postal_code : "", @t_occ, listing.unit.access_info].to_csv.strip.html_safe %>
 <%- end -%>
