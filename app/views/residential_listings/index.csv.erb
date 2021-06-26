@@ -13,7 +13,7 @@
 	<%end%>
 	<% if !@retstatus.blank? %>
 		<% @s_change = Audit.find(@retstatus.last) %>
-		<% status_change_audit = "#{User.find(@s_change.user_id).name} Changed status from #{@s_change.audited_changes["status"][0]} to #{@s_change.audited_changes["status"][1]}" %>
+		<% status_change_audit = "#{User.find(@s_change.user_id).name} Changed status from #{@s_change.audited_changes["status"][0]} to #{@s_change.audited_changes["status"][1]} at #{@s_change.created_at.strftime('%b-%d-%Y  %I:%M %p')}" %>
 	<% end %>
 	<% if !@retVal.blank? %>
 		<% @last_price_change_date = Audit.find(@retVal.last).created_at %>
