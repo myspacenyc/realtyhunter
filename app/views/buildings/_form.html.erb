@@ -89,6 +89,19 @@
           </div>
         </div>
 
+        <% if current_user.id == 505 || current_user.id == 713 || current_user.id == 112 %>
+          <br />
+          <div class="row">
+            <div class="col-sm-3">
+              <%= f.label :route, "Short Address Change" %>
+            </div>
+            <div class="col-sm-9">
+              <%= f.text_field :route, class: 'form-control' %>
+            </div>
+          </div>
+        <% else %>
+        <% end %>
+
         <br />
         <div class="row">
           <div class="col-sm-3">
