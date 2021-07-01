@@ -210,7 +210,12 @@ class BuildingsController < ApplicationController
         end
       end
     end
-    if @building.update(format_params_before_save(false).merge({route: params[:building][:route],updated_at: Time.now}))
+    if current_user.id == 505 || current_user.id == 713 || current_user.id == 112
+      update_merge_col = {route: params[:building][:route],updated_at: Time.now}
+    else
+      update_merge_col = {updated_at: Time.now}
+    end
+    if @building.update(format_params_before_save(false).merge(update_merge_col))
       Resque.enqueue(UpdateBuilding, @building.id) # send to Knack
       flash[:success] = "Building updated!"
       redirect_to building_path(@building)
