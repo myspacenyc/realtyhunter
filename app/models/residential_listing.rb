@@ -296,7 +296,8 @@ class ResidentialListing < ApplicationRecord
           running_list = running_list.where("status = ? or status = ?",
             Unit.statuses["active"], Unit.statuses["rsonly"])
         elsif status == "off"
-            running_list = running_list.limit(300)
+            running_list = running_list.where("status = ?",
+            Unit.statuses["off"]).limit(300)
         else
           running_list = running_list.where("status = ?", Unit.statuses[status])
         end
