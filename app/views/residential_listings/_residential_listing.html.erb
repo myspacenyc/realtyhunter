@@ -688,9 +688,10 @@
                 Primary : 
                 <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
                   <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
-                <% else %>
+                <% elsif !residential_listing.unit.primary_agent_id.nil? %>
                   <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
-                  
+                <% else %>
+                  --- 
                 <% end %>
             </td>
           <% end %>
@@ -1143,9 +1144,10 @@
               Primary : 
               <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
                 <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
-              <% else %>
+              <% elsif !residential_listing.unit.primary_agent_id.nil? %>
                 <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
-                
+              <% else %>
+                ---  
               <% end %>
           </td>
         <% end %>
