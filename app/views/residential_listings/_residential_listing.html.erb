@@ -677,14 +677,6 @@
               <% if residential_listing.streeteasy_flag == true or residential_listing.streeteasy_flag_one == true %>
                 <span class="glyphicon glyphicon-check ac-se-li" aria-hidden="true"><span class="in-ac-hope">On Streeteasy</span></span>
                 <br>
-                Primary : 
-                <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
-                  <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
-                <% else %>
-                  --
-                  
-                <% end %>
-                <br>
                   <% if !residential_listing.streeteasy_counters.blank? %>
                     Active: <%= ((0.day.ago - residential_listing.streeteasy_counters.last.created_at) / 86400).round %> Days
                   <% end %> 
@@ -692,6 +684,14 @@
               <% else %>
                 <span>---</span>
               <% end %>
+              <br>
+                Primary : 
+                <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
+                  <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
+                <% else %>
+                  <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
+                  
+                <% end %>
             </td>
           <% end %>
           <!-- ****** PRIMARY AGENT ****************************************** -->
@@ -1132,14 +1132,6 @@
             <% if residential_listing.streeteasy_flag == true or residential_listing.streeteasy_flag_one == true %>
               <span class="glyphicon glyphicon-check ac-se-li" aria-hidden="true"><span class="in-ac-hope">On Streeteasy</span></span>
               <br>
-              Primary : 
-              <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
-                <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
-              <% else %>
-                --
-                
-              <% end %>
-              <br>
                 <% if !residential_listing.streeteasy_counters.blank? %>
                   Active: <%= ((0.day.ago - residential_listing.streeteasy_counters.last.created_at) / 86400).round %> Days
                 <% end %> 
@@ -1147,6 +1139,14 @@
             <% else %>
               <span>---</span>
             <% end %>
+            <br>
+              Primary : 
+              <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
+                <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
+              <% else %>
+                <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
+                
+              <% end %>
           </td>
         <% end %>
         <!-- ****** PRIMARY AGENT ****************************************** -->
