@@ -48,6 +48,10 @@
     set_listings
   end
 
+  def rhexport
+    set_listings
+  end
+
   def external_feed
     set_listings
   end
@@ -104,6 +108,8 @@
         @listings = test_watermark_listings(@company.id, syndication_params)
       elsif syndication_params[:action] == 'renthop'
         @listings = renthop_listings(@company.id, syndication_params)
+      elsif syndication_params[:action] == 'rhexport'
+        @listings = rhexport_listings(@company.id, syndication_params)
       end
 
       @pet_policies = Building.get_pet_policies(@listings)

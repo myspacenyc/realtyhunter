@@ -100,6 +100,11 @@ module SyndicationInterface
 		pull_data(company_id, search_params)
 	end
 
+	def rhexport_listings(company_id, search_params)
+		search_params[:must_have_status_selected] = 1
+		pull_data(company_id, search_params)
+	end
+
 	def apartment_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
 		search_params[:exclusive] = 1
@@ -269,6 +274,10 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			listings = listings.where('units.status IN (?)', [Unit.statuses["active"], Unit.statuses["pending"], Unit.statuses["contract_out"], Unit.statuses["on_market"], Unit.statuses["offer_submitted"], Unit.statuses["in_escrow"], Unit.statuses["deal_pending"]])
 		end
 
+		if is_true?(search_params[:must_have_status_selected])
+			listings = listings.where('units.status IN (?)', [Unit.statuses["active"]])
+		end
+
 		if is_true?(search_params[:push_to_zumper_active])
 			#listings = listings.where('buildings.push_to_zumper =?', true)
 		end
@@ -317,22 +326,22 @@ left join sales_listings on units.id = sales_listings.unit_id')
 
 		listings = listings
 			.select('units.id', 'units.building_unit', 'units.status', 'units.available_by',
-			'units.listing_id', 'units.updated_at', 'units.rent', 'units.streeteasy_unit' ,
-			'units.streeteasy_listing_email', 'units.streeteasy_listing_number',
+			'units.listing_id', 'units.updated_at', 'units.rent', 'units.gross_price', 'units.streeteasy_unit' ,
+			'units.streeteasy_listing_email', 'units.streeteasy_listing_number', 'units.has_stock_photos',
 			'buildings.id as building_id', 'buildings.push_to_zumper',
 			'buildings.administrative_area_level_2_short',
 			'buildings.administrative_area_level_1_short',
-			'buildings.sublocality',
+			'buildings.sublocality','buildings.point_of_contact',
 			'buildings.street_number', 'buildings.route',
 			'buildings.postal_code', 'buildings.dotsignal_code',
 			'buildings.lat',
 			'buildings.lng',
-			'landlords.code', 'landlords.ll_public_description',
+			'landlords.code', 'landlords.ll_public_description', 'landlords.ll_importance',
 			'neighborhoods.name as neighborhood_name',
 			'neighborhoods.borough as neighborhood_borough',
 			'residential_listings.id AS r_id',
 			'residential_listings.notes AS r_note','residential_listings.renthop',
-			'residential_listings.lease_start', 'residential_listings.lease_end',
+			'residential_listings.lease_start', 'residential_listings.lease_end','residential_listings.dimensions',
 			'residential_listings.has_fee', 'residential_listings.beds as r_beds', 'residential_listings.alt_address',
 			'residential_listings.baths as r_baths', 'residential_listings.description', 'residential_listings.rooms_description',
 			'residential_listings.total_room_count as r_total_room_count', 'residential_listings.rs_only_description',
@@ -341,6 +350,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			'residential_listings.tp_fee_percentage', 'residential_listings.watermark', 'residential_listings.tenant_description',
 			'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one',
 			'residential_listings.naked_apartment', 'residential_listings.roomfill', 'residential_listings.partial_move_in',
+			'residential_listings.youtube_video_url', 'residential_listings.tour_3d', 'residential_listings.private_youtube_url',
 			'sales_listings.id AS s_id',
 			'sales_listings.beds as s_beds',
 			'sales_listings.baths as s_baths',

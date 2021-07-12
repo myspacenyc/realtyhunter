@@ -298,6 +298,7 @@ Rails.application.routes.draw do
       get 'external_feed'
       get 'external_feed_no_rooms'
       get 'renthop'
+      get 'rhexport'
       get 'test_watermark'
       get 'all_active_users'
     end
