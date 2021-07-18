@@ -1685,9 +1685,12 @@ class ResidentialListingsController < ApplicationController
           @map_infos = ResidentialListing.set_location_data(
           @residential_units.where("units.third_tier =?", true), @res_images, @bldg_images)
         else
-          if current_user.is_special_agent? || current_user.is_streeteasy_agent?
+          if current_user.is_streeteasy_agent?
             @map_infos = ResidentialListing.set_location_data(
             @residential_units.where("units.hide_from_agent =?", false).to_a, @res_images, @bldg_images)
+          elsif current_user.is_special_agent?
+            @map_infos = ResidentialListing.set_location_data(
+            @residential_units.where("units.hide_from_agent =? and landlords.id !=?", false, 2225).to_a, @res_images, @bldg_images)
           else
             @map_infos = ResidentialListing.set_location_data(
             @residential_units.to_a, @res_images, @bldg_images)
@@ -1779,6 +1782,11 @@ class ResidentialListingsController < ApplicationController
       end
 
       @residential_units = ResidentialListing.search(params, current_user, params[:building_id])
+      if current_user.is_special_agent?
+        @residential_units = @residential_units.where.not("landlords.id =?", 2225)
+      else
+        @residential_units = @residential_units
+      end
       # remove listing who has more then 2 rooms booked
       # @residential_units.each do |res_list|
       #   if !res_list.rooms.blank?
