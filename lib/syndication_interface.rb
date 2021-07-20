@@ -18,7 +18,7 @@ module SyndicationInterface
 	def naked_apts_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
 		search_params[:has_fee_exclusive] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:has_naked_apartment] = 1
 		search_params[:has_hide_from_agent] = 1
 		pull_data(company_id, search_params)
@@ -38,7 +38,7 @@ module SyndicationInterface
 		# syndication. If the "streeteasy flag" is not set here, we prevent the data from going out.
 		search_params[:has_primary_agent] = 1
 		search_params[:exclusive] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:must_have_description] = 1
 		search_params[:must_have_status_inbetween] = 1
 		search_params[:must_have_streeteasy_flag] = 1
@@ -48,7 +48,7 @@ module SyndicationInterface
 
 	def zumper_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:push_to_zumper_active] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		#search_params[:has_hide_from_agent] = 1
@@ -57,7 +57,7 @@ module SyndicationInterface
 
 	def zumper_backup_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:push_to_zumper_active] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		#search_params[:has_hide_from_agent] = 1
@@ -66,7 +66,7 @@ module SyndicationInterface
 
 	def test_watermark_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:push_to_zumper_active] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -75,7 +75,7 @@ module SyndicationInterface
 
 	def external_feed_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:push_to_zumper_active] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -84,7 +84,7 @@ module SyndicationInterface
 
 	def external_feed_no_rooms_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:push_to_zumper_active] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -93,7 +93,7 @@ module SyndicationInterface
 
 	def renthop_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:must_have_status_for_zumper] = 1
 		search_params[:renthop_active] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -108,7 +108,7 @@ module SyndicationInterface
 	def apartment_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
 		search_params[:exclusive] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:must_have_description] = 1
 		# search_params[:must_have_apartment] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -122,7 +122,7 @@ module SyndicationInterface
 	def trulia_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
 		search_params[:exclusive] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:must_have_description] = 1
 		search_params[:must_have_streeteasy_flag] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -132,7 +132,7 @@ module SyndicationInterface
 	def zillow_listings(company_id, search_params)
 		search_params[:has_primary_agent] = 1
 		search_params[:exclusive] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:must_have_description] = 1
 		search_params[:must_have_streeteasy_flag] = 1
 		search_params[:has_hide_from_agent] = 1
@@ -143,14 +143,14 @@ module SyndicationInterface
 	# to accomodate Nestio's requirements.
 	def nestio_listings(company_id, search_params)
 		search_params[:is_nestio] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:has_hide_from_agent] = 1
 		pull_data(company_id, search_params)
 	end
 
 	def hotpad_listings(company_id, search_params)
 		search_params[:is_hotpad] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		search_params[:is_having_description] = 1
 		search_params[:has_hide_from_agent] = 1
 		pull_data(company_id, search_params)
@@ -165,7 +165,7 @@ module SyndicationInterface
 
 	def dotsignal_listings(company_id, search_params)
 		search_params[:is_dotsignal] = 1
-		search_params[:is_hide_on_website] = 1
+		# search_params[:is_hide_on_website] = 1
 		pull_data(company_id, search_params)
 	end
 
@@ -262,9 +262,9 @@ left join sales_listings on units.id = sales_listings.unit_id')
 		end
 
 
-		if is_true?(search_params[:is_hide_on_website])
-			listings = listings.where('units.hide_on_website =?', false)
-		end
+		# if is_true?(search_params[:is_hide_on_website])
+		# 	listings = listings.where('units.hide_on_website =?', false)
+		# end
 
 		if is_true?(search_params[:has_naked_apartment])
 			listings = listings.where('residential_listings.naked_apartment = TRUE')
