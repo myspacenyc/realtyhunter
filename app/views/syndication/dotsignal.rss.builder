@@ -86,7 +86,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -442,7 +446,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -788,7 +796,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -1143,7 +1155,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -1489,7 +1505,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -1836,7 +1856,11 @@ xml.streeteasy :version => "1.6" do
                   end
                 end
                 
-                xml.price listing.rent
+                if !listing.promotional_price.nil?
+                  xml.price listing.promotional_price
+                else
+                  xml.price listing.rent
+                end
 
                 if !listing.has_fee
                   xml.noFee
@@ -2531,7 +2555,11 @@ xml.streeteasy :version => "1.6" do
             end
           end
           
-          xml.price listing.rent
+          if !listing.promotional_price.nil?
+            xml.price listing.promotional_price
+          else
+            xml.price listing.rent
+          end
 
           if !listing.has_fee
             xml.noFee

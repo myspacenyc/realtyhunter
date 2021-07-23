@@ -79,7 +79,11 @@ xml.instruct! :xml, :version => "1.0"
 					else
 						xml.Status listing.status
 					end
-					xml.price listing.rent
+					if !listing.promotional_price.nil?
+	                  xml.price listing.promotional_price
+	                else
+	                  xml.price listing.rent
+	                end
 					xml.ListingUrl public_url
 				end
 

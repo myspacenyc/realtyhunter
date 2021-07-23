@@ -1,4 +1,4 @@
-# todo: before re-enabling caching here, need to figure out how to expire the cache here
+[# todo: before re-enabling caching here, need to figure out how to expire the cache here
 # when a building photo is updated. the building photo is displayed before listings photos,
 # but adding/removing building photos does not update the listing object.
 #cache "trulia/#{@listings.ids.join('')}-#{@listings.ids.count}-#{@listings.maximum(:updated_at).to_i}-" do
@@ -167,7 +167,11 @@ xml.hotPadsItems version:"2.1" do
 				end
 			end
 
-			xml.price listing.rent
+			if !listing.promotional_price.nil?
+              xml.price listing.promotional_price
+            else
+              xml.price listing.rent
+            end
 			xml.pricingFrequency "MONTH"
 			#xml.HOA-FEE
 			#xml.deposit

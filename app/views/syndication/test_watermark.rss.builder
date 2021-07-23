@@ -274,7 +274,11 @@ xml.streeteasy :version => "1.6" do
 								if listing.building.push_to_zumper == true
 									xml.provider_buildingid listing.building.id
 								end
-								xml.price listing.rent
+								if !listing.promotional_price.nil?
+				                  xml.price listing.promotional_price
+				                else
+				                  xml.price listing.rent
+				                end
 
 							 	if !listing.has_fee
 							 		xml.noFee
@@ -715,7 +719,11 @@ xml.streeteasy :version => "1.6" do
 								if listing.building.push_to_zumper == true
 									xml.provider_buildingid listing.building.id
 								end
-								xml.price listing.rent
+								if !listing.promotional_price.nil?
+				                  xml.price listing.promotional_price
+				                else
+				                  xml.price listing.rent
+				                end
 
 							 	if !listing.has_fee
 							 		xml.noFee
