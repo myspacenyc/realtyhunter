@@ -1173,6 +1173,18 @@
             <%= f.text_field :streeteasy_url, class: 'form-control' %>
           </div>
         </div>
+        <% if current_user.is_management? %>
+          <div class="row vertical-margin-lg">
+            <div class="col-xs-3 col-md-4">
+              <%= f.label "Promotional Price" %>
+            </div>
+            <div class="col-xs-9 col-md-7">
+              <%= f.fields_for @residential_unit.unit do |unit_form| %>
+                <%= unit_form.number_field :promotional_price, class: 'form-control' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
         <div class="row vertical-margin-lg">
           <div class="col-xs-3 col-md-4">
             <%= f.label "Touring Options" %>

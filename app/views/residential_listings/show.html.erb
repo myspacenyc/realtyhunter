@@ -275,6 +275,16 @@
 		    					<% end %>
 		    				</div>
 		    			</div>
+		    			<% if !@residential_unit.unit.promotional_price.nil? %>
+			    			<div class="row">
+			    				<div class="col-xs-5">
+			    					<strong>Promotional Price</strong>
+			    				</div>
+			    				<div class="col-xs-7">
+			    					<%= rent_formatted(@residential_unit.unit.promotional_price) %>
+			    				</div>
+			    			</div>
+			    		<% end %>
 		    			<div class="row">
 		    				<div class="col-xs-5">
 				    			<strong>Price:</strong>
