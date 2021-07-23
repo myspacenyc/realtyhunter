@@ -1343,17 +1343,16 @@ function clearsearchdata(){
   $("#unit").val("");
   $("#rent_min").val("");
   $("#rent_max").val("");
+  $("#net_min").val("");
+  $("#net_max").val("");
+  $("#gross_min").val("");
+  $("#gross_max").val("");
   $("#bed_min").val("Any");
   $("#bed_min").val("Any");
   $("#bath_min").val("Any");
   $("#bath_min").val("Any");
   $("#landlord").val("");
-  if ($("#hd_for_ll_class").val() == "false"){
-    $("#ll_importance").val("gold");
-  }
-  else{
-    $("#ll_importance").val("Any");
-  }
+  $("#ll_importance").val("Any");
   $("#accepts_third_party_gaurantor").val("Any");
   $("#status").val("Active");
   $("#public_url").val("");
