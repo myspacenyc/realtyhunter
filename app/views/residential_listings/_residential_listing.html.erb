@@ -631,6 +631,9 @@
                 Gross : $<%= residential_listing.unit.gross_price %><br>
               <% end %>
             <% end %>
+            <% if !residential_listing.unit.promotional_price.nil? %>
+              Promo Price : $<%= residential_listing.unit.promotional_price %><br>
+            <% end %>
             Term : <%= residential_listing.lease_start %><br>
             <% if residential_listing.unit.maths_free == 0.0 %>
             <% else %>
@@ -1083,6 +1086,9 @@
               <% if residential_listing.unit.gross_price > 0 %>
                 Gross : $<%= residential_listing.unit.gross_price %><br>
               <% end %>
+            <% end %>
+            <% if !residential_listing.unit.promotional_price.nil? %>
+              Promo Price : $<%= residential_listing.unit.promotional_price %><br>
             <% end %>
             Term : <%= residential_listing.lease_start %><br>
             <% if residential_listing.unit.maths_free == 0.0 %>
