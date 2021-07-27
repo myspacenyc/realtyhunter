@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get 'edit_faq_company_policy' => "companies#edit_faq_company_policy", as: :edit_faq_company_policy
   get 'faq_company_policy' => "companies#faq_company_policy", as: :faq_company_policy
   post 'update_faq_company_policy' => "companies#update_faq_company_policy", as: :update_faq_company_policy
+  get 'user_login_details' => "companies#user_login_details", as: :user_login_details
   resources :companies do
     collection do
       get 'filter'

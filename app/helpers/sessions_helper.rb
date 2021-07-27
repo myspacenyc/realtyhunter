@@ -3,6 +3,8 @@ module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
     user.update_columns(last_login_at: Time.zone.now)
+    query = Geocoder.search(params[:latlong]).first
+    UserLoginDetail.create!(login_address: query.address, login_time: Time.zone.now, user_id: user.id)
   end
 
   # Remembers a user in a persistent session.

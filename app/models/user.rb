@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :deals
   has_many :checkins, dependent: :destroy
   has_many :feedbacks
+  has_many :user_login_details, dependent: :destroy
 
 	before_create :create_activation_digest
   before_create :set_auth_token # for API

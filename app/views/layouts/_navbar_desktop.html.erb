@@ -123,6 +123,9 @@
                 <% if current_user.is_management? %>
                   <li><%= link_to "New/Reactivated Listings Tracker", weekly_track_path %></li>
                 <% end %>
+                <% if current_user.is_manager? || current_user.is_company_admin? %>
+                  <li><%= link_to "User Login Details", user_login_details_path %></li>
+                <% end %>
                 <% if current_user.is_management? %>
                   <li><%= link_to "Neighborhood", neighborhoods_path %></li>
                 <% end %>

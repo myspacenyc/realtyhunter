@@ -20,6 +20,7 @@
         <div class="col-xs-12">
           <%= f.label :password %>
           <%= f.password_field :password, class: 'form-control' %>
+          <%= hidden_field_tag "latlong"  %>
         </div>
       </div>
       <br>
@@ -39,3 +40,16 @@
     <% end %>
   </div>
 </div>
+<script>
+  var x = document.getElementById("latlong");
+  function getLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+  }
+  function showPosition(position) {
+      x.value = [position.coords.latitude, position.coords.longitude]; 
+  }
+</script>
