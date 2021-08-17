@@ -25,7 +25,8 @@
             <div class="col-xs-12 col-md-6 vertical-margin-lg">
               <%= link_to 'Edit', edit_landlord_path(@landlord) %> |
               <%= link_to 'View all', landlords_path %> |
-              <%= link_to 'Add building', new_building_path(landlord_id: @landlord.id) %><br  />
+              <%= link_to 'Add building', new_building_path(landlord_id: @landlord.id) %> |
+              <%= link_to 'Add/Update Landlord to KNACK', "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addLLtoKnack.php?action=new landlord&code=#{@landlord.code}&company=#{@landlord.name}&address=#{@landlord.formatted_street_address}&contact=#{@landlord.contact_name}&contactphone=#{@landlord.office_phone}&email=#{@landlord.email}&fax=#{@landlord.fax}&notes=#{@landlord.notes}&website=#{@landlord.website}", target: "_blank" %>
             </div>
           </div>
         <% end %>
