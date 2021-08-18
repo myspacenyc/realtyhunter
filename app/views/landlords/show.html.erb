@@ -1,3 +1,14 @@
+<style type="text/css">
+  #popup { display: none; position: fixed; top: 12%; left: 15%; width: 70%; height: 70%; background-color: white; z-index: 10; }
+#popup iframe { width: 100%; height: 100%; border: 0; }
+#popupdarkbg { position: fixed; z-index: 5; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,.75); display: none; }
+#closeimg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  }
+</style>
 <% provide(:title, @landlord.code) %>
 
 <div id="landlords">
@@ -26,7 +37,11 @@
               <%= link_to 'Edit', edit_landlord_path(@landlord) %> |
               <%= link_to 'View all', landlords_path %> |
               <%= link_to 'Add building', new_building_path(landlord_id: @landlord.id) %> |
-              <%= link_to 'Add/Update Landlord to KNACK', "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addLLtoKnack.php?action=new landlord&code=#{@landlord.code}&company=#{@landlord.name}&address=#{@landlord.formatted_street_address}&contact=#{@landlord.contact_name}&contactphone=#{@landlord.office_phone}&email=#{@landlord.email}&fax=#{@landlord.fax}&notes=#{@landlord.notes}&website=#{@landlord.website}", target: "_blank" %>
+              <a href="" id="link">Add/Update Landlord to KNACK</a><br>
+
+                <div id="popup"><iframe id="popupiframe"></iframe>
+                <%= image_tag("dialog-close.png", width: "15", id: "closeimg", onclick: "document.getElementById('popup').style.display = 'none';document.getElementById('popupdarkbg').style.display = 'none';") %></div>
+                <div id="popupdarkbg"></div>
             </div>
           </div>
         <% end %>
@@ -291,6 +306,26 @@
     }
     else{
       $(".lab_disp").hide();
+    }
+    document.getElementById("link").onclick = function(e) {
+      e.preventDefault();
+      document.getElementById("popupdarkbg").style.display = "block";
+      document.getElementById("popup").style.display = "block";
+      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addLLtoKnack.php?action=new landlord&code=#{@landlord.code}&company=#{@landlord.name}&address=#{@landlord.formatted_street_address}&contact=#{@landlord.contact_name}&contactphone=#{@landlord.office_phone}&email=#{@landlord.email}&fax=#{@landlord.fax}&notes=#{@landlord.notes}&website=#{@landlord.website}";
+      document.getElementById('popupdarkbg').onclick = function() {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+      };
+      return false;
+    }
+
+    window.onkeydown = function(e) {
+        if (e.keyCode == 27) {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+          e.preventDefault();
+          return;
+        }
     }
   })();
 </script>
