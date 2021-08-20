@@ -1,3 +1,14 @@
+<style type="text/css">
+  #popup { display: none; position: fixed; top: 12%; left: 15%; width: 70%; height: 70%; background-color: white; z-index: 10; }
+#popup iframe { width: 100%; height: 100%; border: 0; }
+#popupdarkbg { position: fixed; z-index: 5; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,.75); display: none; }
+#closeimg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  }
+</style>
 <% provide(:title, @building.formatted_street_address) %>
 
 <div id="buildings">
@@ -25,14 +36,20 @@
 
 		  <div class="panel-body">
 		  	<div class="row hidden-print">
-		  		<div class="col-xs-12 col-md-6 vertical-margin-lg">
+		  		<div class="col-xs-12 col-md-7 vertical-margin-lg">
 		  			<%= link_to 'View all', buildings_path %>
 					<% if current_user.is_management? || current_user.is_listings_manager? || current_user.id == @building.point_of_contact %>
 						| <%= link_to 'Edit', edit_building_path(@building) %> |
 						<%= link_to 'Add a Unit', new_residential_listing_path(building_id: @building.id) %>
 					<% end %>
 					<% if current_user.is_management? || current_user.is_listings_manager? %>
-						| <%= link_to 'Mass Edit', mass_edit_path(@building) %>
+						| <%= link_to 'Mass Edit', mass_edit_path(@building) %> |
+					<% end %>
+					<% if current_user.is_management? %>
+						<a href="" id="link_building_to_knack">Add/Update Building to KNACK</a><br>
+		                <div id="popup"><iframe id="popupiframe"></iframe>
+		                <%= image_tag("dialog-close.png", width: "15", id: "closeimg", onclick: "document.getElementById('popup').style.display = 'none';document.getElementById('popupdarkbg').style.display = 'none';") %></div>
+		                <div id="popupdarkbg"></div>
 					<% end %>
 		  		</div>
 		  	</div><!-- row -->
@@ -343,6 +360,26 @@
     }
     else{
       $(".lab_disp").hide();
+    }
+    document.getElementById("link_building_to_knack").onclick = function(e) {
+      e.preventDefault();
+      document.getElementById("popupdarkbg").style.display = "block";
+      document.getElementById("popup").style.display = "block";
+      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addBLDGtoKnack.php?action=add building&llname=<%= @building.landlord.name %>&llcode=<%= @building.landlord.code %>&addr=<%= @building.formatted_street_address %>&neigh=<%= @building.neighborhood.name %>&poc=<%= User.find(@building.point_of_contact).name %>&notes=<%= @building.notes %>";
+      document.getElementById('popupdarkbg').onclick = function() {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+      };
+      return false;
+    }
+
+    window.onkeydown = function(e) {
+        if (e.keyCode == 27) {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+          e.preventDefault();
+          return;
+        }
     }
   })();
 </script>
