@@ -178,9 +178,9 @@ class LandlordsController < ApplicationController
         params[:status_listings] = 'active/pending'
       end
       @residential_units, @res_images, @res_bldg_images = @landlord.residential_units(params[:status_listings])
-      @residential_units = @residential_units.page(params[:page]).per(25)
+      @residential_units = @residential_units.page(params[:page])
       @commercial_units, @com_images, @com_bldg_images = @landlord.commercial_units(params[:status_listings])
-      @commercial_units = @commercial_units.page(params[:page]).per(25)
+      @commercial_units = @commercial_units.page(params[:page])
       @buildings = @landlord.buildings
     end
 
