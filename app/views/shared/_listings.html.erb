@@ -50,11 +50,11 @@
                 bldg_images: res_bldg_images} %>
 
           <div class="row">
-					  <div class="col-sm-4 col-sm-offset-4">
-              <div class="listing-pagination res pagination-wrapper">
-               <%= render partial: 'shared/pagination', locals: {models: residential_units} %>
+					  <div class="col-md-12">
+              <div class="apple_pagination">
+                <%= will_paginate residential_units, :container => false %>
               </div>
-					  </div>
+            </div>
 					</div>
 
         </div>
@@ -65,9 +65,9 @@
                 bldg_images: com_bldg_images } %>
 
           <div class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-              <div class="listing-pagination com pagination-wrapper">
-                <%= render partial: 'shared/pagination', locals: {models: commercial_units} %>
+            <div class="col-md-12">
+              <div class="apple_pagination">
+                <%= will_paginate commercial_units, :container => false %>
               </div>
             </div>
           </div>
