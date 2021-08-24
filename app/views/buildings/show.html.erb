@@ -365,7 +365,7 @@
       e.preventDefault();
       document.getElementById("popupdarkbg").style.display = "block";
       document.getElementById("popup").style.display = "block";
-      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addBLDGtoKnack.php?action=add building&llname=<%= @building.landlord.name %>&llcode=<%= @building.landlord.code %>&addr=<%= @building.formatted_street_address %>&neigh=<%= @building.neighborhood.name %>&poc=<%= User.find(@building.point_of_contact).name %>&notes=<%= @building.notes %>";
+      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addBLDGtoKnack.php?action=add building&llname=<%= @building.landlord.name %>&llcode=<%= @building.landlord.code %>&addr=<%= @building.formatted_street_address %>&neigh=<%= @building.neighborhood.name %>&poc=<%= @building.point_of_contact ? User.find(@building.point_of_contact).name : '' %>&notes=<%= @building.notes %>";
       document.getElementById('popupdarkbg').onclick = function() {
           document.getElementById("popup").style.display = "none";
           document.getElementById("popupdarkbg").style.display = "none";
