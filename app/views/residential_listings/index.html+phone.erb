@@ -89,9 +89,12 @@
                 collection: @residential_units, as: :residential_listing,
                 locals: {res_images: @res_images, bldg_images: @bldg_images} %>
           </div>
+          <div style="clear: both;"></div>
           <div class="row">
-            <div class="col-xs-12 pagination-wrapper">
-              <%#= render partial: 'shared/pagination', locals: {models: @residential_units} %>
+            <div class="col-md-12">
+              <div class="apple_pagination">
+                <%= will_paginate @residential_units, :container => false %>
+              </div>
             </div>
           </div>
         </div>
