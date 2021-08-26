@@ -1,3 +1,14 @@
+<style type="text/css">
+  #popup { display: none; position: fixed; top: 12%; left: 15%; width: 70%; height: 70%; background-color: white; z-index: 10; }
+#popup iframe { width: 100%; height: 100%; border: 0; }
+#popupdarkbg { position: fixed; z-index: 5; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,.75); display: none; }
+#closeimg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  }
+</style>
 <input type="hidden" name="alert-third-tier" id="alrt-third-tier" value="<%= current_user.is_third_tier_agent? %>">
 <script type="text/javascript">
 	window.addEventListener('popstate', function(event) {
@@ -120,8 +131,13 @@
 					    	<% else %>
 					    		<%= link_to 'Manage photos', edit_residential_listing_path(@residential_unit.id) %>
 					    	<% end %>
+					    	|  <a href="" id="link_unit_to_knack">Add/Update Unit to KNACK</a>
+			                <div id="popup"><iframe id="popupiframe"></iframe>
+			                <%= image_tag("dialog-close.png", width: "15", id: "closeimg", onclick: "document.getElementById('popup').style.display = 'none';document.getElementById('popupdarkbg').style.display = 'none';") %></div>
+			                <div id="popupdarkbg"></div>
 					  	</div>
 					  </div>
+					  
 					<% end %>
 
 				  <div class="row">
@@ -1113,6 +1129,29 @@
 <!--% end %--><!-- cache -->
 
 <script type="text/javascript">
+(function(){
+    document.getElementById("link_unit_to_knack").onclick = function(e) {
+      e.preventDefault();
+      document.getElementById("popupdarkbg").style.display = "block";
+      document.getElementById("popup").style.display = "block";
+      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addUNITtoKnack.php?action=add unit&bldg=<%= @residential_unit.unit.building.formatted_street_address %>&apt=<%= @residential_unit.unit.building_unit %>&bed=<%= @residential_unit.beds %>&bath=<%= @residential_unit.baths %>&rent=<%= @residential_unit.unit.gross_price %>";
+      document.getElementById('popupdarkbg').onclick = function() {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+      };
+      return false;
+    }
+
+    window.onkeydown = function(e) {
+        if (e.keyCode == 27) {
+          document.getElementById("popup").style.display = "none";
+          document.getElementById("popupdarkbg").style.display = "none";
+          e.preventDefault();
+          return;
+        }
+    }
+  })();
+
 	var upics = <%= raw @images_url %>
 
 //
@@ -1162,5 +1201,4 @@ function downloadAll(item) {
     download(upics[i]);
   }
 }
-
 </script>
