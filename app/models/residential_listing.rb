@@ -225,7 +225,7 @@ class ResidentialListing < ApplicationRecord
         'landlords.code', 'landlords.rating', 'landlords.ll_importance',
         'landlords.id AS landlord_id', 'units.third_tier', 'landlords.accepts_third_party_gaurantor',
         'units.listing_id', 'units.available_by', 'units.public_url', 'units.exclusive',
-        'users.name')
+        'users.name').order('units.building_unit asc')
       #abort running_list.inspect
     if !params && !building_id
       running_list
@@ -850,7 +850,7 @@ class ResidentialListing < ApplicationRecord
     # ts = ["35", "428", "39", "146"]
     # running_list = running_list.where.not('buildings.point_of_contact IN (?)', ts)
 
-    running_list.distinct
+    running_list
   end
 
   def deep_copy_imgs(dst_id)
