@@ -1700,7 +1700,7 @@ class ResidentialListingsController < ApplicationController
 
       # only get data + images for paginated responses
       if !current_user.is_third_tier_agent?
-        @residential_units = @residential_units.page params[:page]
+        @residential_units = @residential_units.paginate(:page => params[:page], per_page: 100)
       else
         @residential_units = @residential_units
       end
