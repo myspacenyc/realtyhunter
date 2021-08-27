@@ -932,7 +932,7 @@
   <span id="infinite-table-container">
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-striped table-hover table-condensed infinite-table-res">
+      <table class="sortable table table-striped table-hover table-condensed infinite-table-res">
         <thead>
           <tr>
             <th style="min-width: 35px;">
@@ -940,24 +940,24 @@
               <i data-action="selectAllUnits" class="select-all-listings fa fa-square-o fa-lg"></i>
             </th>
             <th class="img-col"><!-- first image --></th>
-            <th data-sort="formatted_street_address" class="th-sortable">Address</th>
+            <th>Address</th>
             <!-- <th data-sort="building_unit" class="th-sortable">Unit</th> -->
             <th style="min-width: 20%;">Access</th>
             <th>Touring Options</th>
-            <th data-sort="bed_and_baths_sorter" class="th-sortable">Beds/Baths</th>
-            <th data-sort="rent" class="th-sortable" style="min-width: 125px;">Price</th>
+            <th>Beds/Baths</th>
+            <th style="min-width: 125px;">Price</th>
             <!-- <th data-sort="available_by" class="th-sortable">Available</th> -->
             <!-- <th data-sort="code" class="th-sortable">Landlord</th> -->
             <!-- <th data-sort="name" class="th-sortable">Primary Agent</th>
             <th data-sort="name" class="th-sortable">StreetEasy Primary Agent</th> -->
             <!-- <th data-sort="name" class="th-sortable">Point Of Contact</th> -->
-            <th data-sort="residential_listings.updated_at" class="th-sortable">Updated</th>
+            <th class="th-sortable">Updated</th>
             <!-- <th data-sort="residential_listings.updated_at" class="th-sortable">Price Change Date</th> -->
             <% if current_user.is_management? %>
-              <th data-sort="residential_listings.updated_at" class="th-sortable">Syndicated</th>
+              <th class="th-sortable">Syndicated</th>
             <% end %>
             <% if [505,255,555].include? current_user.id %>
-              <th data-sort="residential_listings.updated_at" class="th-sortable">Key</th>
+              <th class="th-sortable">Key</th>
             <% end %>
             <!-- <th data-sort="units.status" class="th-sortable">Status</th>
             <th data-sort="featured" class="th-sortable">Featured</th> -->
