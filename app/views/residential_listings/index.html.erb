@@ -951,13 +951,13 @@
             <!-- <th data-sort="name" class="th-sortable">Primary Agent</th>
             <th data-sort="name" class="th-sortable">StreetEasy Primary Agent</th> -->
             <!-- <th data-sort="name" class="th-sortable">Point Of Contact</th> -->
-            <th class="th-sortable">Updated</th>
+            <th>Updated</th>
             <!-- <th data-sort="residential_listings.updated_at" class="th-sortable">Price Change Date</th> -->
             <% if current_user.is_management? %>
-              <th class="th-sortable">Syndicated</th>
+              <th>Syndicated</th>
             <% end %>
             <% if [505,255,555].include? current_user.id %>
-              <th class="th-sortable">Key</th>
+              <th>Key</th>
             <% end %>
             <!-- <th data-sort="units.status" class="th-sortable">Status</th>
             <th data-sort="featured" class="th-sortable">Featured</th> -->
