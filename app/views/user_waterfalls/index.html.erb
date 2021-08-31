@@ -68,7 +68,7 @@
   <div class="col-md-6">
     <br />
     <span class="totals">
-      &nbsp;&nbsp;<%= @entries.total_entries %> Entries found
+      &nbsp;&nbsp;<%= @entries.total_count %> Entries found
     </span>
   </div>
 </div>
@@ -98,10 +98,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="apple_pagination">
-        <%= will_paginate @entries, :container => false %>
-      </div>
+   <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
+      <%= render partial: 'shared/pagination', locals: {models: @entries} %>
     </div>
   </div>
 </span>

@@ -215,7 +215,7 @@
         </div>
 
       <span class="totals">
-        &nbsp;&nbsp;<%= @sales_units.total_entries %> Units found
+        &nbsp;&nbsp;<%= @sales_units.total_count %> Units found
       </span>
     </div>
   </div>
@@ -254,10 +254,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <div class="apple_pagination">
-          <%= will_paginate @sales_units, :container => false %>
-        </div>
+      <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
+        <%= render partial: 'shared/pagination', locals: {models: @sales_units} %>
       </div>
     </div>
   </span>
