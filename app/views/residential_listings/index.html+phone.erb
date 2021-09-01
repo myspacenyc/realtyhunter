@@ -91,10 +91,8 @@
           </div>
           <div style="clear: both;"></div>
           <div class="row">
-            <div class="col-md-12">
-              <div class="apple_pagination">
-                <%= will_paginate @residential_units, :container => false %>
-              </div>
+            <div class="col-xs-12 pagination-wrapper">
+              <%= render partial: 'shared/pagination', locals: {models: @residential_units} %>
             </div>
           </div>
         </div>
