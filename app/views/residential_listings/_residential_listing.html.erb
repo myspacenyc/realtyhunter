@@ -643,7 +643,7 @@
           </td>
 
           <!-- ****** UPDATED_AT ****************************************** -->
-          <td>Updated: <%= time_ago_in_words(residential_listing.updated_at) %>
+          <td>Updated: <%= residential_listing.updated_at.strftime('%b-%d-%Y  %I:%M %p') %>
 
             <% if residential_listing.unit.audits %>
               <%# abort residential_listing.unit.audits.inspect %>
@@ -1101,7 +1101,7 @@
           <!-- ****** UPDATED_AT ****************************************** -->
           <td>Updated: 
           <span id="current_update_dt_<%= residential_listing.id %>">
-            <%= time_ago_in_words(residential_listing.updated_at) %>
+            <%= residential_listing.updated_at.strftime('%b-%d-%Y  %I:%M %p') %>
           </span>
 
             <% if residential_listing.unit.audits %>
