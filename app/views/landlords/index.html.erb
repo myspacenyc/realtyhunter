@@ -94,7 +94,7 @@
   <div class="row">
     <div class="col-xs-12 vertical-padding">
       <span class="totals">
-        &nbsp;&nbsp;<%= @landlords.total_count %> Landlords found
+        &nbsp;&nbsp;<%= @landlords.total_entries %> Landlords found
       </span>
     </div>
   </div>
@@ -126,8 +126,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-        <%= render partial: 'shared/pagination', locals: {models: @landlords} %>
+      <div class="col-md-12">
+        <div class="apple_pagination">
+          <%= will_paginate @landlords, :container => false %>
+        </div>
       </div>
     </div>
   </span>

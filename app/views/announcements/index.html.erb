@@ -75,8 +75,10 @@
 </div>
 
 <div class="row vertical-padding">
-  <div class="col-md-6 col-md-offset-3 pagination-wrapper">
-    <%= render partial: 'shared/pagination', locals: {models: @announcements, shorten_text: false} %>
+  <div class="col-md-12">
+    <div class="apple_pagination">
+      <%= will_paginate @announcements, :container => false %>
+    </div>
   </div>
 </div>
 

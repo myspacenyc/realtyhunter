@@ -1,17 +1,17 @@
 <!-- if we are filtering, don't route to that action. route back to main controller listing -->
-<% if !models.last_page? %>
-  <p class="pagination btn btn-warning btn-lg btn-block link-as-button" role="button">
-    <% if controller_name == 'residential_listings' %>
-      <%= link_to_next_page(models, 'Load More', remote: true,
+<%# if !models.last_page? %>
+  <!-- <p class="pagination btn btn-warning btn-lg btn-block link-as-button" role="button">
+    <%# if controller_name == 'residential_listings' %>
+      <%#= link_to_next_page(models, 'Load More', remote: true,
           params: params.permit!.merge({
             action: controller.action_name == 'filter' ? 'index' : controller.action_name,
             class: 'prefetch'
             }) ) %>
-    <% else %>
-      <%= link_to_next_page(models, 'Load More', remote: true,
+    <%# else %>
+      <%#= link_to_next_page(models, 'Load More', remote: true,
           params: params.permit!.merge({
             action: controller.action_name == 'filter' ? 'index' : controller.action_name
             }) ) %>
-    <% end %>
-  </p>
-<% end %>
+    <%# end %>
+  </p> -->
+<%# end %>

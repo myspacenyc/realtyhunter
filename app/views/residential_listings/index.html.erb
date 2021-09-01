@@ -773,7 +773,7 @@
             </span> -->
         <% else %>
             <span class="totals">
-              &nbsp;&nbsp;<%= @residential_units.total_count %> Units found
+              &nbsp;&nbsp;<%= @residential_units.total_entries %> Units found
             </span>
         <% end %>
       <% end %>
@@ -978,8 +978,10 @@
   </div>
   <% if !current_user.is_third_tier_agent? %>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-        <%= render partial: 'shared/pagination', locals: {models: @residential_units} %>
+      <div class="col-md-12">
+        <div class="apple_pagination">
+          <%= will_paginate @residential_units, :container => false %>
+        </div>
       </div>
     </div>
   <% end %>

@@ -257,8 +257,10 @@
     </div>
     <% if !current_user.is_third_tier_agent? %>
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-          <%= render partial: 'shared/pagination', locals: {models: @residential_units.where("landlords.ll_importance =?", "gold")} %>
+        <div class="col-md-12">
+          <div class="apple_pagination">
+            <%= will_paginate @residential_units.where("landlords.ll_importance =?", "gold"), :container => false %>
+          </div>
         </div>
       </div>
     <% end %>
@@ -311,8 +313,10 @@
     </div>
     <% if !current_user.is_third_tier_agent? %>
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-          <%= render partial: 'shared/pagination', locals: {models: @residential_units.where("landlords.ll_importance =?", "silver")} %>
+        <div class="col-md-12">
+          <div class="apple_pagination">
+            <%= will_paginate @residential_units.where("landlords.ll_importance =?", "silver"), :container => false %>
+          </div>
         </div>
       </div>
     <% end %>
@@ -365,8 +369,10 @@
     </div>
     <% if !current_user.is_third_tier_agent? %>
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-          <%= render partial: 'shared/pagination', locals: {models: @residential_units.where("landlords.ll_importance =?", "bronze")} %>
+        <div class="col-md-12">
+          <div class="apple_pagination">
+            <%= will_paginate @residential_units.where("landlords.ll_importance =?", "bronze"), :container => false %>
+          </div>
         </div>
       </div>
     <% end %>
@@ -419,8 +425,10 @@
     </div>
     <% if !current_user.is_third_tier_agent? %>
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4 pagination-wrapper">
-          <%= render partial: 'shared/pagination', locals: {models: @residential_units.where("landlords.ll_importance IS ?", nil)} %>
+        <div class="col-md-12">
+          <div class="apple_pagination">
+            <%= will_paginate @residential_units.where("landlords.ll_importance IS ?", nil), :container => false %>
+          </div>
         </div>
       </div>
     <% end %>
