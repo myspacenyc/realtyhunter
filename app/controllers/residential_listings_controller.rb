@@ -1830,7 +1830,7 @@ class ResidentialListingsController < ApplicationController
         :no_description,:no_images, :roomshare_department, :renthop, :private_bathroom, :watermark, :watermark_in_use,
         :primary_agent_id, :favorites, :show,:claim_for_naked_apartment, :claim_for_individual_syndication_page, :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
         :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,
-        :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment, :pending_se, :managed_listing,
+        :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment, :pending_se, :se_pending_text, :managed_listing,
         unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, :streeteasy_listing_number, :rent, :gross_price, :promotional_price, :maths_free, :available_by, :access_info, :status,
           :unit_tag_number, :unit_key_status, :unit_office_location, :unit_master, :unit_commercial_property, :unit_key_active,
           :unit_signout_key, :unit_case_name,
