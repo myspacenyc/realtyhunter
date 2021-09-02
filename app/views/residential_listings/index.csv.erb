@@ -1,4 +1,4 @@
-<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Net Price', 'Gross Price', 'Promotional Price', 'Beds' , 'Baths', 'Building Ammenities', 'Unit Ammenities', 'Landlord', 'LL Class', 'Point Of Contact', 'Primary Agent', 'On Streeteasy', 'Video Present Or Not', 'Private Video Present Or Not', '3D Video Present Or Not','Available', 'Neighborhood', 'Stock Photos', 'Description', 'Public URL', 'Zip Code', 'Tenant Occupied', "Access", "Last Status Change"] -%>
+<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Net Price', 'Gross Price', 'Promotional Price', 'Beds' , 'Baths', 'Building Ammenities', 'Unit Ammenities', 'Landlord', 'LL Class', 'Point Of Contact', 'Primary Agent', 'On Streeteasy', 'Video Present Or Not', 'Private Video Present Or Not', '3D Video Present Or Not','Available', 'Neighborhood', 'Stock Photos', 'Description', 'Public URL', 'Zip Code', 'Tenant Occupied', "Access", "Last Status Change", "Day Active"] -%>
 <%= CSV.generate_line(headers).strip %>
 <% @retVal = [] %>
 <% @retstatus = [] %>
@@ -14,6 +14,7 @@
 	<% if !@retstatus.blank? %>
 		<% @s_change = Audit.find(@retstatus.last) %>
 		<% status_change_audit = "#{User.find(@s_change.user_id).name} Changed status from #{@s_change.audited_changes["status"][0]} to #{@s_change.audited_changes["status"][1]} at #{@s_change.created_at.strftime('%b-%d-%Y  %I:%M %p')}" %>
+		<% day_active = @s_change.created_at.strftime('%b-%d-%Y  %I:%M %p')  %>
 	<% end %>
 	<% if !@retVal.blank? %>
 		<% @last_price_change_date = Audit.find(@retVal.last).created_at %>
@@ -51,5 +52,5 @@
 	<% @retstatus = [] %>
 	<% aa = Building.find(listing.unit.building_id) %>
 	<% aa = aa.units.each.map(&:building_unit) - [listing.building_unit] %>
-  <%= ["#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.unit.status,listing.rent, listing.unit.gross_price, !listing.unit.promotional_price.nil? ? listing.unit.promotional_price : '', listing.beds, listing.baths, listing.residential_amenities.map(&:name).join(", "), listing.unit.building.building_amenities.map(&:name).join(", "), listing.unit.building.landlord.code, listing.unit.building.landlord.ll_importance, listing.unit.building.point_of_contact ? User.find(listing.unit.building.point_of_contact).name : '', listing.unit.primary_agent_id ? User.find(listing.unit.primary_agent_id).name : '', @streeteasy, @video_present, @video_present_private, @tour_3d, listing.unit.available_by, listing.neighborhood_name, @stock_photo, listing.description, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.postal_code ? listing.unit.building.postal_code : "", @t_occ, listing.unit.access_info, status_change_audit ? status_change_audit : ""].to_csv.strip.html_safe %>
+  <%= ["#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.unit.status,listing.rent, listing.unit.gross_price, !listing.unit.promotional_price.nil? ? listing.unit.promotional_price : '', listing.beds, listing.baths, listing.residential_amenities.map(&:name).join(", "), listing.unit.building.building_amenities.map(&:name).join(", "), listing.unit.building.landlord.code, listing.unit.building.landlord.ll_importance, listing.unit.building.point_of_contact ? User.find(listing.unit.building.point_of_contact).name : '', listing.unit.primary_agent_id ? User.find(listing.unit.primary_agent_id).name : '', @streeteasy, @video_present, @video_present_private, @tour_3d, listing.unit.available_by, listing.neighborhood_name, @stock_photo, listing.description, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.building.postal_code ? listing.unit.building.postal_code : "", @t_occ, listing.unit.access_info, status_change_audit ? status_change_audit : "", day_active ? day_active : ""].to_csv.strip.html_safe %>
 <%- end -%>
