@@ -765,7 +765,7 @@
         <% if !@residential_units.where('units.hide_from_agent =?', true).blank? && current_user.is_special_agent? %>
             <% @hide_agents_count = @residential_units.where('units.hide_from_agent =?', true).count %>
             <span class="totals">
-              &nbsp;&nbsp;<%= @residential_units.total_count - @hide_agents_count %> Units found
+              &nbsp;&nbsp;<%= @residential_units.total_entries - @hide_agents_count %> Units found
             </span>
         <%# elsif !@residential_units.where('units.third_tier =?', true).blank? && current_user.is_third_tier_agent? %>
             <!-- <span class!current_user.is_third_tier_agent?="totals">
