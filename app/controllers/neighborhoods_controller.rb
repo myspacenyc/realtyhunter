@@ -4,7 +4,7 @@ class NeighborhoodsController < ApplicationController
   # GET /neighborhoods
   # GET /neighborhoods.json
   def index
-    @neighborhoods = Neighborhood.unarchived.page params[:page]
+    @neighborhoods = Neighborhood.unarchived
   end
 
   # GET /neighborhoods/1
