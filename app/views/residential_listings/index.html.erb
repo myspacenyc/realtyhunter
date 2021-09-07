@@ -276,7 +276,7 @@
                     <div class="row vertical-padding test_c" id="demo_pet_policy" style="display: none;">
                       <!-- <div class="col-xs-11 selectize-wrapper"> -->
 
-                          <% PetPolicy.all.each do |pet_policy| %>
+                          <% PetPolicy.where(id: [19,17,1,4,8]).each do |pet_policy| %>
                             <div class="col-sm-6" id="unit-amenities-select-multiple">
                               <% if params[:pet_policy_shorthand] %>  
                                 <% if (params[:pet_policy_shorthand].split(",").include? "#{pet_policy.id}") %>

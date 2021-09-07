@@ -398,7 +398,7 @@
       </div>
       <div class="col-xs-9 col-sm-6">
         <%= f.select(:pet_policy_id,
-          options_for_select(current_user.company.pet_policies.all.collect { |r| [r.name.titleize, r.id] },
+          options_for_select(current_user.company.pet_policies.where(id: [19,17,1,4,8]).collect { |r| [r.name.titleize, r.id] },
           [@building.pet_policy ? @building.pet_policy.id : '']),
            {prompt: "Choose one..."},
           :required => true,
