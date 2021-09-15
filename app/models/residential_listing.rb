@@ -489,7 +489,9 @@ class ResidentialListing < ApplicationRecord
       # end
       policies = params[:pet_policy_shorthand][0, 256]
       policies = policies.split(",").select{|i| !i.empty?}
-
+      if policies.include?("19")
+        policies << "5" << "7"
+      end
       if policies
         running_list = running_list#.joins(building: :pet_policy)
           .where('pet_policy_id IN (?)', policies)
