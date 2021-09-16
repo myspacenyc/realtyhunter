@@ -68,18 +68,36 @@ xml.instruct! :xml, :version => "1.0"
 					if listing.gross_price
 						xml.GrossPrice listing.gross_price
 					end
+					if listing.promotional_price
+						xml.PromotionalPrice listing.promotional_price
+					end
 					if listing.r_beds
 						xml.Beds listing.r_beds
 					end
 					if listing.r_baths
 						xml.Baths listing.r_baths
 					end
-					if listing.dimensions
-						xml.Dimensions listing.dimensions
+					if listing.building
+						xml.BuildingAmenities listing.building.building_amenities.map(&:name).join(", ")
 					end
-					if listing.listing_id
-						xml.ListingId listing.listing_id
+					if listing.residential_listing
+						xml.UnitAmenities listing.residential_listing.residential_amenities.map(&:name).join(", ")
 					end
+					retstatus = []
+					listing.audits.each do |audit|
+						if !audit.audited_changes["status"].blank?
+							retstatus << audit.id
+						end
+					end
+					if !retstatus.blank?
+						xml.LastStatusChange Audit.find(retstatus.last).created_at.strftime('%b-%d-%Y  %I:%M %p')
+					end
+					# if listing.dimensions
+					# 	xml.Dimensions listing.dimensions
+					# end
+					# if listing.listing_id
+					# 	xml.ListingId listing.listing_id
+					# end
 					if listing.building.landlord
 						xml.Landlord listing.building.landlord.code
 						xml.LL_Class listing.building.landlord.ll_importance
