@@ -207,7 +207,7 @@
             </div>
             <div class="col-xs-6 col-sm-left-padding">
               <%= select_tag(:status,
-                  options_for_select(['Any', 'Active/Pending', 'Active', 'Pending', 'Off', 'Rsonly'],
+                  options_for_select(['Any', 'Active/Pending', 'Active', 'Pending', 'Off', 'Rented', 'Rsonly'],
                   params[:status] ? params[:status].titleize : "Active"), class: 'form-control') %>
               <%# if current_user.is_management? ||
                     current_user.is_listings_manager? ||
