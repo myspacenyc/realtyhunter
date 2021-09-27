@@ -287,7 +287,7 @@ class ResidentialListing < ApplicationRecord
     # search by status
     if params[:status]
       status = params[:status].downcase
-      included = ['active/pending', 'active', 'pending', 'off', 'rsonly', 'rsonly/active'].include?(status)
+      included = ['active/pending', 'active', 'pending', 'off', 'rented', 'rsonly', 'rsonly/active'].include?(status)
       if included
         if status == 'active/pending'
           running_list = running_list.where("status = ? or status = ?",
@@ -298,6 +298,9 @@ class ResidentialListing < ApplicationRecord
         elsif status == "off"
             running_list = running_list.where("status = ?",
             Unit.statuses["off"]).limit(300)
+        elsif status == "rented"
+            running_list = running_list.where("status = ?",
+            Unit.statuses["rented"]).limit(300)
         else
           running_list = running_list.where("status = ?", Unit.statuses[status])
         end

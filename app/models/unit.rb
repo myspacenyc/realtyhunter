@@ -24,12 +24,12 @@ class Unit < ApplicationRecord
   scope :available_on_market, ->{ where("status = ? OR status = ?", Unit.statuses["active"], Unit.statuses["pending"]) }
 
 	enum status: [
-    :active, :pending, :off, :rsonly, #residential
+    :active, :pending, :off, :rsonly, :rented, #residential
     :offer_submitted, :offer_accepted, :binder_signed, :off_market_for_lease_execution, #additional for commercial
     :on_market, :contract_out, :in_escrow, :closed_off, :closed, :deal_pending # additional for sales
    ]
   validates :status, presence: true, inclusion: {
-    in: ['active', 'pending', 'off', 'rsonly',
+    in: ['active', 'pending', 'off', 'rsonly', 'rented',
          'offer_submitted', 'offer_accepted', 'binder_signed', 'off_market_for_lease_execution',
          'on_market', 'contract_out', 'in_escrow', 'closed_off', 'closed', 'deal_pending'] }
 
