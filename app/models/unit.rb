@@ -29,7 +29,7 @@ class Unit < ApplicationRecord
     :on_market, :contract_out, :in_escrow, :closed_off, :closed, :deal_pending # additional for sales
    ]
   validates :status, presence: true, inclusion: {
-    in: ['active', 'pending', 'off', 'rsonly', 'rented',
+    in: ['active', 'pending', 'off', 'rented', 'rsonly',
          'offer_submitted', 'offer_accepted', 'binder_signed', 'off_market_for_lease_execution',
          'on_market', 'contract_out', 'in_escrow', 'closed_off', 'closed', 'deal_pending'] }
 
