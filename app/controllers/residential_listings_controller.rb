@@ -1549,7 +1549,7 @@ class ResidentialListingsController < ApplicationController
       @listings.each do |l|
         if l.unit.primary_agent_id != @agent.id
           Unit.update_primary_agent(l.unit.primary_agent_id, @agent.id, l.unit.listing_id)
-          l.unit.update_attribute(:primary_agent_id, @agent.id)
+          l.unit.update_attributes(primary_agent_id: @agent.id, streeteasy_primary_agent_id: @agent.id)
         end
       end
 
