@@ -903,7 +903,7 @@ class ResidentialListingsController < ApplicationController
       #Slack Message when status change from active to pending start
       if @residential_unit.unit.status == "active" && params[:residential_listing][:unit][:status].downcase == "pending"
         if params[:residential_listing][:unit][:hide_from_agent] != "1"
-          client.chat_postMessage(channel: '#depos', text: "*APP* *APPROVED* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
+          client.chat_postMessage(channel: '#depos', text: "*APP* *Pending* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n Price: $#{params[:residential_listing][:unit][:rent]} \n Changes made by #{current_user.name} \n ---", as_user: true)
         end
         # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
         #     defaults channel: "#default",
