@@ -183,7 +183,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.beds', 'residential_listings.baths', 'residential_listings.notes', 'residential_listings.tenant_credit_offered',
         'residential_listings.description', 'residential_listings.lease_start', 'residential_listings.dimensions',
         'residential_listings.lease_end', 'residential_listings.has_fee', 'residential_listings.youtube_video_url',
-        'residential_listings.private_youtube_url', 'residential_listings.tour_3d',
+        'residential_listings.private_youtube_url', 'residential_listings.tour_3d', 'residential_listings.streeteasy_url',
         'residential_listings.op_fee_percentage','residential_listings.tp_fee_percentage',
         'residential_listings.tenant_occupied', 'residential_listings.created_at', 'residential_listings.alt_address',
         'residential_listings.updated_at','residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one','residential_listings.show',

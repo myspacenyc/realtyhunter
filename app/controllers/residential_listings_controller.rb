@@ -16,6 +16,7 @@ class ResidentialListingsController < ApplicationController
       u = User.find(build)
       @user << [u.name, u.id]
     end
+    @user.sort!
     respond_to do |format|
       format.html.phone do
         set_residential_listings

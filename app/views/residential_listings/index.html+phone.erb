@@ -134,6 +134,16 @@
             </div>
           </div>
           <div class="row vertical-padding">
+            <div class="col-xs-12">
+              <%= label_tag(:address, "Alt Address", class: 'field-label-sm') %>
+            </div>
+          </div>
+          <div class="row no-vertical-padding">
+            <div class="col-xs-12">
+              <%= text_field_tag :alt_address, params[:alt_address], class:"form-control" %>
+            </div>
+          </div>
+          <div class="row vertical-padding">
             <div class="col-xs-3">
               <%= label_tag(:unit, "Rent", class: "field-label-sm") %>
             </div>
@@ -146,6 +156,7 @@
                 min: 0, max: 1000000, class:"form-control" %>
             </div>
           </div>
+
           <div class="row vertical-padding">
             <div class="col-xs-3">
               <%= label_tag(:unit, "Beds", class: "field-label-sm") %>
