@@ -1,4 +1,4 @@
-<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Net Price', 'Gross Price', 'Promotional Price', 'Beds' , 'Baths', 'Building Ammenities', 'Unit Ammenities', 'Landlord', 'LL Class', 'Point Of Contact', 'Primary Agent', 'On Streeteasy', 'Video Present Or Not', 'Private Video Present Or Not', '3D Video Present Or Not','Available', 'Neighborhood', 'Stock Photos', 'Description', 'Public URL', 'SE URL', 'Internal URL', 'Zip Code', 'Tenant Occupied', "Access", "Last Status Change"] -%>
+<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Net Price', 'Gross Price', 'Promotional Price', 'Beds' , 'Baths', 'Unit Ammenities', 'Building Ammenities', 'Landlord', 'LL Class', 'Point Of Contact', 'Primary Agent', 'On Streeteasy', 'Video Present Or Not', 'Private Video Present Or Not', '3D Video Present Or Not','Available', 'Neighborhood', 'Stock Photos', 'Description', 'Public URL', 'SE URL', 'Internal URL', 'Zip Code', 'Tenant Occupied', "Access", "Last Status Change"] -%>
 <%= CSV.generate_line(headers).strip %>
 <% @retVal = [] %>
 <% @retstatus = [] %>
