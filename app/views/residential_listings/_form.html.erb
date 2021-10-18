@@ -1318,7 +1318,7 @@
 
         <div class="row vertical-margin-lg">
           <div class="col-xs-3 col-md-4">
-            <%= f.label :managed_listing, "Managed Listing" %>
+            <%= f.label :managed_listing, "NO DS" %>
           </div>
           <div class="col-xs-9 col-md-7">
             <div class="checkbox checkbox-warning checkbox-inline">
@@ -1600,6 +1600,13 @@
         }
       });
   })();
+
+  $("#residential_listing_unit_rent").on("change paste click", function(){
+    if($("#residential_listing_unit_rent").val() < $("#residential_listing_unit_promotional_price").val()){
+      alert("Net price to lower than Promotional price")
+      return false;
+    }
+  });
 
   if($("#residential_listing_streeteasy_flag").prop("checked") == true){
     $("#residential_listing_streeteasy_flag_one").prop("disabled", true);

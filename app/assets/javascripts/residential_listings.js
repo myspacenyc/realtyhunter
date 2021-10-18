@@ -69,6 +69,7 @@
         primary_agent_id:  $('#primary_agent_id').val(),
         claim_agent_id: $('#claim_agent_id').val(),
         point_of_contact:  $('#point_of_contact').val(),
+        listing_agent_id: $('#listing_agent_id').val(),
         primary_agent_for_rs: $('#primary_agent_for_rs').val(),
         building_rating: $('#building_rating').val(),
         streeteasy_eligibility: $('#streeteasy_eligibility').val(),

@@ -319,6 +319,18 @@
                         class: 'form-control'}) %>
                   </div>
                 </div>
+                 <div class="row vertical-padding">
+                  <div class="col-xs-5">
+                    <%= label_tag :listing_agent_id, "Listing Agent" %>
+                  </div>
+                  <div class="col-xs-6 col-sm-left-padding">
+                    <%= select_tag(:listing_agent_id,
+                      options_for_select(current_user.company.users.unarchived.collect {|u| [u.name, u.id]},
+                          [params[:listing_agent_id] ? params[:listing_agent_id].titleize : "Any"]),
+                        {prompt: "Choose one...",
+                        class: 'form-control'}) %>
+                  </div>
+                </div>
                 <%# abort current_user.is_streeteasy_agent?.inspect %>
                 <% if current_user.is_management? || current_user.is_streeteasy_agent? %>
                   <div class="row vertical-padding">
@@ -533,7 +545,7 @@
                       <%= check_box_tag :managed_listing, "".freeze, params[:managed_listing] == "true".freeze ? true : false,
                           class: 'styled' %>
                       <label for="managed_listing">
-                        Managed Listing
+                        NO DS
                       </label>
                     </div>
                   </div>

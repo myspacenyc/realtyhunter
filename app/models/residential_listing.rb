@@ -188,7 +188,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.tenant_occupied', 'residential_listings.created_at', 'residential_listings.alt_address',
         'residential_listings.updated_at','residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one','residential_listings.show',
         'neighborhoods.name AS neighborhood_name', 'neighborhoods.id AS neighborhood_id',
-        'landlords.code', 'landlords.rating',
+        'landlords.code', 'landlords.rating', 'landlords.listing_agent_id',
         'landlords.id AS landlord_id',
         'users.name')
 
@@ -222,7 +222,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.roomfill', 'residential_listings.partial_move_in', 'residential_listings.working_this_listing', 'residential_listings.alt_address',
         'residential_listings.virtual_tours_available', 'residential_listings.in_person_tours_available', 'residential_listings.no_access_until_vacant',
         'neighborhoods.name AS neighborhood_name', 'neighborhoods.id AS neighborhood_id',
-        'landlords.code', 'landlords.rating', 'landlords.ll_importance',
+        'landlords.code', 'landlords.rating', 'landlords.ll_importance', 'landlords.listing_agent_id',
         'landlords.id AS landlord_id', 'units.third_tier', 'landlords.accepts_third_party_gaurantor',
         'units.listing_id', 'units.available_by', 'units.public_url', 'units.exclusive',
         'users.name').order('units.building_unit asc')
@@ -749,6 +749,10 @@ class ResidentialListing < ApplicationRecord
         params[:primary_agent_id], params[:primary_agent_id])
     end
 
+    if !params[:listing_agent_id].blank?
+      running_list = running_list.where('landlords.listing_agent_id =?', params[:listing_agent_id])
+    end
+
     if !params[:primary_agent_for_rs].blank?
       running_list = running_list.where('units.primary_agent_for_rs = ?', params[:primary_agent_for_rs])
     end
@@ -1077,7 +1081,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.photographer_user_id','residential_listings.photographer_update_date', 'residential_listings.pending_se', 'residential_listings.managed_listing',
         'residential_listings.virtual_tours_available', 'residential_listings.in_person_tours_available', 'residential_listings.no_access_until_vacant',
         'neighborhoods.name AS neighborhood_name',
-        'landlords.code', 'landlords.ll_importance', 'landlords.accepts_third_party_gaurantor',
+        'landlords.code', 'landlords.ll_importance', 'landlords.accepts_third_party_gaurantor', 'landlords.listing_agent_id',
         'landlords.id AS landlord_id', 'units.third_tier', 'units.public_url',
         'units.primary_agent_id', 'units.available_by', 'units.listing_id', 'units.exclusive',
         'users.name')
@@ -1121,7 +1125,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.photographer_user_id','residential_listings.photographer_update_date', 'residential_listings.pending_se', 'residential_listings.managed_listing',
         'residential_listings.virtual_tours_available', 'residential_listings.in_person_tours_available', 'residential_listings.no_access_until_vacant',
         'neighborhoods.name AS neighborhood_name',
-        'landlords.code', 'landlords.ll_importance', 'landlords.accepts_third_party_gaurantor',
+        'landlords.code', 'landlords.ll_importance', 'landlords.accepts_third_party_gaurantor', 'landlords.listing_agent_id',
         'landlords.id AS landlord_id', 'units.third_tier', 'units.public_url',
         'units.primary_agent_id', 'units.available_by', 'units.listing_id', 'units.exclusive',
         'users.name')
