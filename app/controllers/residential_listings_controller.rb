@@ -1155,6 +1155,7 @@ class ResidentialListingsController < ApplicationController
             residential_listing_params[:unit][:primary_agent_id],
             @residential_unit.unit.primary_agent_id,
             @residential_unit.unit.listing_id)
+        client.chat_postMessage(channel: '#test_channel', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n Primary agent changed from #{User.find(@residential_unit.unit.primary_agent_id).name} to #{User.find(residential_listing_params[:unit][:primary_agent_id].to_i).name} \n Changes made by #{current_user.name}\n ---", as_user: true)
       end
 
       # keep track of whether this listing just came on or off the market

@@ -348,7 +348,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			'residential_listings.floor', 'residential_listings.room_syndication', 'residential_listings.watermark_in_use',
 			'residential_listings.tenant_occupied as r_tenant_occupied', 'residential_listings.op_fee_percentage', 'residential_listings.youtube_video_url',
 			'residential_listings.tp_fee_percentage', 'residential_listings.watermark', 'residential_listings.tenant_description',
-			'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one',
+			'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_flag_one', 'residential_listings.streeteasy_url',
 			'residential_listings.naked_apartment', 'residential_listings.roomfill', 'residential_listings.partial_move_in',
 			'residential_listings.youtube_video_url', 'residential_listings.tour_3d', 'residential_listings.private_youtube_url',
 			'sales_listings.id AS s_id',

@@ -152,6 +152,10 @@ xml.instruct! :xml, :version => "1.0"
 						public_url = 'http://www.myspacenyc.com/'
 					end
 					xml.PublicURL public_url
+					if !listing.streeteasy_url.blank?
+						xml.se_url listing.streeteasy_url
+					end
+					xml.internal_url "https://realtyhunter.org:3000/residential_listings/#{listing.id}"
 					xml.zipcode listing.postal_code
 					if listing.r_tenant_occupied == true
 						xml.TenantOccupied "Yes"
