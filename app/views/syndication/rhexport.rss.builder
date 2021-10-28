@@ -155,7 +155,11 @@ xml.instruct! :xml, :version => "1.0"
 					if !listing.streeteasy_url.blank?
 						xml.se_url listing.streeteasy_url
 					end
-					xml.internal_url "https://realtyhunter.org:3000/residential_listings/#{listing.id}"
+					if listing.r_id
+						xml.internal_url "https://realtyhunter.org:3000/residential_listings/#{listing.residential_listing.id}"
+					else
+						xml.internal_url "https://realtyhunter.org:3000/residential_listings/#{listing.sales_listing.id}"
+					end
 					xml.zipcode listing.postal_code
 					if listing.r_tenant_occupied == true
 						xml.TenantOccupied "Yes"
