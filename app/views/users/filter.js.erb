@@ -1,3 +1,3 @@
 $('.users_table_body').html("<%= escape_javascript (render :partial => @users, :locals => {:manager => nil})  %>");
 $('.pagination-wrapper').html("<%= escape_javascript (render :partial => 'shared/pagination', :locals => {:models => @users}) %>");
-$('.totals').html("<%= @users.total_count %> Users found");
+$('.totals').html("<%= @users.total_entries %> Users found");
