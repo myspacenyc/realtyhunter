@@ -275,7 +275,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 		end
 
 		if is_true?(search_params[:must_have_status_selected])
-			listings = listings.where('units.status IN (?)', [Unit.statuses["active"]])
+			listings = listings.where('units.status IN (?)', [Unit.statuses["active"], Unit.statuses["pending"]])
 		end
 
 		if is_true?(search_params[:push_to_zumper_active])
@@ -360,7 +360,7 @@ left join sales_listings on units.id = sales_listings.unit_id')
 			'sales_listings.total_room_count as s_total_room_count', 'sales_listings.property_tax',
 			'sales_listings.internal_sq_footage', 'sales_listings.common_chargers',
 			'units.id as unit_id',
-			'units.primary_agent_id','units.access_info',
+			'units.primary_agent_id','units.access_info','units.hide_on_website',
 			'units.primary_agent2_id','units.featured', 'units.hide_from_agent',
 			'units.streeteasy_primary_agent_id','units.maths_free',
 			'units.public_url', 'units.primary_agent_for_rs',

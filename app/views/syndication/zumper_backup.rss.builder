@@ -288,6 +288,12 @@ xml.streeteasy :version => "1.6" do
 							 		xml.noFee
 							 	end
 
+							 	if listing.hide_on_website == true
+							 		xml.hide_on_website "true"
+							 	else
+							 		xml.hide_on_website "false"
+							 	end
+
 							 	if listing.featured == true
 							 		xml.featured "yes"
 							 	else
@@ -902,6 +908,12 @@ xml.streeteasy :version => "1.6" do
 							 		xml.noFee
 							 	end
 
+							 	if listing.hide_on_website == true
+							 		xml.hide_on_website "true"
+							 	else
+							 		xml.hide_on_website "false"
+							 	end
+
 							 	if listing.featured == true
 							 		xml.featured "yes"
 							 	else
@@ -1501,6 +1513,12 @@ xml.streeteasy :version => "1.6" do
 
 								 	if !listing.has_fee
 								 		xml.noFee
+								 	end
+
+								 	if listing.hide_on_website == true
+								 		xml.hide_on_website "true"
+								 	else
+								 		xml.hide_on_website "false"
 								 	end
 
 									if listing.exclusive
