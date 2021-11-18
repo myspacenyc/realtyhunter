@@ -399,7 +399,7 @@ class BuildingsController < ApplicationController
           :building_tag_number, :building_key_status, :building_office_location, :building_master,
           :building_commercial_property, :building_key_active, :building_signout_key, :building_case_name,
          :push_to_zumper, :building_website, :building_name, :section_8, :income_restricted, :year_build, :featured, 
-         :rating, :notes, :description, :landlord_id, :user_id, :third_tier,
+         :rating, :notes, :description, :landlord_id, :user_id, :third_tier, :building_youtube_url,
           :inaccuracy_description, :pet_policy_id, :rental_term_id, :custom_rental_term, :file,
           :custom_amenities, :custom_utilities, :neighborhood_id, :neighborhood, :llc_name,
           building_amenity_ids: [], images_files: [], utility_ids: [] ])

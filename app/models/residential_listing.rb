@@ -864,7 +864,6 @@ class ResidentialListing < ApplicationRecord
 
   def deep_copy_imgs(dst_id)
     @dst = ResidentialListing.find(dst_id)
-
     # deep copy photos
     self.unit.images.each { |i|
       img_copy = Image.new
@@ -898,10 +897,17 @@ class ResidentialListing < ApplicationRecord
         raise "Error saving unit"
       end
 
-      #Image.async_copy_residential_unit_images(self.id, residential_unit_dup.id)
       if include_photos
         self.deep_copy_imgs(residential_unit_dup.id)
+        residential_unit_dup.unit.update(has_stock_photos: true)
+      else
+        residential_unit_dup.unit.update(has_stock_photos: false)
       end
+
+      #Image.async_copy_residential_unit_images(self.id, residential_unit_dup.id)
+      # if include_photos
+      #   self.deep_copy_imgs(residential_unit_dup.id)
+      # end
 
       #puts "NEW UNIT NUM #{residential_unit_dup.unit.building_unit}"
       #update_building_counts

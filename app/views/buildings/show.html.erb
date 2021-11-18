@@ -243,6 +243,12 @@
 								<%= @building.description.html_safe %>
 							</p>
 						<% end %>
+						<% if !@building.building_youtube_url.blank? %>
+							<p>
+								<strong>Building Video url:</strong>
+								<%= link_to @building.building_youtube_url, @building.building_youtube_url,target: "_blank" %>
+							</p>
+						<% end %>
 					</div>
 				</div><!-- row -->
 				<br/>
