@@ -480,12 +480,12 @@
 								<strong>Point of Contact:</strong>
 							</div>
 							<div class="col-xs-7">
-								<% if @residential_unit.unit.building.landlord.point_of_contact %>
+								<% if @residential_unit.unit.building.point_of_contact %>
 									<%# if @residential_unit.unit.building.point_of_contact == 230 || @residential_unit.unit.building.point_of_contact == 278 || @residential_unit.unit.building.point_of_contact == 417 %>
 										<!-- Contact Your Manager -->
 									<%# else %>
-										<%= link_to User.find(@residential_unit.unit.building.landlord.point_of_contact).name, user_path(@residential_unit.unit.building.landlord.point_of_contact.id) %>
-										<%= link_to User.find(@residential_unit.unit.building.landlord.point_of_contact).mobile_phone_number, "tel:#{User.find(@residential_unit.unit.building.landlord.point_of_contact).mobile_phone_number}" %>
+										<%= link_to User.find(@residential_unit.unit.building.point_of_contact).name, user_path(@residential_unit.unit.building.point_of_contact) %>
+										<%= link_to User.find(@residential_unit.unit.building.point_of_contact).mobile_phone_number, "tel:#{User.find(@residential_unit.unit.building.point_of_contact).mobile_phone_number}" %>
 									<%# end %>
 								<% end %>
 							</div>

@@ -125,15 +125,15 @@
 								<% end %>
 							</p>
 						<% end %>
-						<% if @building.landlord.point_of_contact %>
+						<% if @building.point_of_contact %>
 							<p>
 							  <strong>Point of Contact:</strong>
 							  <% if current_user.is_management? || current_user.is_listings_manager? %>
-								  <%= link_to User.find(@building.landlord.point_of_contact).name, user_path(@building.landlord.point_of_contact) %>
-								  <%= link_to User.find(@building.landlord.point_of_contact).mobile_phone_number, "tel:#{User.find(@building.landlord.point_of_contact).mobile_phone_number}" %>
+								  <%= link_to User.find(@building.point_of_contact).name, user_path(@building.point_of_contact) %>
+								  <%= link_to User.find(@building.point_of_contact).mobile_phone_number, "tel:#{User.find(@building.point_of_contact).mobile_phone_number}" %>
 								<% else %>
-									<%= User.find(@building.landlord.point_of_contact).name %>
-									<%= link_to User.find(@building.landlord.point_of_contact).mobile_phone_number, "tel:#{User.find(@building.landlord.point_of_contact).mobile_phone_number}" %>
+									<%= User.find(@building.point_of_contact).name %>
+									<%= link_to User.find(@building.point_of_contact).mobile_phone_number, "tel:#{User.find(@building.point_of_contact).mobile_phone_number}" %>
 								<% end %>
 							</p>
 						<% end %>
