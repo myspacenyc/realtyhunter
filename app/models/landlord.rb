@@ -9,8 +9,13 @@ class Landlord < ApplicationRecord
 	validates :company_id, presence: true
 
   belongs_to :listing_agent, :class_name => 'User' #, touch: true
-  validates :listing_agent_percentage, allow_blank: true, length: {maximum: 3}, numericality: { only_integer: true }
-
+  belongs_to :point_of_contact, class_name: 'User'
+  validates :listing_agent_percentage, presence: true, length: {maximum: 3}, numericality: { only_integer: true }
+  validates :listing_agent_id, presence: true
+  validates :point_of_contact_id, presence: true
+  validates :op_fee_percentage, presence: true
+  validates :back_to_owner, presence: true
+  validates :myspacenyc_percentage, presence: true
 	validates :code, presence: true, length: {maximum: 100},
 		uniqueness: { case_sensitive: false }
 

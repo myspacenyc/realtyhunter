@@ -164,7 +164,20 @@
         <br />
         <div class="row">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :listing_agent_id, "Listing Agent" %>
+            <%= f.label :is_this_a_myspacenyc_house_listing, "Is This A MySpaceNYC House Listing?" %>
+          </div>
+          <div class="col-xs-4">
+            <%= f.label :is_this_a_myspacenyc_house_listing, "Yes", :value => "true"  %>
+            <%= f.radio_button :is_this_a_myspacenyc_house_listing, true %>
+            <%= f.label :is_this_a_myspacenyc_house_listing, "No", :value => "false" %>
+            <%= f.radio_button :is_this_a_myspacenyc_house_listing, false %>
+          </div>
+        </div>
+
+        <br />
+        <div class="row">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :listing_agent_id, "Account Owner",class: 'required' %>
           </div>
           <div class="col-xs-4">
             <%= f.select(:listing_agent_id,
@@ -179,7 +192,7 @@
         <br />
         <div class="row">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :listing_agent_percentage, 'Listing agent %' %>
+            <%= f.label :listing_agent_percentage, 'Account Owner %', class: 'required' %>
           </div>
           <div class="col-xs-9 col-md-4">
             <div class="field">
@@ -204,7 +217,7 @@
         <br />
         <div class="row show-op">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :op_fee_percentage, 'Owner Pays %' %>
+            <%= f.label :op_fee_percentage, "% Available for Commission", class: 'required' %>
           </div>
           <div class="col-xs-9 col-md-4">
             <%= f.number_field :op_fee_percentage, class: 'form-control', min: 0, default: 95 %>
@@ -230,6 +243,43 @@
           </div>
           <div class="col-xs-4">
             <%= f.number_field :tp_fee_percentage, class: 'form-control', min: 0, default: 95 %>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row show-tp">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :back_to_owner, "% Back to Owner", class: 'required' %>
+          </div>
+          <div class="col-xs-4">
+            <%= f.number_field :back_to_owner, class: 'form-control', min: 0, default: 95 %>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row show-tp">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :myspacenyc_percentage, "MySpaceNYC %", class: 'required' %>
+          </div>
+          <div class="col-xs-4">
+            <%= f.number_field :myspacenyc_percentage, class: 'form-control', min: 0, default: 95 %>
+          </div>
+        </div>
+
+        <br />
+        <div class="row">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :point_of_contact_id, "Point Of Contact",class: 'required' %>
+          </div>
+          <div class="col-xs-4">
+            <%= f.select(:point_of_contact_id,
+              options_for_select(current_user.company.users.collect {|u| [u.name, u.id]},
+                [@landlord.point_of_contact ? @landlord.point_of_contact.id : '']),
+              {prompt: "Choose one..."},
+              class: 'form-control',
+              :include_blank => true) %>
           </div>
         </div>
 

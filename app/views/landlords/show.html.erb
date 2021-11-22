@@ -156,6 +156,19 @@
         <% end %>
 
         <br>
+        <% if @landlord.point_of_contact %>
+          <div class="row">
+            <div class="col-xs-4 col-md-3">
+              <strong>Point Of Contact</strong>
+            </div>
+            <div class="col-xs-8 col-md-3">
+              <%= link_to @landlord.point_of_contact.name, user_path(@landlord.point_of_contact.id) %>
+            </div>
+            <!-- spacer -->
+          </div>
+        <% end %>
+
+        <br>
         <div class="row">
           <div class="col-xs-12 col-md-3">
             <strong>Office address</strong>

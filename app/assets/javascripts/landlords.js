@@ -80,20 +80,36 @@ Landlords = {};
     }
   };
 
-  Landlords.toggleFeeOptions = function() {
-    var isChecked = $('#landlords .has-fee').prop('checked');
-    if (isChecked) {
-      $('#landlords .show-op').addClass('hide');
-      $('#landlords .show-tp').removeClass('hide');
-    } else {
-      $('#landlords .show-op').removeClass('hide');
-      $('#landlords .show-tp').addClass('hide');
-    }
-  };
+  // Landlords.toggleFeeOptions = function() {
+  //   var isChecked = $('#landlords .has-fee').prop('checked');
+  //   if (isChecked) {
+  //     $('#landlords .show-op').addClass('hide');
+  //     $('#landlords .show-tp').removeClass('hide');
+  //   } else {
+  //     $('#landlords .show-op').removeClass('hide');
+  //     $('#landlords .show-tp').addClass('hide');
+  //   }
+  // };
+  $("#landlord_is_this_a_myspacenyc_house_listing_false").click(function(){
+    $("#landlord_listing_agent_id").prop("disabled", true);
+    $("#landlord_listing_agent_percentage").prop("disabled", true);
+  })
+  $("#landlord_is_this_a_myspacenyc_house_listing_true").click(function(){
+    $("#landlord_listing_agent_id").prop("disabled", false);
+    $("#landlord_listing_agent_percentage").prop("disabled", false);
+  })
+
+  if($("#landlord_is_this_a_myspacenyc_house_listing_false").is(":checked")){
+    $("#landlord_listing_agent_id").prop("disabled", true);
+    $("#landlord_listing_agent_percentage").prop("disabled", true);
+  }else{
+    $("#landlord_listing_agent_id").prop("disabled", false);
+    $("#landlord_listing_agent_percentage").prop("disabled", false);
+  }
 
   Landlords.initEditor = function() {
-    $('#landlords .has-fee').click(Landlords.toggleFeeOptions);
-    Landlords.toggleFeeOptions();
+    // $('#landlords .has-fee').click(Landlords.toggleFeeOptions);
+    // Landlords.toggleFeeOptions();
 
     var office_address = $('#map-canvas').attr('data-address') ? $('#map-canvas').attr('data-address') : 'New York, NY, USA';
     // console.log(office_address);
