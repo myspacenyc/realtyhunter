@@ -1775,7 +1775,7 @@ class ResidentialListingsController < ApplicationController
         if action_name == "room_index"
           params[:status] = "Rsonly/Active".freeze
         else
-          params[:status] = "active".freeze
+          params[:status] = "active/pending".freeze
         end
       end
 
