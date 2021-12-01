@@ -130,6 +130,11 @@
                     {prompt: "Choose one..."},
                     :required => true,
                     class: "form-control" %>
+                  <% if @residential_unit.unit.building.landlord.listing_agent_id.nil? || @residential_unit.unit.building.landlord.listing_agent_percentage.nil? || @residential_unit.unit.building.landlord.op_fee_percentage.nil? || @residential_unit.unit.building.landlord.back_to_owner.nil? || @residential_unit.unit.building.landlord.myspacenyc_percentage.nil? || @residential_unit.unit.building.landlord.is_this_a_myspacenyc_house_listing.nil? || @residential_unit.unit.building.landlord.point_of_contact_id.nil? %>
+                    <%= hidden_field_tag "status_cant_change_until_landlord_info_missing", "yes" %>
+                  <% else %>
+                    <%= hidden_field_tag "status_cant_change_until_landlord_info_missing", "no" %>
+                  <% end %>
               </div>
           </div>
           <% end %>
@@ -1546,13 +1551,18 @@
   // $("#listing_unit_email").click(function(){
   //   $("#update_status_info").attr("value", "unit_email")
   // })
-
+  var last_selected = $("#residential_listing_unit_status").val()
   $("#residential_listing_unit_status").change(function(){
-    var status = $("#residential_listing_unit_status").val()
+    var status = $("#residential_listing_unit_status").val();
 
     if ( status == "Off" || status == "Pending"){
       $("#residential_listing_streeteasy_flag").prop("checked", "");
       $("#residential_listing_streeteasy_flag_one").prop("checked", "");
+    }
+    var l_val = $("#status_cant_change_until_landlord_info_missing").val();
+    if (l_val == "yes"){
+      alert("This unit cannot be active until the Landlord Information is Complete");
+      $("#residential_listing_unit_status").val(last_selected);
     }
   });
 
