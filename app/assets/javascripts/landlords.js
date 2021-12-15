@@ -91,20 +91,22 @@ Landlords = {};
   //   }
   // };
   $("#landlord_is_this_a_myspacenyc_house_listing_false").click(function(){
-    $("#landlord_listing_agent_id").prop("disabled", true);
-    $("#landlord_listing_agent_percentage").prop("disabled", true);
-  })
-  $("#landlord_is_this_a_myspacenyc_house_listing_true").click(function(){
     $("#landlord_listing_agent_id").prop("disabled", false);
     $("#landlord_listing_agent_percentage").prop("disabled", false);
+  })
+  $("#landlord_is_this_a_myspacenyc_house_listing_true").click(function(){
+    $("#landlord_listing_agent_id").prop("value","114");
+    $("#landlord_listing_agent_percentage").prop("value", "0");
+    $("#landlord_listing_agent_id").prop("disabled", true);
+    $("#landlord_listing_agent_percentage").prop("disabled", true);
   })
 
   if($("#landlord_is_this_a_myspacenyc_house_listing_false").is(":checked")){
-    $("#landlord_listing_agent_id").prop("disabled", true);
-    $("#landlord_listing_agent_percentage").prop("disabled", true);
-  }else{
     $("#landlord_listing_agent_id").prop("disabled", false);
     $("#landlord_listing_agent_percentage").prop("disabled", false);
+  }else{
+    $("#landlord_listing_agent_id").prop("disabled", true);
+    $("#landlord_listing_agent_percentage").prop("disabled", true);
   }
 
   Landlords.initEditor = function() {

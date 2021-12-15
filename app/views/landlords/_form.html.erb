@@ -225,6 +225,16 @@
         </div>
 
         <br />
+        <div class="row show-op">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :percentage_invoiced_to_ll, "Percentage Invoiced to LL", class: 'required' %>
+          </div>
+          <div class="col-xs-9 col-md-4">
+            <%= f.number_field :percentage_invoiced_to_ll, class: 'form-control', min: 0, default: 95 %>
+          </div>
+        </div>
+
+        <br />
         <div class="row">
           <div class="col-xs-3 form-label-responsive">
             <strong>Accepts Third-Party Gaurantor</strong>
