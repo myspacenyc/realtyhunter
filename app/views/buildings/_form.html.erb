@@ -143,7 +143,12 @@
             <%= f.label :streeteasy_eligibility, "Streeteasy Eligibility" %>
           </div>
           <div class="col-sm-9">
-            <%= f.select :streeteasy_eligibility, [['Yes', 0], ['No', 1]], {}, {class: "form-control"}%>
+            <%= f.select(:streeteasy_eligibility,
+                options_for_select([['Yes', 0], ['No', 1]],
+                  [@building.streeteasy_eligibility == 1 ? 1 : 0]),
+                {prompt: "Choose one..."},
+                class: 'form-control') %>
+            <%#= f.select :streeteasy_eligibility, [['Yes', 0], ['No', 1]], {}, {class: "form-control"}%>
           </div>
         </div>
 
