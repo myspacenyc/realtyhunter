@@ -176,14 +176,6 @@
 								<div id="residential_unit-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
 								  <!-- Wrapper for slides -->
 								  <div class="carousel-inner" role="listbox">
-								  <!-- first display building photos... -->
-								  	<%# @residential_unit.unit.building.images.each do |image| %>
-								  		<!-- <div class="item">
-										    <%#= image_tag image.file.url(:large), :class => 'img-responsive center-block',
-										      	alt: image.file.url(:large)  %>
-
-									    </div> -->
-								  	<%# end %>
 								  	<!-- now display unit photos -->
 								  	<% @residential_unit.unit.images.each do |image| %>
 								  		<div class="item">
@@ -197,6 +189,14 @@
 										    	<%= image_tag image.file.url(:large_blankwatermark), :class => 'img-responsive center-block',
 										      	alt: image.file.url(:large_blankwatermark) %>
 										    <% end %>
+									    </div>
+								  	<% end %>
+								  	<!-- first display building photos... -->
+								  	<% @residential_unit.unit.building.images.each do |image| %>
+								  		<div class="item">
+										    <%= image_tag image.file.url(:large), :class => 'img-responsive center-block',
+										      	alt: image.file.url(:large)  %>
+
 									    </div>
 								  	<% end %>
 								  </div>
