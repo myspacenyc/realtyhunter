@@ -64,7 +64,7 @@ class AnnouncementsController < ApplicationController
 
     def set_announcements
       @announcements = Announcement.search(announcement_params)
-      @announcements = @announcements.page(params[:page]).per(100)
+      @announcements = @announcements.page(params[:page])
     end
 
   	def announcement_params
