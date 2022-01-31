@@ -66,8 +66,17 @@
       <tr>
         <td><%= neighborhood.name %></td>
         <td><%= neighborhood.borough %></td>
-        <td><%= neighborhood.youtube_url %></td>
-        <td><%= link_to 'Show', neighborhood %></td>
+        <td>
+          <% if !neighborhood.youtube_url.blank? %>
+            <p>
+              <small>
+                <a href="<%= neighborhood.youtube_url%>" target="_blank"><%= neighborhood.youtube_url %></a>
+              </small>
+            </p>
+          <%else%>
+          <% end %>
+        </td>
+        <!-- <td><%#= link_to 'Show', neighborhood %></td> -->
         <td><%= link_to 'Edit', edit_neighborhood_path(neighborhood) %></td>
         <td><%= link_to 'Destroy', neighborhood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

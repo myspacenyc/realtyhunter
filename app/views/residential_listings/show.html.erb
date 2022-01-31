@@ -520,6 +520,18 @@
 				    			<% end %>
 				    		</div>
 		    			</div>
+		    			<div class="row">
+							<div class="col-xs-5">
+				    			<strong>Agent Bonus Offered:</strong>
+				    		</div>
+				    		<div class="col-xs-7">
+				    			<% if @residential_unit.tenant_credit_offered == true %>
+				    				<span class="glyphicon glyphicon-ok green" aria-hidden="true"></span><br>
+				    			<% else %>
+				    				<span class="glyphicon glyphicon-remove red" aria-hidden="false"></span><br>
+				    			<% end %>
+				    		</div>
+		    			</div>
 		    		</div>
 		    	</div>
 		    		<% if current_user.is_management? %>

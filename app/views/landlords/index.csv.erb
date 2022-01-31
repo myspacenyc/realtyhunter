@@ -12,43 +12,22 @@
 	'Management Info',
 	'Key Pick Up Location',
 	'Update Source',
-  'Listing Agent',
-	'Listing Agent Percentage',
+  'Is This A MySpaceNYC House Listing?',
+  'Account Owner',
+	'Account Owner Percentage',
 	'Has Fee',
-	'OP Fee %',
-	'TP Fee %',
+	'% Available for Commission',
+  'Percentage Invoiced to LL',
+  'Accepts Third-Party Gaurantor',
+	'Tenant Pays %',
+  '% Back to Owner',
+  'MySpaceNYC %',
   'Total Units Count',
   'Active Units Count',
   'Last Unit Updated At',
 	'Created At', 'Updated at'] -%>
 <%= CSV.generate_line headers %>
 <%- @landlords.each do |landlord| -%>
-  <%= [
-  	landlord.name,
-  	landlord.code,
-  	landlord.contact_name,
-  	landlord.office_phone,
-  	landlord.mobile,
-  	landlord.fax,
-  	landlord.email,
-  	landlord.website,
-  	landlord.formatted_street_address,
-  	landlord.notes,
-  	landlord.management_info,
-  	landlord.key_pick_up_location,
-  	landlord.update_source,
-    landlord.listing_agent_name || '',
-  	landlord.listing_agent_percentage,
-
-		landlord.has_fee ? 'Yes' : 'No',
-  	landlord.op_fee_percentage,
-  	landlord.tp_fee_percentage,
-
-    landlord.total_unit_count,
-    landlord.active_unit_count,
-    landlord.last_unit_updated_at,
-
-  	landlord.created_at,
-  	landlord.updated_at
-  	].to_csv.html_safe %>
+  <%= [landlord.name, landlord.code, landlord.contact_name, landlord.office_phone, landlord.mobile, landlord.fax, landlord.email, landlord.website, landlord.formatted_street_address, landlord.notes, landlord.management_info, landlord.key_pick_up_location, landlord.update_source, landlord.is_this_a_myspacenyc_house_listing ? 'Yes' : 'No', landlord.listing_agent_name || '', landlord.listing_agent_percentage, landlord.has_fee ? 'Yes' : 'No', landlord.op_fee_percentage, landlord.percentage_invoiced_to_ll, landlord.accepts_third_party_gaurantor ? 'Yes' : 'No', landlord.tp_fee_percentage, landlord.back_to_owner, landlord.myspacenyc_percentage, landlord.total_unit_count,landlord.active_unit_count, landlord.last_unit_updated_at, landlord.created_at, landlord.updated_at
+  	].to_csv.strip.html_safe %>
 <%- end -%>
