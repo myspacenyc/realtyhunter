@@ -1178,6 +1178,18 @@
             <%= f.text_field :streeteasy_url, class: 'form-control' %>
           </div>
         </div>
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :streeteasy_featured, "Streeteasy Featured" %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+            <div class="checkbox checkbox-warning checkbox-inline">
+              <%= f.check_box :streeteasy_featured, class: "styled",
+                  checked: @residential_unit ? @residential_unit.streeteasy_featured : false %>
+              <label></label>
+            </div>
+          </div>
+        </div>
         <% if current_user.is_management? %>
           <div class="row vertical-margin-lg">
             <div class="col-xs-3 col-md-4">
@@ -1352,7 +1364,7 @@
         <%= f.fields_for @residential_unit.unit do |unit_form| %>
           <div class="row vertical-margin-lg">
             <div class="col-xs-3 col-md-4">
-              <%= unit_form.label :featured, "Featured Unit" %>
+              <%= unit_form.label :featured, "Apts.com Featured Unit" %>
             </div>
             <div class="col-xs-9 col-md-7">
               <div class="checkbox checkbox-warning checkbox-inline">

@@ -64,6 +64,7 @@
         managed_listing: $('#managed_listing').prop('checked'),
         tenant_credit_offered: $('#tenant_credit_offered').prop('checked'),
         featured: $('#featured').prop('checked'),
+        past_24_hours_active: $('#past_24_hours_active').prop('checked'),
         streeteasy_filter: $('#streeteasy_filter').val(),
         streeteasy_claim: $('#streeteasy_claim').val(),
         primary_agent_id:  $('#primary_agent_id').val(),

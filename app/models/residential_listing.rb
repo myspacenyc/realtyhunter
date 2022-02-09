@@ -216,7 +216,7 @@ class ResidentialListing < ApplicationRecord
         'residential_listings.id', 'residential_listings.baths','units.access_info', 'units.gross_price', 'residential_listings.notes',
         'residential_listings.favorites','residential_listings.streeteasy_flag_one', 'residential_listings.lease_start', 'residential_listings.private_bathroom',
         'residential_listings.streeteasy_flag', 'residential_listings.streeteasy_claim', 'residential_listings.couples_accepted',
-        'residential_listings.has_fee', 'residential_listings.updated_at', 'residential_listings.youtube_video_url', 'residential_listings.private_youtube_url',
+        'residential_listings.has_fee', 'residential_listings.created_at', 'residential_listings.updated_at', 'residential_listings.youtube_video_url', 'residential_listings.private_youtube_url',
         'residential_listings.tenant_occupied', 'residential_listings.roomshare_department', 'residential_listings.tour_3d',
         'residential_listings.photographer_update_date','residential_listings.photographer_user_id', 'residential_listings.pending_se', 'residential_listings.managed_listing',
         'residential_listings.roomfill', 'residential_listings.partial_move_in', 'residential_listings.working_this_listing', 'residential_listings.alt_address',
@@ -711,6 +711,10 @@ class ResidentialListing < ApplicationRecord
 
     if !params[:tenant_credit_offered].blank?
       running_list = running_list.where("residential_listings.tenant_credit_offered =?", params[:tenant_credit_offered])
+    end
+
+    if !params[:past_24_hours_active].blank?
+      running_list = running_list.where("residential_listings.created_at >= ?", (Time.now - 1.day).strftime("%m/%d/%Y"))
     end
 
     if !params[:featured].blank?
