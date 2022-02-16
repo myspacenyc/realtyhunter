@@ -990,7 +990,7 @@
 
         <tbody class="residential_units_table_body">
           <%= render partial: 'residential_listings/residential_listing',
-            collection: @residential_units, locals: {
+            collection: @residential_units.sort{|a,b| b.updated_at <=> a.updated_at}, locals: {
               res_images: @res_images, bldg_images: @bldg_images
             } %>
         </tbody>
