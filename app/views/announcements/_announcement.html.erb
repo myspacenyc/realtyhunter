@@ -17,7 +17,8 @@
 		link that takes you to announcements/index -->
 
 	<% if params[:action] != 'index' %>
-		<a href="/announcements">
+		<!-- <a href="/announcements"> -->
+		<a href="<%= announcement.note.html_safe %>" target="_blank">
 	<% end %>
 
     <p class="announcement-description">
