@@ -1179,8 +1179,11 @@ class ResidentialListingsController < ApplicationController
       # end
       unit_updated = @residential_unit.unit.update(
           residential_listing_params[:unit].merge({updated_at: Time.now}))
+      landlord_update = @residential_unit.unit.building.landlord.update(
+          residential_listing_params[:landlord].merge({updated_at: Time.now}))
       r_params = residential_listing_params
       r_params.delete('unit')
+      r_params.delete('landlord')
       listing_updated = @residential_unit.update(r_params.merge({updated_at: Time.now}))
     # end
     # update res
@@ -1869,7 +1872,8 @@ class ResidentialListingsController < ApplicationController
         :primary_agent_id, :favorites, :show,:claim_for_naked_apartment, :claim_for_individual_syndication_page, :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
         :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,
         :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment, :pending_se, :se_pending_text, :managed_listing,
-        unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, :streeteasy_listing_number, :rent, :gross_price, :promotional_price, :maths_free, :available_by, :access_info, :status,
+        unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, 
+          :streeteasy_listing_number, :rent, :gross_price, :promotional_price, :maths_free, :available_by, :access_info, :status,
           :unit_tag_number, :unit_key_status, :unit_office_location, :unit_master, :unit_commercial_property, :unit_key_active,
           :unit_signout_key, :unit_case_name,
           :exclusive, :featured, :hide_on_website, :hide_from_agent, :building_id, :primary_agent_id, :primary_agent2_id, :listing_agent_id,
@@ -1877,6 +1881,7 @@ class ResidentialListingsController < ApplicationController
           :exclusive_agreement_expires_at, :public_url, :price_calculation,
           open_houses_attributes: [:day, :start_time, :end_time, :_destroy, :id],
           building: [:point_of_contact] ],
+        landlord: [:op_fee_percentage],
         residential_amenity_ids: []
         )
 

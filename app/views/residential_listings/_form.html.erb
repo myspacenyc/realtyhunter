@@ -902,7 +902,7 @@
           </div>
         </div>
 
-        <div class="row show-op vertical-margin-lg">
+        <div class="row vertical-margin-lg">
           <div class="col-xs-3 col-md-4">
             <%= f.label :op_fee_percentage, 'PayOut %' %>
           </div>
@@ -919,6 +919,15 @@
                 <% end %>
               </p>
             </div>
+          </div>
+        </div>
+
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :commission_amount %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+            <%= f.number_field :commission_amount, class: 'form-control', :step => 'any' %>
           </div>
         </div>
 
@@ -942,6 +951,16 @@
           </div>
         </div>
 
+        <%= f.fields_for @residential_unit.unit.building.landlord do |landlord_form| %>
+          <div class="row show-tp vertical-margin-lg">
+            <div class="col-xs-3 col-md-4">
+              <%= landlord_form.label '% Available for Commission' %>
+            </div>
+            <div class="col-xs-9 col-md-4">
+              <%= landlord_form.number_field :op_fee_percentage, class: 'form-control', min: 0, max: 100 %>
+            </div>
+          </div>
+        <% end %>
         <div class="row vertical-margin-lg">
             <div class="col-xs-3 col-sm-4">
               <%= f.label :rental_term_id, "Rental Terms" %>
@@ -1135,15 +1154,6 @@
           </div>
           <div class="col-xs-9 col-md-7">
             <%= f.text_field :showing_instruction, class: 'form-control' %>
-          </div>
-        </div>
-
-        <div class="row vertical-margin-lg">
-          <div class="col-xs-3 col-md-4">
-            <%= f.label :commission_amount %>
-          </div>
-          <div class="col-xs-9 col-md-7">
-            <%= f.number_field :commission_amount, class: 'form-control', :step => 'any' %>
           </div>
         </div>
         <div class="row vertical-margin-lg">
