@@ -1405,7 +1405,7 @@
           <%= f.fields_for @residential_unit.unit do |unit_form| %>
             <div class="row vertical-margin-lg">
               <div class="col-xs-3 col-md-4">
-                <%= unit_form.label :hide_from_agent, "Hide From Agents" %>
+                <%= unit_form.label :hide_from_agent, "Hide from Agent (EXCEPT Hidden Unit Agents)" %>
               </div>
               <div class="col-xs-9 col-md-7">
                 <div class="checkbox checkbox-warning checkbox-inline">

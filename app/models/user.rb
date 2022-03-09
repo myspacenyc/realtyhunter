@@ -296,8 +296,12 @@ class User < ApplicationRecord
     self.has_role? :third_tier_agent
   end
 
-  def is_s_agents?
-    self.has_role? :s_agents
+  def is_wmm_agents?
+    self.has_role? :wmm_agents
+  end
+
+  def is_hidden_unit_agent?
+    self.has_role? :hidden_unit_agent
   end
 
   def is_listings_manager?

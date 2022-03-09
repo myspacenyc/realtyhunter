@@ -1825,6 +1825,10 @@ class ResidentialListingsController < ApplicationController
       @residential_units = ResidentialListing.search(params, current_user, params[:building_id])
       if current_user.is_special_agent?
         @residential_units = @residential_units.where.not("landlords.id =?", 2225)
+      elsif current_user.is_wmm_agents?
+        @residential_units = @residential_units.where("landlords.id =?", 2225)
+      elsif current_user.is_hidden_unit_agent?
+        @residential_units = @residential_units.where("units.hide_from_agent =?", true)
       else
         @residential_units = @residential_units
       end
