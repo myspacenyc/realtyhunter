@@ -383,6 +383,7 @@ class ResidentialListingsController < ApplicationController
       new_unit = Unit.new(residential_listing_params[:unit])
       r_params = residential_listing_params
       r_params.delete('unit')
+      r_params.delete('landlord')
       @residential_unit = ResidentialListing.new(r_params)
       @residential_unit.unit = new_unit
     end
