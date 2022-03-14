@@ -10,13 +10,13 @@ class Landlord < ApplicationRecord
 
   belongs_to :listing_agent, :class_name => 'User' #, touch: true
   belongs_to :point_of_contact, class_name: 'User'
-  validates :listing_agent_percentage, presence: true, length: {maximum: 3}, numericality: { only_integer: true }
+  # validates :listing_agent_percentage, presence: true, length: {maximum: 3}, numericality: { only_integer: true }
   validates :listing_agent_id, presence: true
   validates :point_of_contact_id, presence: true
-  validates :percentage_invoiced_to_ll, presence: true
-  validates :op_fee_percentage, presence: true
-  validates :back_to_owner, presence: true
-  validates :myspacenyc_percentage, presence: true
+  # validates :percentage_invoiced_to_ll, presence: true
+  # validates :op_fee_percentage, presence: true
+  # validates :back_to_owner, presence: true
+  # validates :myspacenyc_percentage, presence: true
 	validates :code, presence: true, length: {maximum: 100},
 		uniqueness: { case_sensitive: false }
 
@@ -25,8 +25,8 @@ class Landlord < ApplicationRecord
 	VALID_TELEPHONE_REGEX = /\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z/
 	validates :mobile, allow_blank: true, length: {maximum: 25},
 		format: { with: VALID_TELEPHONE_REGEX }
-	validates :office_phone, allow_blank: true, length: {maximum: 25},
-		format: { with: VALID_TELEPHONE_REGEX }
+	# validates :office_phone, allow_blank: true, length: {maximum: 25},
+	# 	format: { with: VALID_TELEPHONE_REGEX }
 	validates :fax, allow_blank: true, length: {maximum: 25},
 		format: { with: VALID_TELEPHONE_REGEX }
 
