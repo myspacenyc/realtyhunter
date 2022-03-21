@@ -552,22 +552,35 @@
 				    	</div>
 				    <% end %>
 					<% if @residential_unit.unit.access_info %>
-			    	<br />
-			    	<div class="row">
-			    		<div class="col-xs-12 col-md-3">
-			    			<strong>Access info:</strong>
-			    		</div>
-			    		<div class="col-xs-12 col-md-9">
-			    			<div class="disclaimer"><%= occupancy_status(@residential_unit) %></div>
-			    			<% if @residential_unit.unit.has_stock_photos %>
-				    			<div class="disclaimer">Has Stock Photos</div>
-				    		<% end %>
-			    			<div class="access-info">
-				    			<%= @residential_unit.unit.access_info %>
+				    	<br />
+				    	<div class="row">
+				    		<div class="col-xs-12 col-md-3">
+				    			<strong>Access info:</strong>
 				    		</div>
-			    		</div>
-			    	</div>
-			    <% end %>
+				    		<div class="col-xs-12 col-md-9">
+				    			<div class="disclaimer"><%= occupancy_status(@residential_unit) %></div>
+				    			<% if @residential_unit.unit.has_stock_photos %>
+					    			<div class="disclaimer">Has Stock Photos</div>
+					    		<% end %>
+				    			<div class="access-info">
+					    			<%= @residential_unit.unit.access_info %>
+					    		</div>
+				    		</div>
+				    	</div>
+			    	<% end %>
+			    	<% if !@residential_unit.bonus_details.blank? %>
+			    		<br />
+				    	<div class="row">
+				    		<div class="col-xs-12 col-md-3">
+				    			<strong>Bonus Details:</strong>
+				    		</div>
+				    		<div class="col-xs-12 col-md-9">
+				    			<div class="bonus-info">
+					    			<%= @residential_unit.bonus_details %>
+					    		</div>
+				    		</div>
+				    	</div>
+			    	<% end %>
 
 			    <% if !@residential_unit.photo_video_access.blank? && current_user.is_management? %>
 			    	<div class="row">

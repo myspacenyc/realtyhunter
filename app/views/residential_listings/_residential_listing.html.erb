@@ -639,6 +639,9 @@
             <% else %>
               <span class="mthsFree">Mths Free :<%= residential_listing.unit.maths_free %></span>
             <% end %>
+            <% if !residential_listing.bonus_details.blank? %>
+              <b>Bonus:</b> <%= residential_listing.bonus_details %>
+            <% end %>
             
           </td>
 
@@ -1094,6 +1097,9 @@
             <% if residential_listing.unit.maths_free == 0.0 %>
             <% else %>
               <span class="mthsFree">Mths Free :<%= residential_listing.unit.maths_free %></span>
+            <% end %>
+            <% if !residential_listing.bonus_details.blank? %>
+              <b>Bonus:</b> <%= residential_listing.bonus_details %>
             <% end %>
             
           </td>

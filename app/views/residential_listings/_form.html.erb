@@ -1461,55 +1461,62 @@
           </div>
         <% end %>
         <div class="row vertical-margin-lg">
-              <div class="col-xs-3 col-md-4">
-                <%= f.label :tenant_credit_offered, "Agent Bonus Offered" %>
-              </div>
-              <div class="col-xs-9 col-md-7">
-                <div class="checkbox checkbox-warning checkbox-inline">
-                  <%= f.check_box :tenant_credit_offered, class: "styled",
-                      checked: @residential_unit ? @residential_unit.tenant_credit_offered : false %>
-                  <label></label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row vertical-margin-lg">
             <div class="col-xs-3 col-md-4">
-              <%= f.label :watermark_in_use %>
+              <%= f.label :tenant_credit_offered, "Agent Bonus Offered" %>
             </div>
             <div class="col-xs-9 col-md-7">
-                <%# abort @residential_unit.unit.status.titleize.inspect %>
-                <%= f.select :watermark_in_use,
-                  options_for_select([["myspacedefault", 0], ["simplybrooklyn", 1], ["blankwatermark", 2]],
-                    [@residential_unit.watermark_in_use]),
-                  {prompt: "Choose one..."},
-                  :required => true,
-                  class: "form-control" %>
+              <div class="checkbox checkbox-warning checkbox-inline">
+                <%= f.check_box :tenant_credit_offered, class: "styled",
+                    checked: @residential_unit ? @residential_unit.tenant_credit_offered : false %>
+                <label></label>
+              </div>
             </div>
+        </div>
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :bonus_details %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+            <%= f.text_field :bonus_details, class: 'form-control' %>
           </div>
         </div>
-        <%= hidden_field_tag :update_status_info %>
         <br>
         <div class="row vertical-margin-lg">
-          <div class="col-md-12 col-md-offset-0">
-            <div class="actions col-md-3">
-              <%= f.submit class: "btn btn-warning btn-block", id: "listing_update" %>
-            </div>
-            <%# if params[:action] == "edit" %>
-              <!-- <div class="actions col-md-3">
-                <%#= f.submit "Access" ,class: "btn btn-warning btn-block", id: "listing_access" %>
-                <%#= submit_tag "Access", type: 'button', id: "access-btn", class: "btn btn-warning btn-block" %>
-              </div>
-              <div class="actions col-md-3">
-                <%#= f.submit "Update and Email" ,class: "btn btn-warning btn-block", id: "listing_update_and_email" %>
-              </div>
-              <div class="actions col-md-3">
-                <%#= f.submit "Unit Email" ,class: "btn btn-warning btn-block", id: "listing_unit_email" %>
-              </div> -->
-            <%# end %>
+          <div class="col-xs-3 col-md-4">
+            <%= f.label :watermark_in_use %>
+          </div>
+          <div class="col-xs-9 col-md-7">
+              <%# abort @residential_unit.unit.status.titleize.inspect %>
+              <%= f.select :watermark_in_use,
+                options_for_select([["myspacedefault", 0], ["simplybrooklyn", 1], ["blankwatermark", 2]],
+                  [@residential_unit.watermark_in_use]),
+                {prompt: "Choose one..."},
+                :required => true,
+                class: "form-control" %>
           </div>
         </div>
+      </div>
+      <%= hidden_field_tag :update_status_info %>
+      <br>
+      <div class="row vertical-margin-lg">
+        <div class="col-md-12 col-md-offset-0">
+          <div class="actions col-md-3">
+            <%= f.submit class: "btn btn-warning btn-block", id: "listing_update" %>
+          </div>
+          <%# if params[:action] == "edit" %>
+            <!-- <div class="actions col-md-3">
+              <%#= f.submit "Access" ,class: "btn btn-warning btn-block", id: "listing_access" %>
+              <%#= submit_tag "Access", type: 'button', id: "access-btn", class: "btn btn-warning btn-block" %>
+            </div>
+            <div class="actions col-md-3">
+              <%#= f.submit "Update and Email" ,class: "btn btn-warning btn-block", id: "listing_update_and_email" %>
+            </div>
+            <div class="actions col-md-3">
+              <%#= f.submit "Unit Email" ,class: "btn btn-warning btn-block", id: "listing_unit_email" %>
+            </div> -->
+          <%# end %>
+        </div>
+      </div>
 
         <%# end %>
 

@@ -1875,7 +1875,7 @@ class ResidentialListingsController < ApplicationController
         :roomsharing_filter, :unassigned_filter, :tenant_occupied_filter, :streeteasy_filter,
         :no_description,:no_images, :roomshare_department, :renthop, :private_bathroom, :watermark, :watermark_in_use,
         :primary_agent_id, :favorites, :show,:claim_for_naked_apartment, :claim_for_individual_syndication_page, :expose_address, :floor, :total_room_count, :condition, :showing_instruction,
-        :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers,
+        :commission_amount, :cyof, :rented_date, :rlsny, :share_with_brokers, :bonus_details,
         :rls_flag, :streeteasy_flag, :streeteasy_flag_one,:streeteasy_claim, :naked_apartment, :pending_se, :se_pending_text, :managed_listing,
         unit: [:building_unit, :streeteasy_unit, :third_tier, :applications, :streeteasy_primary_agent_id, :streeteasy_listing_email, 
           :streeteasy_listing_number, :rent, :gross_price, :promotional_price, :maths_free, :available_by, :access_info, :status,
