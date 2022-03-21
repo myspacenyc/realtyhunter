@@ -18,7 +18,15 @@
 
 	<% if params[:action] != 'index' %>
 		<!-- <a href="/announcements"> -->
-		<a href="<%= announcement.note.html_safe %>" target="_blank">
+		<%
+			def get_url(str)
+			    arr = str.split(' ')
+			    url = nil
+			    arr.map {|arr_str| url = arr_str if arr_str.include?('http')}
+			    url
+			end 
+		%>
+		<a href="<%= get_url(announcement.note) %>" target="_blank">
 	<% end %>
 
     <p class="announcement-description">
