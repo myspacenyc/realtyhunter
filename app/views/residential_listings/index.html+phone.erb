@@ -251,16 +251,14 @@
             <%#= text_field_tag :listing_id, params[:listing_id], class:"form-control" %>
           </div>
         </div> -->
-        <% if current_user.is_company_admin? || current_user.is_super_admin? || current_user.is_listings_manager? %>
-            <div class="row vertical-padding">
-              <div class="col-xs-5">
-                <%= label_tag :tenant_occupied, "Tenant Occupieds or Not", class: "field-label-sm"  %>
-              </div>
-              <div class="col-xs-6 col-sm-left-padding">
-                <%= select_tag(:tenant_occupied, options_for_select([['Any','Any'],['Tenant Occupied', 0], ['Not Tenant Occupied', 1]], params[:tenant_occupied] ? params[:tenant_occupied].titleize : "Any"), class: 'form-control') %>
-              </div>
+          <div class="row vertical-padding">
+            <div class="col-xs-5">
+              <%= label_tag :tenant_occupied, "Tenant Occupieds or Not", class: "field-label-sm"  %>
             </div>
-          <% end %>
+            <div class="col-xs-6 col-sm-left-padding">
+              <%= select_tag(:tenant_occupied, options_for_select([['Any','Any'],['Tenant Occupied', 0], ['Not Tenant Occupied', 1]], params[:tenant_occupied] ? params[:tenant_occupied].titleize : "Any"), class: 'form-control') %>
+            </div>
+          </div>
           <div class="row vertical-padding">
             <div class="col-xs-5">
               <%= label_tag :youtube_video_url, "Video Present Or Not", class: "field-label-sm" %>
