@@ -916,115 +916,117 @@ class ResidentialListingsController < ApplicationController
       #Slack Message when status change from active to pending End
       UnitMailer.send_status_change(params[:residential_listing][:unit][:building_id],params[:residential_listing][:unit][:building_unit],params[:residential_listing][:unit][:rent],params[:residential_listing][:unit][:status], current_user.name, @residential_unit.id, @residential_unit.unit.status).deliver!
     else
-      if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
-        @se_text = "On Streeteasy"
-      end
-      if params[:residential_listing][:pending_se] == "1"
-        @se_text = "Pending Streeteasy"
-      end
-      if params[:residential_listing][:managed_listing] == "1"
-        @manage_list = "Managed Listing"
-      end
-      if(params[:residential_listing][:unit][:status] != "Off" && params[:residential_listing][:unit][:status] != "Pending")
-        if ((@residential_unit.unit.access_info != params[:residential_listing][:unit][:access_info]) || (@residential_unit.unit.available_by.nil? || @residential_unit.unit.available_by.strftime("%m/%d/%Y") != params[:residential_listing][:unit][:available_by]) || (@residential_unit.unit.rent != params[:residential_listing][:unit][:rent].to_i) || (params[:residential_listing][:has_fee] == "0" || params[:residential_listing][:has_fee] == "1"))
-          
-          if params[:residential_listing][:has_fee] == "0"
-            if !params[:residential_listing][:op_fee_percentage].blank?
-              if !@residential_unit.op_fee_percentage.nil? && @residential_unit.op_fee_percentage != params[:residential_listing][:op_fee_percentage].to_i
-                @has_fee = "Payout Changed to #{params[:residential_listing][:op_fee_percentage]} \n"
-              end
-            end
-          end
-          if params[:residential_listing][:has_fee] == "1"
-            if !params[:residential_listing][:tp_fee_percentage].blank?
-              if !@residential_unit.tp_fee_percentage.nil? && @residential_unit.tp_fee_percentage != params[:residential_listing][:tp_fee_percentage].to_i
-                @has_fee = "Tenant Pay Changed to #{params[:residential_listing][:tp_fee_percentage]} \n"
-              end
-            end
-          end
-
-          @price_diff = params[:residential_listing][:unit][:rent].to_i - @residential_unit.unit.rent
-
-          if @price_diff > 25 || @price_diff < -25
-            if @residential_unit.unit.rent != params[:residential_listing][:unit][:rent].to_i
-              @rent_info = "Price Changed from $#{@residential_unit.unit.rent} to $#{params[:residential_listing][:unit][:rent]} \n"
-            end
-          end
-
-          if @residential_unit.unit.available_by.nil? || @residential_unit.unit.available_by.strftime("%m/%d/%Y") != params[:residential_listing][:unit][:available_by]
-            @avail_info = "Available by changed to #{params[:residential_listing][:unit][:available_by]} \n"
-          end
-
-          if @residential_unit.unit.access_info != params[:residential_listing][:unit][:access_info]
-            @accs_info = "Access Changed to #{params[:residential_listing][:unit][:access_info]} \n"
-          end
-
-          if @residential_unit.unit.building
-            if !@residential_unit.unit.building.point_of_contact.nil?
-              @poc = User.find(@residential_unit.unit.building.point_of_contact).name
-            end
-          end
-          if @residential_unit.unit.building.landlord
-            @llc = @residential_unit.unit.building.landlord.code
-          end
-
-          if !@accs_info.nil?
-            if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
-              if params[:residential_listing][:unit][:hide_from_agent] != "1"
-                client.chat_postMessage(channel: '#updates_manhattan', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-              if params[:residential_listing][:roomshare_department] == "1"
-                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-            else
-              if params[:residential_listing][:unit][:hide_from_agent] != "1"
-                client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-              if params[:residential_listing][:roomshare_department] == "1"
-                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-            end
-          end
-          if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57
-            if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
-              if params[:residential_listing][:unit][:hide_from_agent] != "1"
-                client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-              if params[:residential_listing][:roomshare_department] == "1"
-                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-            end
-            # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
-            #   defaults channel: "#default",
-            #            username: "notifier"
-            # end
-          elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
-            if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
-              if params[:residential_listing][:unit][:hide_from_agent] != "1"
-                client.chat_postMessage(channel: '#updates_manhattan', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-              if params[:residential_listing][:roomshare_department] == "1"
-                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-            end
-          elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 54
-            if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
-              if params[:residential_listing][:unit][:hide_from_agent] != "1"
-                client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-              if params[:residential_listing][:roomshare_department] == "1"
-                client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
-              end
-            end
-            # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
-            #   defaults channel: "#default",
-            #            username: "notifier"
-            # end
-          end
+      if @residential_unit.unit.status != "off" && @residential_unit.unit.status != "rented"
+        if params[:residential_listing][:streeteasy_flag] == "1" || params[:residential_listing][:streeteasy_flag_one] == "1"
+          @se_text = "On Streeteasy"
         end
-        # if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil? || !@accs_info.nil?
-        #   notifier.ping "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@accs_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---"
-        # end
+        if params[:residential_listing][:pending_se] == "1"
+          @se_text = "Pending Streeteasy"
+        end
+        if params[:residential_listing][:managed_listing] == "1"
+          @manage_list = "Managed Listing"
+        end
+        if(params[:residential_listing][:unit][:status] != "Off" && params[:residential_listing][:unit][:status] != "Pending")
+          if ((@residential_unit.unit.access_info != params[:residential_listing][:unit][:access_info]) || (@residential_unit.unit.available_by.nil? || @residential_unit.unit.available_by.strftime("%m/%d/%Y") != params[:residential_listing][:unit][:available_by]) || (@residential_unit.unit.rent != params[:residential_listing][:unit][:rent].to_i) || (params[:residential_listing][:has_fee] == "0" || params[:residential_listing][:has_fee] == "1"))
+            
+            if params[:residential_listing][:has_fee] == "0"
+              if !params[:residential_listing][:op_fee_percentage].blank?
+                if !@residential_unit.op_fee_percentage.nil? && @residential_unit.op_fee_percentage != params[:residential_listing][:op_fee_percentage].to_i
+                  @has_fee = "Payout Changed to #{params[:residential_listing][:op_fee_percentage]} \n"
+                end
+              end
+            end
+            if params[:residential_listing][:has_fee] == "1"
+              if !params[:residential_listing][:tp_fee_percentage].blank?
+                if !@residential_unit.tp_fee_percentage.nil? && @residential_unit.tp_fee_percentage != params[:residential_listing][:tp_fee_percentage].to_i
+                  @has_fee = "Tenant Pay Changed to #{params[:residential_listing][:tp_fee_percentage]} \n"
+                end
+              end
+            end
+
+            @price_diff = params[:residential_listing][:unit][:rent].to_i - @residential_unit.unit.rent
+
+            if @price_diff > 25 || @price_diff < -25
+              if @residential_unit.unit.rent != params[:residential_listing][:unit][:rent].to_i
+                @rent_info = "Price Changed from $#{@residential_unit.unit.rent} to $#{params[:residential_listing][:unit][:rent]} \n"
+              end
+            end
+
+            if @residential_unit.unit.available_by.nil? || @residential_unit.unit.available_by.strftime("%m/%d/%Y") != params[:residential_listing][:unit][:available_by]
+              @avail_info = "Available by changed to #{params[:residential_listing][:unit][:available_by]} \n"
+            end
+
+            if @residential_unit.unit.access_info != params[:residential_listing][:unit][:access_info]
+              @accs_info = "Access Changed to #{params[:residential_listing][:unit][:access_info]} \n"
+            end
+
+            if @residential_unit.unit.building
+              if !@residential_unit.unit.building.point_of_contact.nil?
+                @poc = User.find(@residential_unit.unit.building.point_of_contact).name
+              end
+            end
+            if @residential_unit.unit.building.landlord
+              @llc = @residential_unit.unit.building.landlord.code
+            end
+
+            if !@accs_info.nil?
+              if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
+                if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                  client.chat_postMessage(channel: '#updates_manhattan', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+                if params[:residential_listing][:roomshare_department] == "1"
+                  client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+              else
+                if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                  client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+                if params[:residential_listing][:roomshare_department] == "1"
+                  client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@accs_info} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+              end
+            end
+            if @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 55 || @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 57
+              if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
+                if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                  client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+                if params[:residential_listing][:roomshare_department] == "1"
+                  client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+              end
+              # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
+              #   defaults channel: "#default",
+              #            username: "notifier"
+              # end
+            elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 56
+              if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
+                if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                  client.chat_postMessage(channel: '#updates_manhattan', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+                if params[:residential_listing][:roomshare_department] == "1"
+                  client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+              end
+            elsif @residential_unit.unit.building.neighborhood.parent_neighborhood_id == 54
+              if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil?
+                if params[:residential_listing][:unit][:hide_from_agent] != "1"
+                  client.chat_postMessage(channel: '#updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+                if params[:residential_listing][:roomshare_department] == "1"
+                  client.chat_postMessage(channel: '#rooms_updates', text: "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{@se_text} \n #{@manage_list} \n poc: #{@poc} \n llc: #{@llc} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---", as_user: true)
+                end
+              end
+              # notifier = Slack::Notifier.new "https://hooks.slack.com/services/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" do
+              #   defaults channel: "#default",
+              #            username: "notifier"
+              # end
+            end
+          end
+          # if !@has_fee.nil? || !@rent_info.nil? || !@avail_info.nil? || !@accs_info.nil?
+          #   notifier.ping "*Unit* *Update* \n #{@residential_unit.unit.building.street_number} #{@residential_unit.unit.building.route}, #{@residential_unit.unit.building_unit} \n #{@residential_unit.unit.building.neighborhood.name} \n #{params[:residential_listing][:beds]} Beds / #{params[:residential_listing][:baths]} Baths \n $#{params[:residential_listing][:unit][:rent]} \n #{@rent_info} #{@avail_info} #{@accs_info} #{@has_fee} \n Changes made by #{current_user.name}\n ---"
+          # end
+        end
       end
     end
     #End Slack Message when status change neighbourhood wise channel
