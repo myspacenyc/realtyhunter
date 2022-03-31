@@ -680,7 +680,19 @@
                 <span>---</span>
                 <br>
               <% end %>
+              <% if residential_listing.streeteasy_featured == true %>
+                <% residential_listing.audits.each do |audit| %>
+                  <% if audit.audited_changes["streeteasy_featured"] %>
+                    <% if audit.audited_changes["streeteasy_featured"][1] == true %>
+                      SE Featured:<%= audit.created_at.strftime('%m-%d-%Y  %I:%M %p') %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <span>---</span>
+              <% end %>
               <% if residential_listing.streeteasy_flag == true or residential_listing.streeteasy_flag_one == true %>
+                SE Active Date: <%= residential_listing.streeteasy_counters.order('created_at ASC').last.created_at.strftime('%m-%d-%Y  %I:%M %p') %>
                 <span class="glyphicon glyphicon-check ac-se-li" aria-hidden="true"><span class="in-ac-hope">On Streeteasy</span></span>
                 <br>
                   <% if !residential_listing.streeteasy_counters.blank? %>
@@ -1142,7 +1154,19 @@
                 <span>---</span>
                 <br>
               <% end %>
+              <% if residential_listing.streeteasy_featured == true %>
+                <% residential_listing.audits.each do |audit| %>
+                  <% if audit.audited_changes["streeteasy_featured"] %>
+                    <% if audit.audited_changes["streeteasy_featured"][1] == true %>
+                      SE Featured:<%= audit.created_at.strftime('%m-%d-%Y  %I:%M %p') %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <span>---</span>
+              <% end %>
               <% if residential_listing.streeteasy_flag == true or residential_listing.streeteasy_flag_one == true %>
+                SE Active Date: <%= residential_listing.streeteasy_counters.order('created_at ASC').last.created_at.strftime('%m-%d-%Y  %I:%M %p') %>
                 <span class="glyphicon glyphicon-check ac-se-li" aria-hidden="true"><span class="in-ac-hope">On Streeteasy</span></span>
                 <br>
                   <% if !residential_listing.streeteasy_counters.blank? %>
