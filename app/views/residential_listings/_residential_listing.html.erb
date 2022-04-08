@@ -61,6 +61,12 @@
         <% else %>
           ll code: <%= residential_listing.code %><br>
         <% end %>
+        <% if residential_listing.has_fee %>
+          <b>Broker Fees:  "Yes" </b>
+        <% else %>
+          <b>Broker Fees:  "No" </b>
+        <% end %>
+        <br>
         <!-- ****** Point of Contact ****************************************** -->
         <% if !residential_listing.unit.building.point_of_contact.nil? %>
           POC: <%= link_to User.find(residential_listing.unit.building.point_of_contact).name, user_path(residential_listing.unit.building.point_of_contact) %>
@@ -488,6 +494,12 @@
             <% else %>
               ll code: <%= residential_listing.code %><br>
             <% end %>
+            <% if residential_listing.has_fee %>
+              <b>Broker Fees:  "Yes" </b>
+            <% else %>
+              <b>Broker Fees:  "No" </b>
+            <% end %>
+            <br>
             <!-- ****** Point of Contact ****************************************** -->
             <% if !residential_listing.unit.building.point_of_contact.nil? %>
               POC: 
@@ -499,7 +511,6 @@
             <% else %>
               --
             <% end %>
-
             <!-- ****** ACCESS ****************************************** -->
             <span class="access-info" data-toggle="tooltip" data-placement="top" title="<%= residential_listing.access_info %>"
               data-delay="1500">
@@ -951,6 +962,12 @@
             <% else %>
               ll code: <%= residential_listing.code %><br>
             <% end %>
+            <% if residential_listing.has_fee %>
+              <b>Broker Fees:  "Yes" </b>
+            <% else %>
+              <b>Broker Fees:  "No" </b>
+            <% end %>
+            <br>
             <% if residential_listing.unit.building.landlord.ll_importance == 'gold' %>
               <span class="glyphicon glyphicon-certificate gold"></span>
             <% elsif residential_listing.unit.building.landlord.ll_importance == 'silver' %>
@@ -1177,13 +1194,17 @@
                 <span>---</span>
               <% end %>
               <br>
-                Primary : 
+                SE Primary : 
                 <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
                   <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
-                <% elsif !residential_listing.unit.primary_agent_id.nil? %>
+                <% else %>
+                  ---
+                <% end %>
+                Primary :
+                <% if !residential_listing.unit.primary_agent_id.nil? %>
                   <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
                 <% else %>
-                  ---  
+                  ---
                 <% end %>
             </td>
           <% end %>
