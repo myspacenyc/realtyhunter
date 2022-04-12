@@ -99,8 +99,17 @@ class Landlord < ApplicationRecord
       else
         running_list = running_list
       end
+    end
+    ll_status = params[:ll_status]
+    if !ll_status.nil?
+      if ll_status == 'active'
+        running_list = running_list.where("landlords.ll_status =?", true)
+      elsif ll_status == 'inactive'
+        running_list = running_list.where("landlords.ll_status =?", false)
+      else
+        running_list = running_list
+      end
           
-        
     end
 
     status = params[:status]
@@ -138,7 +147,7 @@ class Landlord < ApplicationRecord
     running_list = self._search(running_list, params)
 		running_list = running_list.select('landlords.id', 'landlords.code', 'landlords.name',
 				'landlords.updated_at', 'landlords.mobile', 'landlords.rating', 'landlords.ll_importance',
-				'landlords.active_unit_count', 'landlords.total_unit_count',
+				'landlords.active_unit_count', 'landlords.total_unit_count', 'landlords.ll_status',
 				'landlords.last_unit_updated_at', 'landlords.listing_agent_id',
         'users.name as listing_agent_name', 'landlords.listing_agent_percentage')
 	end

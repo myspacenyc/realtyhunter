@@ -84,6 +84,15 @@
                   options_for_select([['Any','Any'],['Gold', 'gold'], ['Silver', 'silver'], ['Bronze', 'bronze']], params[:ll_importance] ? params[:ll_importance] : "Any"), class: 'form-control') %>
             </div>
           <% end %>
+          <% if current_user.is_company_admin? || current_user.is_super_admin? || current_user.is_listings_manager? %>
+            <div class="col-sm-2 col-md-1 vertical-padding form-label-responsive">
+              <label class="vertical-padding">LL Status:</label>
+            </div>
+            <div class="col-sm-10 col-md-2 vertical-padding">
+              <%= select_tag(:ll_status,
+                  options_for_select([['Any','Any'],['Active', 'active'], ['Inactive', 'inactive']], params[:ll_status] ? params[:ll_status] : "Any"), class: 'form-control') %>
+            </div>
+          <% end %>
         </div>
         <% end %><!-- form end -->
       </div>

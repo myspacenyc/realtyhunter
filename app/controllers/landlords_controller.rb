@@ -222,7 +222,7 @@ class LandlordsController < ApplicationController
          :route, :neighborhood, :sublocality, :administrative_area_level_2_short,
         :administrative_area_level_1_short, :postal_code, :country_short, :lat, :lng, :place_id,
         landlord: [:lock_version, :code, :rating, :ll_public_description, :ll_importance, :name, :contact_name, :mobile, :office_phone, :fax,
-          :email, :website, :formatted_street_address, :notes, :accepts_third_party_gaurantor,
+          :email, :website, :formatted_street_address, :notes, :accepts_third_party_gaurantor, :ll_status,
           :listing_agent_percentage, :percentage_invoiced_to_ll, :listing_agent_id, :is_this_a_myspacenyc_house_listing, :point_of_contact_id,
           :has_fee, :op_fee_percentage, :tp_fee_percentage, :back_to_owner, :myspacenyc_percentage,
           :management_info, :key_pick_up_location, :update_source ])

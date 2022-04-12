@@ -295,6 +295,19 @@
 
         <br />
         <div class="row">
+          <div class="col-xs-3 form-label-responsive">
+            <%= f.label :ll_status, "Status" %>
+          </div>
+          <div class="col-xs-4">
+            <%= f.radio_button :ll_status, true %>
+            <%= f.label :ll_status, "Active", :value => "true"  %>
+            <%= f.radio_button :ll_status, false %>
+            <%= f.label :ll_status, "Inactive", :value => "false" %>
+          </div>
+        </div>
+
+        <br />
+        <div class="row">
           <div class="col-xs-12">
             <%= f.label :update_source, "Source of updates" %><br />
             <%= f.text_area :update_source, class: 'form-control', rows: 2 %>
