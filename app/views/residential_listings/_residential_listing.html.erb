@@ -1201,13 +1201,13 @@
               <% end %>
               <br>
                 SE Primary : 
-                <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? %>
+                <% if !residential_listing.unit.streeteasy_primary_agent_id.nil? && residential_listing.streeteasy_flag_one == true %>
                   <%= link_to User.find(residential_listing.unit.streeteasy_primary_agent_id).name, user_path(residential_listing.unit.streeteasy_primary_agent_id) %>
                 <% else %>
                   ---
                 <% end %>
                 Primary :
-                <% if !residential_listing.unit.primary_agent_id.nil? %>
+                <% if !residential_listing.unit.primary_agent_id.nil? && residential_listing.streeteasy_flag == true %>
                   <%= link_to User.find(residential_listing.unit.primary_agent_id).name, user_path(residential_listing.unit.primary_agent_id) %>
                 <% else %>
                   ---
