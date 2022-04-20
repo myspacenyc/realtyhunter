@@ -437,18 +437,18 @@
 		    			<div class="row">
 		    				<!-- Broker's Fee -->
 				    		<%# if @residential_unit.has_fee %>
-				    			<div class="col-xs-5">
+				    			<!-- <div class="col-xs-5">
 					    			<strong>Tenant Pays:</strong>
 					    		</div>
 					    		<div class="col-xs-7">
-				    			<% if @residential_unit.tp_fee_percentage %>
-					    			<%= @residential_unit.tp_fee_percentage %>%
-					    		<% else %>
-					    			<% if @residential_unit.unit.building.landlord.tp_fee_percentage %>
-					    				<%= @residential_unit.unit.building.landlord.tp_fee_percentage %>%
-					    			<% end %>
-					    		<% end %>
-				    			</div>
+				    			<%# if @residential_unit.tp_fee_percentage %>
+					    			<%#= @residential_unit.tp_fee_percentage %>%
+					    		<%# else %>
+					    			<%# if @residential_unit.unit.building.landlord.tp_fee_percentage %>
+					    				<%#= @residential_unit.unit.building.landlord.tp_fee_percentage %>%
+					    			<%# end %>
+					    		<%# end %>
+				    			</div> -->
 				    		<!-- No Broker's Fee -->
 				    		<%# else %>
 				    			<div class="col-xs-5">
