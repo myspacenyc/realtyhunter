@@ -11,6 +11,7 @@ class Company < ApplicationRecord
 	has_many :buildings, dependent: :destroy
 	has_many :landlords, dependent: :destroy
 	has_many :building_amenities, dependent: :destroy
+	has_many :trains, dependent: :destroy
 	has_many :utilities, dependent: :destroy
 	has_many :rental_terms, dependent: :destroy
 	has_many :pet_policies, dependent: :destroy
