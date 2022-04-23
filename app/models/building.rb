@@ -18,6 +18,7 @@ class Building < ApplicationRecord
   has_many :documents, dependent: :destroy
 
 	has_and_belongs_to_many :building_amenities
+  has_and_belongs_to_many :trains
 	has_and_belongs_to_many :utilities
 
 	attr_accessor :building, :inaccuracy_description, :custom_rental_term, :custom_amenities,
@@ -96,11 +97,20 @@ class Building < ApplicationRecord
     Image.where(building_id: building_ids).to_a.group_by(&:building_id)
   end
 
-  def self._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
+  def self._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     if query_str
       @terms = query_str.split(" ")
       @terms.each do |term|
         running_list = running_list.where('buildings.formatted_street_address ILIKE ? OR buildings.sublocality ILIKE ?', "%#{term}%", "%#{term}%")
+      end
+    end
+
+    if !train_line.nil?
+      if train_line == "0"
+        running_list = running_list
+      else
+        bldg_ids = Building.joins(:trains).where('train_id =?', train_line).pluck(:id)
+        running_list = running_list.where("buildings.id IN (?)", bldg_ids)
       end
     end
 
@@ -149,7 +159,7 @@ class Building < ApplicationRecord
     running_list
   end
 
-	def self.search(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
+	def self.search(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     running_list = Building
       .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
       .where('buildings.archived = false')
@@ -165,12 +175,12 @@ class Building < ApplicationRecord
         'buildings.total_unit_count',
         'buildings.active_unit_count')
 
-    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
+    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     running_list
 	end
 
   # adds in landlord
-  def self.export_all(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
+  def self.export_all(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     running_list = Building.joins(:landlord).joins(:rental_term)
       .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
       .where('buildings.archived = false')
@@ -187,7 +197,7 @@ class Building < ApplicationRecord
         'buildings.active_unit_count',
         'rental_terms.id as rental_term_id', 'rental_terms.name')
 
-    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code)
+    running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     running_list
   end
 

@@ -319,6 +319,35 @@
     <br />
     <div class="row">
       <div class="col-md-12">
+        <%= f.label :train_ids, "Train Lines" %>
+      </div>
+    </div>
+    <!-- for bigger screens -->
+    <!--div class="hidden-xs"-->
+      <div class="row">
+        <% i = 0 %>
+        <%= f.collection_check_boxes(:train_ids, current_user.company.trains, :id, :name) do |b| %>
+
+          <% if i % 10 == 0 && i > 0 %>
+            </div>
+            <div class="row">
+          <% end %>
+
+          <div class="col-sm-1">
+            <div class="checkbox checkbox-warning checkbox-inline">
+              <%= b.check_box(class: "styled") %>
+              <%= b.label {b.text.titleize} %>
+            </div>
+          </div>
+
+        <% i = i+1 %>
+        <% end %>
+
+      </div><!-- row -->
+
+    <br />
+    <div class="row">
+      <div class="col-md-12">
         <%= f.label :building_amenity_ids, "Building-Level Amenities" %>
       </div>
     </div>

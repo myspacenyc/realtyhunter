@@ -80,6 +80,12 @@
               <%#= select_tag :rating, options_for_select([['Any','Any'],['NA', 0], ['Excellent', 1], ['Good', 2], ['Fair', 3]], {class: "form-control"})%>
             </div>
           <% end %>
+          <div class="col-md-6 vertical-padding">
+            <label class="vertical-padding">Train Lines:</label>
+            <%= select_tag(:train_line,
+                options_for_select(Train.all.collect {|u| [u.name, u.id]}.unshift(["Any", 0]),
+                params[:train_line] ? params[:train_line].titleize : "Any"), class: 'form-control', style: "margin-top:15px;") %>
+            <%#= select_tag :rating, options_for_select([['Any','Any'],['NA', 0], ['Excellent', 1], ['Good', 2], ['Fair', 3]], {class: "form-control"})%>
         </div>
         <div class="row">
           <div class="col-xs-12 vertical-padding">
