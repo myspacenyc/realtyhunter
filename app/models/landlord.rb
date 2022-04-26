@@ -13,10 +13,10 @@ class Landlord < ApplicationRecord
   # validates :listing_agent_percentage, presence: true, length: {maximum: 3}, numericality: { only_integer: true }
   validates :listing_agent_id, presence: true
   validates :point_of_contact_id, presence: true
-  # validates :percentage_invoiced_to_ll, presence: true
-  # validates :op_fee_percentage, presence: true
-  # validates :back_to_owner, presence: true
-  # validates :myspacenyc_percentage, presence: true
+  validates :percentage_invoiced_to_ll, presence: true
+  validates :op_fee_percentage, presence: true
+  validates :back_to_owner, presence: true
+  validates :myspacenyc_percentage, presence: true
 	validates :code, presence: true, length: {maximum: 100},
 		uniqueness: { case_sensitive: false }
 

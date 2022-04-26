@@ -217,7 +217,7 @@
         <br />
         <div class="row show-op">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :op_fee_percentage, "% Available for Commission" %>
+            <%= f.label :op_fee_percentage, "% Available for Commission",class: 'required' %>
           </div>
           <div class="col-xs-9 col-md-4">
             <%= f.number_field :op_fee_percentage, class: 'form-control', min: 0, default: 95 %>
@@ -227,7 +227,7 @@
         <br />
         <div class="row show-op">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :percentage_invoiced_to_ll, "Percentage Invoiced to LL" %>
+            <%= f.label :percentage_invoiced_to_ll, "Percentage Invoiced to LL",class: 'required' %>
           </div>
           <div class="col-xs-9 col-md-4">
             <%= f.number_field :percentage_invoiced_to_ll, class: 'form-control', min: 0, default: 95 %>
@@ -260,7 +260,7 @@
 
         <div class="row show-tp">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :back_to_owner, "% Back to Owner" %>
+            <%= f.label :back_to_owner, "% Back to Owner",class: 'required' %>
           </div>
           <div class="col-xs-4">
             <%= f.number_field :back_to_owner, class: 'form-control', min: 0, default: 95 %>
@@ -271,7 +271,7 @@
 
         <div class="row show-tp">
           <div class="col-xs-3 form-label-responsive">
-            <%= f.label :myspacenyc_percentage, "MySpaceNYC %" %>
+            <%= f.label :myspacenyc_percentage, "MySpaceNYC %",class: 'required' %>
           </div>
           <div class="col-xs-4">
             <%= f.number_field :myspacenyc_percentage, class: 'form-control', min: 0, default: 95 %>
