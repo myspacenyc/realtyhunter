@@ -141,6 +141,11 @@ xml.instruct! :xml, :version => "1.0"
 					else
 						xml.StockPhotos "No"
 					end
+					if listing.has_fee == true
+						xml.BrokerFee "Yes"
+					else
+						xml.BrokerFee "No"
+					end
 					if !listing.description.blank?
 						xml.Description h raw sanitize 	listing.description,
 					        		tags: %w(h1 h2 h3 h4 h5 h6 p i b strong em a ol ul li q blockquote font span br div)
