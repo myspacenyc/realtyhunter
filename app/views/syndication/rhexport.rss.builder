@@ -100,7 +100,7 @@ xml.instruct! :xml, :version => "1.0"
 					# end
 					if listing.building.landlord
 						xml.Landlord listing.building.landlord.code
-						xml.LL_Class listing.building.landlord.ll_importance
+						# xml.LL_Class listing.building.landlord.ll_importance
 					end
 					if !listing.point_of_contact.nil?
 						xml.PointOfContact User.find(listing.point_of_contact).name
@@ -118,20 +118,25 @@ xml.instruct! :xml, :version => "1.0"
 						xml.OnStreeteasy "No"
 					end
 					if !listing.youtube_video_url.blank?
-						xml.VideoPresentOrNot "Yes"
+						xml.ListingVideoURL listing.youtube_video_url
 					else
-						xml.VideoPresentOrNot "No"
+						xml.ListingVideoURL ""
 					end
-					if !listing.private_youtube_url.blank?
-						xml.PrivateVideoPresentOrNot "Yes"
-					else
-						xml.PrivateVideoPresentOrNot "No"
-					end
-					if !listing.tour_3d.blank?
-						xml.VideoPresentOrNot3D "Yes"
-					else
-						xml.VideoPresentOrNot3D "No"
-					end
+					# if !listing.youtube_video_url.blank?
+					# 	xml.VideoPresentOrNot "Yes"
+					# else
+					# 	xml.VideoPresentOrNot "No"
+					# end
+					# if !listing.private_youtube_url.blank?
+					# 	xml.PrivateVideoPresentOrNot "Yes"
+					# else
+					# 	xml.PrivateVideoPresentOrNot "No"
+					# end
+					# if !listing.tour_3d.blank?
+					# 	xml.VideoPresentOrNot3D "Yes"
+					# else
+					# 	xml.VideoPresentOrNot3D "No"
+					# end
 					if listing.available_by
 						xml.Available listing.available_by
 					end
