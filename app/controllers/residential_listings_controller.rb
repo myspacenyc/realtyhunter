@@ -1879,7 +1879,7 @@ class ResidentialListingsController < ApplicationController
         :lock_version,
         :id,
         :recipients, :building_rating, :landlord_rating, :title, :message, :listing_ids, :listing_id,
-        :tenant_occupied, :alt_address, :dimensions, :photo_video_access,
+        :tenant_occupied, :alt_address, :dimensions, :photo_video_access, :open_house_times,
         :beds, :baths, :notes, :description, :rooms_description, :lease_start, :lease_end,
         :include_photos, :inaccuracy_description, :rental_term_id, :tenant_email_date, :tenant_sms_date,
         :has_fee, :op_fee_percentage, :tp_fee_percentage, :tenant_description, :tenant_credit_offered,

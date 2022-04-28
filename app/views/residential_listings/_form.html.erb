@@ -332,6 +332,16 @@
             <% end %>
           </div>
         </div>
+
+        <div class="row vertical-margin-lg">
+          <div class="col-xs-3 col-md-2">
+            <%= f.label :open_house_times %>
+          </div>
+          <div class="col-xs-9 col-md-9">
+            <%= f.text_field :open_house_times, class: 'form-control' %>
+          </div>
+        </div>
+
         <% if current_user.is_management? %>
           <div class="row vertical-margin-lg">
             <div class="col-md-2">
@@ -602,7 +612,7 @@
         <br />
 
         <!-- Open House -->
-        <div class="row vertical-margin-lg">
+        <div class="row vertical-margin-lg" style="display: none;">
           <% if !@residential_unit.unit.open_houses.blank? %>
             <div class="col-md-2">
               <br>
@@ -654,7 +664,7 @@
           </div>
         </div>
         <% if !@residential_unit.unit.open_houses.blank? %>
-          <div class="row">
+          <div class="row" style="display: none;">
             <div class="col-xs-12 form-section-header">
               <hr class="thin-line" />
               <hr class="thin-line" />
