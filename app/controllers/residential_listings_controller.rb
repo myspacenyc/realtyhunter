@@ -1225,7 +1225,7 @@ class ResidentialListingsController < ApplicationController
       @residential_unit.update(streeteasy_url: nil)
       if @residential_unit.unit.building.rental_term
         if @residential_unit.unit.status != "off" || @residential_unit.unit.status != "rented"
-          @residential_unit.update_attributes(rental_term_id: residential_unit.unit.building.rental_term_id)
+          @residential_unit.update_attributes(rental_term_id: @residential_unit.unit.building.rental_term_id)
         end
       end
     end
