@@ -1736,6 +1736,26 @@ class ResidentialListingsController < ApplicationController
         @map_infos = ResidentialListing.set_location_data(
           @residential_units.to_a & @residential_listings.to_a, @res_images, @bldg_images)
       else
+        
+        #direct google map api js connection code start
+        @map_info_for_new_map = []
+        @residential_units.each do |a|
+          # @map_info_for_new_map << [a.unit.building.street_number + a.unit.building.route, a.unit.building.lat, a.unit.building.lng]
+          @map_info_for_new_map.push({
+            lat: a.unit.building.lat,
+            lng: a.unit.building.lng
+          })
+        end
+        @map_popup_info = []
+        @residential_units.each do |b|
+          # @map_info_for_new_map << [a.unit.building.street_number + a.unit.building.route, a.unit.building.lat, a.unit.building.lng]
+          @map_popup_info.push({
+            street_number: b.unit.building.street_number,
+            route: b.unit.building.route
+          })
+        end
+        #direct google map api js connection code end
+
         if current_user.is_third_tier_agent?
           @map_infos = ResidentialListing.set_location_data(
           @residential_units.where("units.third_tier =?", true), @res_images, @bldg_images)

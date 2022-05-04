@@ -6,6 +6,14 @@
   <title><%= full_title(yield(:title)) %></title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <!-- used for geocoding -->
+  <% if action_name != "claim_for_streeteasy" %>
+    <script type="text/javascript" data-turbolinks-eval="false"
+      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<%= ENV['GOOGLE_MAPS_KEY'] %>">
+    </script>
+  <% else %>
+  <% end %>
+
   <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
   <!-- used for listings index pages -->
   <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
@@ -37,7 +45,11 @@
   <meta name="theme-color" content="#ffffff">
 
 </head>
-<body class="<%= controller_name %> <%= action_name %>">
+<% if controller_name == "sessions" && action_name == "new" %>
+  <body class="<%= controller_name %> <%= action_name %>" onload="getLocation()">
+<% else %>
+  <body class="<%= controller_name %> <%= action_name %>">
+<% end %>
 
 <div id="mapbox-token" data-mapbox-token="<%= ENV['MAPBOX_TOKEN'] %>"></div>
   <%= render 'layouts/navbar_mobile' %>
@@ -69,22 +81,18 @@
   <script data-turbolinks-eval="false"
       src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 
-  <!-- used for geocoding -->
-  <% if action_name != "claim_for_streeteasy" %>
-    <script type="text/javascript" data-turbolinks-eval="false"
-      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<%= ENV['GOOGLE_MAPS_KEY'] %>">
-    </script>
-  <% else %>
-  <% end %>
-  <% if action_name == "room_index" %>
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js">
-    </script>
+  <% if controller_name == "residential_listings" && action_name == "index" %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <% else %>
   <% end %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': true, 'data-turbolinks-eval':"false" %>
-
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': true, 'data-turbolinks-eval': false %>
+  <script type="text/javascript">
+    document.addEventListener("turbolinks:before-visit", function(e) {
+      e.preventDefault(),
+      window.location = e.data.url
+    })
+  </script>
 </body>
 </html>
 
