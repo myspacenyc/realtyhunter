@@ -70,6 +70,7 @@
         primary_agent_id:  $('#primary_agent_id').val(),
         claim_agent_id: $('#claim_agent_id').val(),
         point_of_contact:  $('#point_of_contact').val(),
+        train_line: $('#train_line').val(),
         listing_agent_id: $('#listing_agent_id').val(),
         primary_agent_for_rs: $('#primary_agent_for_rs').val(),
         building_rating: $('#building_rating').val(),
@@ -399,25 +400,25 @@
     DropZoneHelper.makeSortable('residential', 'images');
 
     // after the order changes
-    $('.sortable').sortable().bind('sortupdate', function(e, ui) {
-        // array to store new order
-        updated_order = []
-        // set the updated positions
-        DropZoneHelper.setPositions('residential', 'images');
+    // $('.sortable').sortable().bind('sortupdate', function(e, ui) {
+    //     // array to store new order
+    //     updated_order = []
+    //     // set the updated positions
+    //     DropZoneHelper.setPositions('residential', 'images');
 
-        // populate the updated_order array with the new task positions
-        $('.img').each(function(i) {
-          updated_order.push({ id: $(this).data('id'), position: i});
-        });
-        //console.log(updated_order);
-        // send the updated order via ajax
-        var unit_id = $('#residential').attr('data-unit-id');
-        $.ajax({
-          type: "PUT",
-          url: '/residential_listings/' + unit_id + '/unit_images/sort',
-          data: { order: updated_order }
-        });
-    });
+    //     // populate the updated_order array with the new task positions
+    //     $('.img').each(function(i) {
+    //       updated_order.push({ id: $(this).data('id'), position: i});
+    //     });
+    //     //console.log(updated_order);
+    //     // send the updated order via ajax
+    //     var unit_id = $('#residential').attr('data-unit-id');
+    //     $.ajax({
+    //       type: "PUT",
+    //       url: '/residential_listings/' + unit_id + '/unit_images/sort',
+    //       data: { order: updated_order }
+    //     });
+    // });
   };
 
   ResidentialListings.initializeDocumentsDropzone = function() {

@@ -424,6 +424,16 @@ class ResidentialListing < ApplicationRecord
       end
     end
 
+    if params[:train_line]
+      train_line = params[:train_line]
+      if train_line == "0"
+        running_list = running_list
+      else
+        bldg_ids = Building.joins(:trains).where('train_id =?', train_line).pluck(:id)
+        running_list = running_list.where("buildings.id IN (?)", bldg_ids)
+      end
+    end
+
     if params[:building_feature_ids]
       features = params[:building_feature_ids][0, 256]
       features = features.split(",").select{|i| !i.empty?}

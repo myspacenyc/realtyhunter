@@ -404,6 +404,16 @@
                     <%= select_tag(:tour_3d, options_for_select([['Any','Any'],['3D Tour Present', 0], ['Not 3D Tour Present', 1]], params[:tour_3d] ? params[:tour_3d].titleize : "Any"), class: 'form-control') %>
                   </div>
                 </div>
+                <div class="row vertical-padding">
+                  <div class="col-xs-5">
+                    <%= label_tag :train_line, "Train Lines" %>
+                  </div>
+                  <div class="col-xs-6 col-sm-left-padding">
+                    
+                    <%= select_tag(:train_line, options_for_select(Train.all.collect {|u| [u.name, u.id]}.unshift(["Any", 0]),
+                params[:train_line] ? params[:train_line].titleize : "Any"), class: 'form-control') %>
+                  </div>
+                </div>
                 <%# if current_user.is_company_admin? || current_user.is_super_admin? || current_user.is_listings_manager? %>
                   <!-- <div class="row vertical-padding">
                     <div class="col-xs-5">
