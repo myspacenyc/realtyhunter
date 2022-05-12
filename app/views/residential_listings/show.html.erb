@@ -279,18 +279,18 @@
 				    			<% end %>
 				    		</div>
 		    			</div>
-		    			<div class="row">
+		    			<!-- <div class="row">
 		    				<div class="col-xs-5">
 		    					<strong>No. of Apps</strong>
 		    				</div>
 		    				<div class="col-xs-7">
-		    					<% if !@residential_unit.unit.applications.blank? %>
-		    						<%= @residential_unit.unit.applications %>
-		    					<% else %>
-		    						---
-		    					<% end %>
+		    					<%# if !@residential_unit.unit.applications.blank? %>
+		    						<%#= @residential_unit.unit.applications %>
+		    					<%# else %>
+		    						
+		    					<%# end %>
 		    				</div>
-		    			</div>
+		    			</div> -->
 		    			<% if !@residential_unit.unit.promotional_price.nil? %>
 			    			<div class="row">
 			    				<div class="col-xs-5">
@@ -410,22 +410,22 @@
 								<% end %>
 				    		</div>
 		    			</div>
-		    			<div class="row">
+		    			<!-- <div class="row">
 		    				<div class="col-xs-5">
 				    			<strong>LL Class:</strong>
 				    		</div>
 		    				<div class="col-xs-7">
-		    					<% if @residential_unit.unit.building.landlord.ll_importance == 'gold' %>
+		    					<%# if @residential_unit.unit.building.landlord.ll_importance == 'gold' %>
 						          <span class="glyphicon glyphicon-certificate gold"></span>
-						        <% elsif @residential_unit.unit.building.landlord.ll_importance == 'silver' %>
+						        <%# elsif @residential_unit.unit.building.landlord.ll_importance == 'silver' %>
 						          <span class="glyphicon glyphicon-certificate silver"></span>
-						        <% elsif @residential_unit.unit.building.landlord.ll_importance == 'bronze' %>
+						        <%# elsif @residential_unit.unit.building.landlord.ll_importance == 'bronze' %>
 						          <span class="glyphicon glyphicon-certificate bronze"></span>
-						        <% else %>
-						        	--
-						        <% end %>
+						        <%# else %>
+						        	
+						        <%# end %>
 		    				</div>
-		    			</div>
+		    			</div> -->
 		    			<div class="row">
 		    				<div class="col-xs-5">
 				    			<strong>Lease duration:</strong>
@@ -510,16 +510,16 @@
 				    			<% end %>
 				    		</div>
 		    			</div>
-		    			<div class="row">
+		    			<!-- <div class="row">
 							<div class="col-xs-5">
 				    			<strong>NO DS:</strong>
 				    		</div>
 				    		<div class="col-xs-7">
-				    			<% if @residential_unit.managed_listing == true %>
+				    			<%# if @residential_unit.managed_listing == true %>
 				    				<span class="glyphicon glyphicon-paste blue" aria-hidden="true"></span><br>
-				    			<% end %>
+				    			<%# end %>
 				    		</div>
-		    			</div>
+		    			</div> -->
 		    			<div class="row">
 							<div class="col-xs-5">
 				    			<strong>Agent Bonus Offered:</strong>
@@ -534,23 +534,23 @@
 		    			</div>
 		    		</div>
 		    	</div>
-		    		<% if current_user.is_management? %>
-			    		<br />
+		    		<%# if current_user.is_management? %>
+			    		<!-- <br />
 				    	<div class="row">
 				    		<div class="col-xs-12 col-md-3">
 				    			<strong>Claim Agents for Naked Apartment:</strong>
 				    		</div>
 				    		<div class="col-xs-12 col-md-9">
-			    			<% if !@residential_unit.blank? %>
-				    			<% rs_final = "" %>
-				    			<% @residential_unit.claim_for_naked_apartment.each do |res_unit| %>
-				    				<% rs_final += User.find(res_unit.to_i).name + ", " %>
-				    			<% end %>
-				    			<%= rs_final %>
-				    		<% end %>	
+			    			<%# if !@residential_unit.blank? %>
+				    			<%# rs_final = "" %>
+				    			<%# @residential_unit.claim_for_naked_apartment.each do |res_unit| %>
+				    				<%# rs_final += User.find(res_unit.to_i).name + ", " %>
+				    			<%# end %>
+				    			<%#= rs_final %>
+				    		<%# end %>	
 				    		</div>
-				    	</div>
-				    <% end %>
+				    	</div> -->
+				    <%# end %>
 					<% if @residential_unit.unit.access_info %>
 				    	<br />
 				    	<div class="row">

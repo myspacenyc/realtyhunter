@@ -770,3 +770,59 @@ label.required:after {
     margin-right: 1em; }
   .flickr_pagination .next_page {
     margin-left: 1em; }
+
+
+
+input[name="building[train_ids][]"] + label {
+    padding: 7px 0 0px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 10px 0;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+label[for="building_train_ids_1"],
+label[for="building_train_ids_2"],
+label[for="building_train_ids_3"] {background-color: red;}
+label[for="building_train_ids_4"],
+label[for="building_train_ids_5"],
+label[for="building_train_ids_6"]{background-color: green;}
+label[for="building_train_ids_7"] {background-color: purple;}
+label[for="building_train_ids_8"],
+label[for="building_train_ids_9"],
+label[for="building_train_ids_10"]{background-color: blue;}
+
+label[for="building_train_ids_11"],
+label[for="building_train_ids_12"],
+label[for="building_train_ids_13"],
+label[for="building_train_ids_14"]{background-color: orange;}
+label[for="building_train_ids_15"],
+label[for="building_train_ids_16"]{background-color: brown;}
+label[for="building_train_ids_17"], 
+label[for="building_train_ids_18"],
+label[for="building_train_ids_19"],
+label[for="building_train_ids_20"]{
+  background-color: yellow; 
+  color: #000 !important;}
+label[for="building_train_ids_21"]{
+  background-color: lime; 
+  color: #000 !important;}
+
+label[for="building_train_ids_22"],
+label[for="building_train_ids_23"]{background-color: grey;}
+
+label[for="building_train_ids_24"],
+label[for="building_train_ids_25"]{
+  border-radius: 0 !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+}
+
+label[for="building_train_ids_24"]{background-color: blue;}
+label[for="building_train_ids_25"]{background-color: brown;}
+
