@@ -161,11 +161,11 @@
 					  				unit_id: @residential_unit.unit_id,
 					  				user_id: @residential_unit.unit.primary_agent),
 				    			class: 'btn btn-warning btn-sm link-as-button vertical-margin-sm' %>
-				    		<% if !@residential_unit.unit.images.blank? %>
-				    			<a onclick="downloadAll(<%= @residential_unit.unit.images.all.map{|a| a.file.url(:large)} %>)" class="mod-cancel">Download Images</a>
-				    			<%#= link_to "Download Images", download_all_img_path(@residential_unit), data: {turbolinks: false}, class: "mod-cancel"%>
-				    		<% end %>
 					  	<% end %>
+					  	<% if !@residential_unit.unit.images.blank? %>
+			    			<a onclick="downloadAll(<%= @residential_unit.unit.images.all.map{|a| a.file.url(:large)} %>)" class="mod-cancel">Download Images</a>
+			    			<%#= link_to "Download Images", download_all_img_path(@residential_unit), data: {turbolinks: false}, class: "mod-cancel"%>
+			    		<% end %>
 			  		</div>
 			    </div>
 

@@ -754,13 +754,14 @@
     </div>
 
    <div class="col-md-9 hidden-xs hidden-sm">
-      <div id="map_c" style="width: 100%; height: 615px;"></div>
+      <div id="r-big-map" data-map-points="<%= @map_infos %>"></div>
+      <!-- <div id="map_c" style="width: 100%; height: 615px;"></div> -->
     </div>
   </div>
 
-  <!-- <div class="hidden-xs hidden-sm">
+  <div class="hidden-xs hidden-sm">
     <hr class="map-hr">
-  </div> -->
+  </div>
 
   <%= form_tag print_list_residential_listings_path do %>
   <div class="row r-search-rs">
@@ -1024,60 +1025,3 @@
 
   </div>
 </div>
-<script type="text/javascript">
-    var locations = <%= @map_info_for_new_map.to_json.gsub(/\s|"|'/,'') %>
-    var locations_infos = <%= raw @map_popup_info.to_json %>
-    console.log(<%= @map_info_for_new_map.to_json.gsub(/\s|"|'/,'') %>)
-    console.log(<%= raw @map_popup_info.to_json %>)
-    
-    var map = new google.maps.Map(document.getElementById('map_c'), {
-      zoom: 12,
-      center: new google.maps.LatLng(locations[0].lat, locations[0].lng),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    
-    var infowindow = new google.maps.InfoWindow({
-        maxWidth: 350,
-        pixelOffset: new google.maps.Size(-10,-25)
-    });
-
-    var infoFn = function (i) {
-        return function (e) {
-            var obj_info = locations_infos[i];
-            var content = '<div>' +
-                '<span>Location: ' + obj_info.street_number + ' ' + obj_info.route + '</span>' +
-                '</div>';
-
-            infowindow.setContent(content);
-            infowindow.open(map);
-            infowindow.setPosition(new google.maps.LatLng(locations[i]));
-        }
-    };
-
-    var marker, i;
-    
-    for (i = 0; i < locations.length; i++) {
-      var obj = locations[i];
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(obj.lat,obj.lng),
-        map: map
-      });
-      
-      // google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      //   return function() {
-      //     infowindow.setContent(locations_infos[i]);
-      //     infowindow.open(map, marker);
-      //   }
-      // })(marker, i));
-      // (function (marker, i) {
-      //   google.maps.event.addListener(marker, "click", function (e) {
-      //     infoWindow.setContent(locations_infos[i]); // @SEE: infoWindow is used but not initialized or declare anywhere within the scope.
-      //     infoWindow.open(map, marker); // same
-      //     });
-      //   })(marker, i);
-      marker.setMap(map);
-
-      let fn = infoFn(i);
-      google.maps.event.addListener(marker, 'click', fn);
-    }
-  </script>

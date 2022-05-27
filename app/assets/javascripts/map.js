@@ -83,14 +83,16 @@ RHMapbox = {};
       }
 
       L.mapbox.accessToken = $('#mapbox-token').attr('data-mapbox-token');
-      RHMapbox.map = L.mapbox.map(RHMapbox.htmlID, 'rakelblujeans.8594241c', {
+      RHMapbox.map = L.mapbox.map(RHMapbox.htmlID, null, {
           zoomControl: false,
           dragging: true,
           touchZoom: true,
           doubleClickZoom: true,
           scrollWheelZoom: true,
           tap: true
-        }).addLayer(L.mapbox.styleLayer('mapbox://styles/rakelblujeans/ckg0assyj20uq19qvut6w9vu9'));
+        }).setView([40.6739591, -73.9570342], 13).addLayer(L.mapbox.styleLayer('mapbox://styles/rakelblujeans/ckg0assyj20uq19qvut6w9vu9'));
+ 
+      // RHMapbox.map = L.mapbox.map(RHMapbox.htmlID).addLayer(L.mapbox.styleLayer('mapbox://styles/rakelblujeans/ckg0assyj20uq19qvut6w9vu9'));
         // .setView([40.6739591, -73.9570342], 13);
       RHMapbox.overlays = L.layerGroup().addTo(RHMapbox.map);
       RHMapbox.updateOverviewMap(null, buildContentStringFn);
