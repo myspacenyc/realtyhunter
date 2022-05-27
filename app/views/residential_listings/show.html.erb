@@ -1168,28 +1168,30 @@
 <!--% end %--><!-- cache -->
 
 <script type="text/javascript">
-(function(){
-    document.getElementById("link_unit_to_knack").onclick = function(e) {
-      e.preventDefault();
-      document.getElementById("popupdarkbg").style.display = "block";
-      document.getElementById("popup").style.display = "block";
-      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addUNITtoKnack.php?action=add unit&bldg=<%= @residential_unit.unit.building.formatted_street_address %>&apt=<%= @residential_unit.unit.building_unit %>&bed=<%= @residential_unit.beds %>&bath=<%= @residential_unit.baths %>&rent=<%= @residential_unit.unit.gross_price %>";
-      document.getElementById('popupdarkbg').onclick = function() {
-          document.getElementById("popup").style.display = "none";
-          document.getElementById("popupdarkbg").style.display = "none";
-      };
-      return false;
-    }
+<% if current_user.is_management? || current_user.is_listings_manager? || current_user.is_photo_manager? || current_user.id == @residential_unit.unit.building.point_of_contact %>
+	(function(){
+	    document.getElementById("link_unit_to_knack").onclick = function(e) {
+	      e.preventDefault();
+	      document.getElementById("popupdarkbg").style.display = "block";
+	      document.getElementById("popup").style.display = "block";
+	      document.getElementById('popupiframe').src = "https://myspacenyc.com/agents-login/wp-content/themes/septera/RHtoKnack/addUNITtoKnack.php?action=add unit&bldg=<%= @residential_unit.unit.building.formatted_street_address %>&apt=<%= @residential_unit.unit.building_unit %>&bed=<%= @residential_unit.beds %>&bath=<%= @residential_unit.baths %>&rent=<%= @residential_unit.unit.gross_price %>";
+	      document.getElementById('popupdarkbg').onclick = function() {
+	          document.getElementById("popup").style.display = "none";
+	          document.getElementById("popupdarkbg").style.display = "none";
+	      };
+	      return false;
+	    }
 
-    window.onkeydown = function(e) {
-        if (e.keyCode == 27) {
-          document.getElementById("popup").style.display = "none";
-          document.getElementById("popupdarkbg").style.display = "none";
-          e.preventDefault();
-          return;
-        }
-    }
-  })();
+	    window.onkeydown = function(e) {
+	        if (e.keyCode == 27) {
+	          document.getElementById("popup").style.display = "none";
+	          document.getElementById("popupdarkbg").style.display = "none";
+	          e.preventDefault();
+	          return;
+	        }
+	    }
+	  })();
+<% end %>
 
 	var upics = <%= raw @images_url %>
 
