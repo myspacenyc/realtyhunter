@@ -39,10 +39,10 @@
           <% end %>
           <% if current_user.is_special_agent? || current_user.is_wmm_agents? || current_user.is_third_tier_agent? || current_user.is_streeteasy_agent? || current_user.is_hidden_unit_agent? %>
             <% if current_user.is_roomsharing? %>
-              <li><%= link_to "Rooms", room_index_path %></li>
+              <li><%#= link_to "Rooms", room_index_path %></li>
             <% end %>
           <% end %>
-          <% if current_user.is_management? %>
+          <% if current_user.is_management? || current_user.is_roomsharing? %>
             <li><%= link_to "Rooms", room_index_path %></li>
           <% end %>
           <!-- <li class="dropdown">
