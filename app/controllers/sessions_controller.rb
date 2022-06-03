@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
         redirect_to current_user
       elsif current_user.is_hired_photographer?
         redirect_to photographer_todo_path
+      elsif current_user.is_roomsharing?
+        redirect_to room_index_path
       else
         redirect_to residential_listings_path
       end
@@ -61,6 +63,8 @@ class SessionsController < ApplicationController
       redirect_to current_user
     elsif current_user.is_hired_photographer?
       redirect_to photographer_todo_path
+    elsif current_user.is_roomsharing?
+        redirect_to room_index_path
     elsif current_user
       redirect_to residential_listings_path
     else
