@@ -37,7 +37,14 @@
           <% if current_user.is_streeteasy_agent? %>
             <li><%= link_to "Claim for Streeteasy","javascript:void(0);", class: "claim_load" %></li>
           <% end %>
-          <li><%= link_to "Rooms", room_index_path %></li>
+          <% if current_user.is_special_agent? || current_user.is_wmm_agents? || current_user.is_third_tier_agent? || current_user.is_streeteasy_agent? || current_user.is_hidden_unit_agent? %>
+            <% if current_user.is_roomsharing? %>
+              <li><%= link_to "Rooms", room_index_path %></li>
+            <% end %>
+          <% end %>
+          <% if current_user.is_management? %>
+            <li><%= link_to "Rooms", room_index_path %></li>
+          <% end %>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rooms
               <b class="caret"></b>
