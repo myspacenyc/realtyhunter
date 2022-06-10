@@ -163,14 +163,14 @@
                 params[:bath_max]), class: 'form-control') %>
             </div>
           </div>
-          <div class="row vertical-padding">
+          <!-- <div class="row vertical-padding">
             <div class="col-xs-5">
-              <%= label_tag(:listing_id, "Listing ID") %>
+              <%#= label_tag(:listing_id, "Listing ID") %>
             </div>
             <div class="col-xs-6 col-sm-left-padding">
-              <%= text_field_tag :listing_id, params[:listing_id], class:"form-control" %>
+              <%#= text_field_tag :listing_id, params[:listing_id], class:"form-control" %>
             </div>
-          </div>
+          </div> -->
           <div class="row vertical-padding">
             <div class="col-xs-5">
               <%= label_tag(:landlord, "Landlord ") %>
@@ -183,16 +183,16 @@
                 size: 30, class:'form-control' %>
             </div>
           </div>
-          <div class="row vertical-padding">
+          <!-- <div class="row vertical-padding">
             <div class="col-xs-5">
-              <%= label_tag :ll_importance, "LL Class" %>
+              <%#= label_tag :ll_importance, "LL Class" %>
             </div>
             <div class="col-xs-6 col-sm-left-padding">
-              <%= select_tag(:ll_importance,
+              <%#= select_tag(:ll_importance,
                   options_for_select(['Any', ['Gold', 'gold'], ['Silver', 'silver'], ['Bronze', 'bronze']],
                   params[:ll_importance] ? params[:ll_importance] : "Any"), class: 'form-control') %>
             </div>
-          </div>
+          </div> -->
           <div class="row vertical-padding">
             <div class="col-xs-5">
               <%= label_tag :accepts_third_party_gaurantor, "Accepts Third-Party Gaurantor" %>
@@ -233,14 +233,14 @@
                  </h4>
               </div>
               <div id="collapseOne" class="panel-collapse collapse">
-                <div class="row vertical-padding">
+                <!-- <div class="row vertical-padding">
                   <div class="col-xs-3">
-                    <%= label_tag(:public_url, "Public URL") %>
+                    <%#= label_tag(:public_url, "Public URL") %>
                   </div>
                   <div class="col-xs-8 col-sm-left-padding">
-                    <%= text_field_tag :public_url, params[:public_url], class:"form-control" %>
+                    <%#= text_field_tag :public_url, params[:public_url], class:"form-control" %>
                   </div>
-                </div>
+                </div> -->
                 <div class="row vertical-padding">
                   <div class="col-xs-5">
                     <%= label_tag :has_fee, "Broker's Fee" %>
@@ -347,17 +347,17 @@
                 <% end %>
 
                 <% if current_user.is_company_admin? || current_user.is_super_admin? %>
-                  <div class="row vertical-padding">
+                  <!-- <div class="row vertical-padding">
                     <div class="col-xs-5">
-                      <%= label_tag :streeteasy_claim, "Claim for Streeteasy" %>
+                      <%#= label_tag :streeteasy_claim, "Claim for Streeteasy" %>
                     </div>
                     <div class="col-xs-6 col-sm-left-padding">
-                      <%= select_tag(:streeteasy_claim,
+                      <%#= select_tag(:streeteasy_claim,
                           options_for_select(['Any', 'Yes', 'No'],
                           [params[:streeteasy_claim] ? params[:streeteasy_claim].titleize : 'Any']),
                           class: 'form-control') %>
                     </div>
-                  </div>
+                  </div> -->
                 <% end %>
                 <%# if current_user.is_company_admin? || current_user.is_super_admin? || current_user.is_listings_manager? %>
                   <!-- <div class="row vertical-padding">
@@ -396,14 +396,14 @@
                     <%= select_tag(:youtube_video_url, options_for_select([['Any','Any'],['Video Present', 0], ['Not Video Present', 1]], params[:youtube_video_url] ? params[:youtube_video_url].titleize : "Any"), class: 'form-control') %>
                   </div>
                 </div>
-                <div class="row vertical-padding">
+                <!-- <div class="row vertical-padding">
                   <div class="col-xs-5">
-                    <%= label_tag :tour_3d, "3D Tour Present Or Not" %>
+                    <%#= label_tag :tour_3d, "3D Tour Present Or Not" %>
                   </div>
                   <div class="col-xs-6 col-sm-left-padding">
-                    <%= select_tag(:tour_3d, options_for_select([['Any','Any'],['3D Tour Present', 0], ['Not 3D Tour Present', 1]], params[:tour_3d] ? params[:tour_3d].titleize : "Any"), class: 'form-control') %>
+                    <%#= select_tag(:tour_3d, options_for_select([['Any','Any'],['3D Tour Present', 0], ['Not 3D Tour Present', 1]], params[:tour_3d] ? params[:tour_3d].titleize : "Any"), class: 'form-control') %>
                   </div>
-                </div>
+                </div> -->
                 <div class="row vertical-padding">
                   <div class="col-xs-5">
                     <%= label_tag :train_line, "Train Lines" %>
@@ -548,15 +548,15 @@
                   </div>
                 </div>
                 <div class="row vertical-padding">
-                  <div class="col-xs-6">
+                  <!-- <div class="col-xs-6">
                     <div class="checkbox checkbox-warning inline">
-                      <%= check_box_tag :managed_listing, "".freeze, params[:managed_listing] == "true".freeze ? true : false,
+                      <%#= check_box_tag :managed_listing, "".freeze, params[:managed_listing] == "true".freeze ? true : false,
                           class: 'styled' %>
                       <label for="managed_listing">
                         NO DS
                       </label>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="col-xs-6">
                     <div class="checkbox checkbox-warning inline">
                       <%= check_box_tag :featured, "".freeze, params[:featured] == "true".freeze ? true : false,
@@ -566,8 +566,6 @@
                       </label>
                     </div>
                   </div>
-                </div>
-                <div class="row vertical-padding">
                   <div class="col-xs-6">
                     <div class="checkbox checkbox-warning inline">
                       <%= check_box_tag :tenant_credit_offered, "".freeze, params[:tenant_credit_offered] == "true".freeze ? true : false,
@@ -577,6 +575,9 @@
                       </label>
                     </div>
                   </div>
+                </div>
+                <div class="row vertical-padding">
+                  
                   <div class="col-xs-6">
                     <div class="checkbox checkbox-warning inline">
                       <%= check_box_tag :past_24_hours_active, "".freeze, params[:past_24_hours_active] == "true".freeze ? true : false,

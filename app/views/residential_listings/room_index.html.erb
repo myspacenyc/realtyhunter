@@ -654,7 +654,7 @@
                       <br>
                     <% end %>
                   <% end %>
-                  <% if current_user.is_management? || current_user.id == res_list.unit.building.point_of_contact %>
+                  <% if current_user.is_management? || current_user.id == res_list.unit.building.point_of_contact || current_user.is_roomsharing? %>
                     <%= link_to "Edit", edit_room_path(res_list) %>
                   <% end %>
                 </td>
