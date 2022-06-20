@@ -147,11 +147,11 @@ class Building < ApplicationRecord
       if status_lowercase != 'any'
         if status_lowercase == 'active/pending'
           running_list = running_list.joins(:units)
-              .where("units.status IN (?) ",
-                [Unit.statuses['active'], Unit.statuses['pending']])
+              .where("units.status IN (?) AND units.archived =?",
+                [Unit.statuses['active'], Unit.statuses['pending']], false)
         else
           running_list = running_list.joins(:units)
-              .where("units.status = ? ", Unit.statuses[status_lowercase])
+              .where("units.status = ? AND units.archived =?", Unit.statuses[status_lowercase], false)
         end
       end
     end
