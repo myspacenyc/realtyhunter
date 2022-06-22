@@ -99,7 +99,7 @@
                     <% end %>
                     <td width="290" class="mobileunits" align="left" valign="top" style="padding: 0 15px 50px 0; color: white;">
                       <% if @images[listing.unit_id] %>
-                        <a href="https://myspacenyc.com/rentaldetails/?rid=<%= listing.unit.id %>&agentid=<%= @source_agent.id %>"><%= image_tag(listing.unit.images.first.file.url(:large),
+                        <a href="https://myspacenyc.com/rental-details/?rid=<%= listing.unit.id %>&agentid=<%= @source_agent.id %>"><%= image_tag(listing.unit.images.first.file.url(:large),
                           alt: @images[listing.unit_id], style: "width: 100%;padding-bottom: 20px;") %></a>
                       <% else %>
                         <!-- placeholder image -->
@@ -127,7 +127,7 @@
               <% end %>
             </p>
             <br>
-            <a href="https://myspacenyc.com/rentaldetails/?rid=<%= listing.unit.id %>&agentid=<%= @source_agent.id %>" target="_blank"><button style="button">MORE INFO</button></a>
+            <a href="https://myspacenyc.com/rental-details/?rid=<%= listing.unit.id %>&agentid=<%= @source_agent.id %>" target="_blank"><button style="button">MORE INFO</button></a>
               </td>
               <% idx = idx + 1 %>
             <% end %>
