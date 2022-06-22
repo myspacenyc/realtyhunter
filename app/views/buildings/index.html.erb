@@ -103,25 +103,25 @@
   <span id="infinite-table-container">
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-striped table-hover table-condensed infinite-table">
+        <table class="sortable table table-striped table-hover table-condensed infinite-table">
           <thead>
             <tr>
               <th></th>
-              <th data-sort="formatted_street_address" class="th-sortable">
+              <th>
                 Address</th>
-              <th data-sort="formatted_street_address" class="th-sortable">
+              <th>
                 LL Code</th>
-              <th data-sort="streeteasy_eligibility" class="th-sortable">
+              <th>
                 SE Eligible</th>
-              <th data-sort="dotsignal_code" class="th-sortable">
+              <th>
                 Dotsignal Code</th>
-              <th data-sort="pet_policy_id" class="th-sortable">
+              <th>
                 Pet Policy</th>
-              <th data-sort="active_unit_count" class="th-sortable">
+              <th>
                 On-Market Units</th>
-              <th data-sort="total_unit_count" class="th-sortable">
+              <th>
                 Total Units</th>
-              <th data-sort="last_unit_updated_at" class="th-sortable">
+              <th>
                 Last Unit Updated</th>
               <% if current_user.is_management? %>
                 <th colspan="1" class="hidden-print"></th>

@@ -87,6 +87,7 @@ class Building < ApplicationRecord
 
   # get first image as thumbnail
   def self.get_images(list)
+    return nil if list.nil?
     imgs = Image.where(building_id: list.ids, priority: 0)
     Hash[imgs.map {|img| [img.building_id, img.file.url(:thumb)]}]
   end
@@ -160,20 +161,33 @@ class Building < ApplicationRecord
   end
 
 	def self.search(query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
-    running_list = Building
+    # running_list = Building
+    #   .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
+    #   .where('buildings.archived = false')
+    #   .select(
+    #     'buildings.formatted_street_address', 'buildings.notes', 'buildings.landlord_id', 'buildings.pet_policy_id',
+    #     'buildings.dotsignal_code', 'buildings.streeteasy_eligibility',
+    #     'buildings.id', 'buildings.street_number', 'buildings.route','buildings.rating', 'buildings.streeteasy_eligibility',
+    #     'buildings.sublocality', 'buildings.neighborhood_id', 'neighborhoods.name as neighborhood_name',
+    #     'buildings.administrative_area_level_2_short', 'buildings.dotsignal_code',
+    #     'buildings.administrative_area_level_1_short', 'buildings.postal_code',
+    #     'buildings.updated_at', 'buildings.created_at',
+    #     'buildings.last_unit_updated_at',
+    #     'buildings.total_unit_count',
+    #     'buildings.active_unit_count')
+    running_list = Building.joins(:landlord).joins(:rental_term)
       .joins('left join neighborhoods on neighborhoods.id = buildings.neighborhood_id')
       .where('buildings.archived = false')
-      .select(
-        'buildings.formatted_street_address', 'buildings.notes', 'buildings.landlord_id', 'buildings.pet_policy_id',
-        'buildings.dotsignal_code', 'buildings.streeteasy_eligibility',
-        'buildings.id', 'buildings.street_number', 'buildings.route','buildings.rating', 'buildings.streeteasy_eligibility',
-        'buildings.sublocality', 'buildings.neighborhood_id', 'neighborhoods.name as neighborhood_name',
-        'buildings.administrative_area_level_2_short', 'buildings.dotsignal_code',
-        'buildings.administrative_area_level_1_short', 'buildings.postal_code',
-        'buildings.updated_at', 'buildings.created_at',
-        'buildings.last_unit_updated_at',
-        'buildings.total_unit_count',
-        'buildings.active_unit_count')
+      .select("DISTINCT ON(buildings.id) buildings.id,landlords.code AS landlord_code,landlords.id AS landlord_id,
+        buildings.formatted_street_address, buildings.notes, buildings.streeteasy_eligibility, buildings.street_number, buildings.route,buildings.rating,
+        buildings.sublocality, buildings.neighborhood_id, neighborhoods.name as neighborhood_name,
+        buildings.administrative_area_level_2_short, buildings.dotsignal_code, buildings.pet_policy_id,
+        buildings.administrative_area_level_1_short, buildings.postal_code, buildings.llc_name,
+        buildings.updated_at, buildings.created_at,
+        buildings.last_unit_updated_at,
+        buildings.total_unit_count,
+        buildings.active_unit_count,
+        rental_terms.id as rental_term_id, rental_terms.name").order('buildings.id')
 
     running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)
     running_list

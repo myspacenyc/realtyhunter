@@ -362,7 +362,7 @@ class BuildingsController < ApplicationController
       sort_order = %w[asc desc].include?(building_params[:direction]) ? building_params[:direction] : "asc".freeze
       params[:sort_by] = sort_column
       params[:direction] = sort_order
-      @buildings = @buildings.order("#{sort_column} #{sort_order}".freeze)
+      @buildings = @buildings.order("buildings.#{sort_column} #{sort_order}".freeze)
       @buildings
     end
 
