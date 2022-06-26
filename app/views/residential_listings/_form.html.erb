@@ -943,7 +943,7 @@
 
         <div class="row show-tp vertical-margin-lg">
           <div class="col-xs-3 col-md-4">
-            <%= f.label :tp_fee_percentage, 'Tenant Pays %' %>
+            <%= f.label :tp_fee_percentage, 'Minimum Fee From Tenant (Annual Percent)' %>
           </div>
           <div class="col-xs-9 col-md-4">
             <%= f.number_field :tp_fee_percentage, class: 'form-control', min: 0, max: 100 %>
@@ -978,8 +978,9 @@
             <div class="col-xs-9 col-sm-6">
               <%#= f.fields_for @residential_unit.unit.building do |unit_form| %>
               <%# abort @residential_unit.unit.building.rental_term.inspect %>
+              <% only_r_term = ["first & security","first, security & broker's fee","subject to blind bidding on price only","subject to blind bidding on both price and fee","subject to blind bidding on fee only"] %>
               <% if @residential_unit.rental_term %>
-                <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.all.collect { |r| [r.name.titleize, r.id] },
+                <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.where(name: only_r_term).order("created_at ASC").uniq.collect { |r| [r.name.titleize, r.id] },
                   [@residential_unit.rental_term.id ? @residential_unit.rental_term.id : '']),
                    {prompt: "Choose one..."},
                   class: 'form-control',

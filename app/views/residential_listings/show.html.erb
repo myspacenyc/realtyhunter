@@ -391,6 +391,31 @@
 		    		<div class="col-md-6">
 		    			<div class="row">
 		    				<div class="col-xs-5">
+				    			<strong>Broker Fee:</strong>
+				    		</div>
+				    		<div class="col-xs-7">
+				    			<% if @residential_unit.has_fee %>
+				    				<strong>Yes</strong>
+				    			<% else %>
+				    				<strong>No</strong>
+				    			<% end %>
+				    		</div>
+		    			</div>
+		    			<% if @residential_unit.has_fee %>
+			    			<div class="row">
+			    				<div class="col-xs-5">
+					    			<strong>Minimum Fee From Tenant (Annual Percent):</strong>
+					    		</div>
+					    		<div class="col-xs-7">
+					    			<% if @residential_unit.tp_fee_percentage.nil? %>
+					    				<% @residential_unit.tp_fee_percentage %>
+					    			<% else %>
+					    			<% end %>
+					    		</div>
+			    			</div>
+		    			<% end %>
+		    			<div class="row">
+		    				<div class="col-xs-5">
 				    			<strong>Pet Policy:</strong>
 				    		</div>
 				    		<div class="col-xs-7">
