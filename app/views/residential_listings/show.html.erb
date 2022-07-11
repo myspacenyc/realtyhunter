@@ -407,7 +407,7 @@
 					    			<strong>Minimum Fee From Tenant (Annual Percent):</strong>
 					    		</div>
 					    		<div class="col-xs-7">
-					    			<% if @residential_unit.tp_fee_percentage.nil? %>
+					    			<% if !@residential_unit.tp_fee_percentage.nil? %>
 					    				<%= @residential_unit.tp_fee_percentage %>
 					    			<% else %>
 					    			<% end %>
