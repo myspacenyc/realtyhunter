@@ -986,7 +986,7 @@
                   class: 'form-control',
                   :include_blank => true) %>
               <% else %>
-                <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.all.collect { |r| [r.name.titleize, r.id] }),
+                <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.where(name: only_r_term).order("created_at ASC").uniq.collect { |r| [r.name.titleize, r.id] }),
                    {prompt: "Choose one..."},
                   class: 'form-control',
                   :include_blank => true) %>

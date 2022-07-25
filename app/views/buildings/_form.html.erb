@@ -503,7 +503,8 @@ label[for="building_train_ids_25"]{background-color: brown;}
         <%= f.label :rental_term_id, "Rental Terms" %>
       </div>
       <div class="col-xs-9 col-sm-6">
-        <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.all.collect { |r| [r.name.titleize, r.id] },
+        <% only_r_term = ["first & security","first, security & broker's fee","subject to blind bidding on price only","subject to blind bidding on both price and fee","subject to blind bidding on fee only"] %>
+        <%= f.select(:rental_term_id, options_for_select(current_user.company.rental_terms.where(name: only_r_term).order("created_at ASC").uniq.collect { |r| [r.name.titleize, r.id] },
           [@building.rental_term ? @building.rental_term.id : '']),
            {prompt: "Choose one..."},
           class: 'form-control',
