@@ -1222,7 +1222,8 @@ class ResidentialListingsController < ApplicationController
     end
 
     if params[:residential_listing][:unit][:status].downcase == "off" || params[:residential_listing][:unit][:status].downcase == "rented" 
-      @residential_unit.update(streeteasy_url: nil)
+      @residential_unit.update(streeteasy_url: nil, streeteasy_flag: false, rental_term_id: nil)
+      @residential_unit.unit.update(promotional_price: nil,)
       if @residential_unit.unit.building.rental_term
         if @residential_unit.unit.status != "off" || @residential_unit.unit.status != "rented"
           @residential_unit.update_attributes(rental_term_id: @residential_unit.unit.building.rental_term_id)
