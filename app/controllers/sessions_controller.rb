@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_authorize_resource
-  skip_before_action :logged_in_user, only: [:new, :create]
+  skip_before_action :logged_in_user, only: [:new, :create, :google_auth]
 
   def new
     # if already logged in, just go to the correct landing page
@@ -70,6 +70,30 @@ class SessionsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def google_auth
+    @user = User.find_or_create_by(uid: auth['uid']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      u.company_id = 1
+      u.office_id = 1
+      u.streeteasy_email = 'testagent@myspacenyc.com'
+      access_token = auth
+      u.google_token = auth.credentials.token
+      refresh_token = auth.credentials.refresh_token
+      u.google_refresh_token = refresh_token if refresh_token.present?
+      u.password = SecureRandom.urlsafe_base64
+      u.save!
+    end
+    log_in @user
+    redirect_to users_path
+  end
+
+  private
+
+  def auth
+    request.env['omniauth.auth'] 
   end
 
 end
