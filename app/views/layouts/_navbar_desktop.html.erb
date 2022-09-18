@@ -5,6 +5,9 @@
     <% if !current_user.mobile_phone_number.empty?%>
       <br>
       <p class="title-user-details"><%= current_user.mobile_phone_number %></p>
+    <% else %>
+      <br>
+      <p class="title-user-details"></p>
     <% end %>
     <% if !current_user.email.empty?%>
       / <p class="title-user-details"><%= current_user.email %></p>
