@@ -87,7 +87,7 @@ class SessionsController < ApplicationController
       u.save!
     end
     log_in @user
-    redirect_to users_path
+    redirect_to root_path
   end
 
   private
