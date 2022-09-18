@@ -18,7 +18,7 @@ gem "slack-ruby-client"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'mailgun-ruby', '~>1.1.6'
 gem 'jbuilder', '~> 2.0'
-gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ckeditor', git: 'https://github.com/galetahub/ckeditor'
 gem 'execjs'
 ## Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
@@ -114,3 +114,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner'
 end
+
+#omniauth-google
+gem 'omniauth-google-oauth2'
