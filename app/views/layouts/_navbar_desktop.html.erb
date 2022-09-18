@@ -2,7 +2,7 @@
   <h3 class="title-logo">REALTYHUNTER</h3> -
   <% if logged_in? %>
     <h4 class="title-user-name"><%= current_user.name %></h4>
-    <% if !current_user.mobile_phone_number.empty?%>
+    <% if !current_user.mobile_phone_number.nil?%>
       <br>
       <p class="title-user-details"><%= current_user.mobile_phone_number %></p>
     <% else %>
