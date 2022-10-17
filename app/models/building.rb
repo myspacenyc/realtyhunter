@@ -205,10 +205,14 @@ class Building < ApplicationRecord
         'buildings.sublocality', 'buildings.neighborhood_id', 'neighborhoods.name as neighborhood_name',
         'buildings.administrative_area_level_2_short',
         'buildings.administrative_area_level_1_short', 'buildings.postal_code', 'buildings.llc_name',
-        'buildings.updated_at', 'buildings.created_at',
-        'buildings.last_unit_updated_at',
-        'buildings.total_unit_count',
-        'buildings.active_unit_count',
+        'buildings.updated_at', 'buildings.created_at', 'buildings.building_name', 'buildings.description',
+        'buildings.last_unit_updated_at', 'buildings.building_website', 'buildings.building_youtube_url',
+        'buildings.total_unit_count', 'buildings.building_case_name', 'buildings.dotsignal_code', 'buildings.featured',
+        'buildings.active_unit_count', 'buildings.income_restricted', 'buildings.point_of_contact',
+        'buildings.building_master', 'buildings.building_signout_key', 'buildings.building_key_active', 
+        'buildings.building_commercial_property', 'buildings.building_key_status', 
+        'buildings.llc_name', 'buildings.building_office_location', 'buildings.section_8', 'buildings.pet_policy_id',
+        'buildings.streeteasy_eligibility', 'buildings.building_tag_number', 'buildings.third_tier', 'buildings.year_build',
         'rental_terms.id as rental_term_id', 'rental_terms.name')
 
     running_list = Building._filter_query(running_list, query_str, status, rating, streeteasy_eligibility, filter_dotsignal_code, train_line)

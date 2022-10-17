@@ -1,7 +1,7 @@
 class LandlordsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: :create
-  before_action :set_landlord, except: [:index, :new, :create, :filter,
+  before_action :set_landlord, except: [:index, :admin_landlord_csv, :new, :create, :filter,
     :filter_listings, :autocomplete_landlord_code]
   autocomplete :landlord, :code, where: {archived: false}, full: true
   include KnackInterface
@@ -9,6 +9,22 @@ class LandlordsController < ApplicationController
   # GET /landlords
   # GET /landlords.json
   def index
+    respond_to do |format|
+      format.html do
+        set_landlords
+      end
+      format.js do
+        set_landlords
+      end
+      format.csv do
+        set_landlords_csv
+        headers['Content-Disposition'] = "attachment; filename=\"landlords-list.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+  end
+
+  def admin_landlord_csv
     respond_to do |format|
       format.html do
         set_landlords

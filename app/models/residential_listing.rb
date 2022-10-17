@@ -179,7 +179,14 @@ class ResidentialListing < ApplicationRecord
         'units.id AS unit_id', 'units.primary_agent_id', 'units.has_stock_photos', 'units.streeteasy_primary_agent_id',
         'buildings.id AS building_id', 'buildings.street_number', 'buildings.route', 'buildings.point_of_contact',
         'buildings.lat', 'buildings.lng', 'buildings.rating',
-        'residential_listings.id',
+        'residential_listings.id','residential_listings.open_house_times', 'residential_listings.photo_video_access',
+        'residential_listings.favorites', 'residential_listings.expose_address', 'residential_listings.tenant_description',
+        'residential_listings.commission_amount', 'residential_listings.rental_term_id', 'residential_listings.rlsny', 'residential_listings.floor',
+        'residential_listings.total_room_count', 'residential_listings.condition', 'residential_listings.showing_instruction',
+        'residential_listings.virtual_tours_available', 'residential_listings.in_person_tours_available', 'residential_listings.no_access_until_vacant',
+        'residential_listings.cyof', 'residential_listings.share_with_brokers', 'residential_listings.rls_flag',
+        'residential_listings.pending_se', 'residential_listings.managed_listing', 'residential_listings.roomshare_department',
+        'residential_listings.renthop', 'residential_listings.watermark_in_use',
         'residential_listings.beds', 'residential_listings.baths', 'residential_listings.notes', 'residential_listings.tenant_credit_offered',
         'residential_listings.description', 'residential_listings.lease_start', 'residential_listings.dimensions', 'residential_listings.streeteasy_featured',
         'residential_listings.lease_end', 'residential_listings.has_fee', 'residential_listings.youtube_video_url',
@@ -303,6 +310,8 @@ class ResidentialListing < ApplicationRecord
             Unit.statuses["rented"]).limit(300)
         else
           running_list = running_list.where("status = ?", Unit.statuses[status])
+          # running_list = running_list.joins('left join rooms on rooms.residential_listing_id = residential_listings.id').where("units.status = ? or units.status = ?",
+          #   Unit.statuses["active"], Unit.statuses["rsonly"]).where("rooms.status = ?", Unit.statuses[status])
         end
       end
     end

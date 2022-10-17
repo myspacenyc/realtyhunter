@@ -133,9 +133,10 @@ class Landlord < ApplicationRecord
 	def self.search_csv(params, user)
 		running_list = Landlord.unarchived.joins(:company)
       .joins('left join users on users.id = landlords.listing_agent_id')
+      .joins('left join users as poc_user on poc_user.id = landlords.point_of_contact_id')
       .includes(:buildings)
       .where('companies.id = ?', user.company_id)
-      .select('landlords.*', 'users.name as listing_agent_name')
+      .select('landlords.*', 'users.name as listing_agent_name', 'poc_user.name as poc_name')
 		self._search(running_list, params)
 	end
 

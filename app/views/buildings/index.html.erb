@@ -10,6 +10,10 @@
       <%= link_to 'Export to CSV', buildings_path(params.permit!.merge(format: 'csv')),
           class: 'btn btn-warning btn-sm link-as-button', target: :_blank %>
     <% end %>
+    <% if current_user.id = 505 or current_user.id == 112 %>
+      <%= link_to 'Admin CSV', admin_building_csv_path(params.permit!.merge(format: 'csv')),
+          class: 'btn btn-warning btn-sm link-as-button', target: :_blank %>
+    <% end %>
   </div>
   <div class="hidden-md hidden-lg col-sm-6 col-sm-left-padding form-label-responsive page-header-buttons">
     <% if current_user.is_management? || current_user.is_listings_manager? %>

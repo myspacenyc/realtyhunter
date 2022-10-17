@@ -10,6 +10,11 @@
       <%= link_to 'Export to CSV',
           landlords_path(params.permit!.merge(format: 'csv')),
           class: 'btn btn-warning btn-sm link-as-button', target: :_blank %>
+      <% if current_user.id == 505 or current_user.id == 112 %>
+        <%= link_to 'Admin CSV',
+              admin_landlord_csv_path(params.permit!.merge(format: 'csv')),
+              class: 'btn btn-warning btn-sm link-as-button', target: :_blank %>
+      <% end %>
     </div>
     <div class="hidden-md hidden-lg col-sm-6 col-sm-left-padding form-label-responsive page-header-buttons">
       <%= link_to 'Add a Landlord', new_landlord_path, class: 'btn btn-warning btn-sm link-as-button' %>

@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: :create
-  before_action :set_building, except: [:index, :new, :create, :filter, :filter_listings,
+  before_action :set_building, except: [:index, :admin_building_csv, :new, :create, :filter, :filter_listings,
     :refresh_images, :neighborhood_options, :autocomplete_building_formatted_street_address]
   autocomplete :building, :formatted_street_address, full: true
 
@@ -10,6 +10,20 @@ class BuildingsController < ApplicationController
   # GET /buildings
   # GET /buildings.json
   def index
+    set_buildings
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv do
+        set_buildings_csv
+        headers['Content-Disposition'] = "attachment; filename=\"buildings-list.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+  end
+
+  def admin_building_csv
     set_buildings
 
     respond_to do |format|

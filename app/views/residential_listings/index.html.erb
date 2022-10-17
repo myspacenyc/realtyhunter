@@ -21,13 +21,19 @@
             residential_listings_path(params.permit!.merge(format: 'csv')),
             class: 'btn btn-sm btn-warning link-as-button management-action-button',
             target: :_blank %>
-        <% if current_user.email == "rakshit@aristainfotech.com" %>
+        <% if current_user.id == 505 %>
           <%= link_to 'Export Main CSV',
               index_main_path(params.permit!.merge(format: 'csv')),
               class: 'btn btn-sm btn-warning link-as-button management-action-button',
               target: :_blank %>
           <%= link_to 'Export Streeteasy CSV',
               index_streeteasy_path(params.permit!.merge(format: 'csv')),
+              class: 'btn btn-sm btn-warning link-as-button management-action-button',
+              target: :_blank %>
+        <% end %>
+        <% if current_user.id == 505 or current_user.id == 112 %>
+          <%= link_to 'Admin CSV',
+              admin_csv_path(params.permit!.merge(format: 'csv')),
               class: 'btn btn-sm btn-warning link-as-button management-action-button',
               target: :_blank %>
         <% end %>

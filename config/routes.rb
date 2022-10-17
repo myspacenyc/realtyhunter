@@ -97,6 +97,7 @@ Rails.application.routes.draw do
 
   get 'buildings/mass_edit/:id' => "buildings#mass_edit", as: :mass_edit
   post 'buildings/mass_edit_update/:id' => "buildings#mass_edit_update", as: :mass_edit_update
+  get 'buildings/admin_building_csv' => "buildings#admin_building_csv", as: :admin_building_csv
   resources :buildings, concerns: [:images_uploadable, :documents_uploadable] do
     get :autocomplete_building_formatted_street_address, :on => :collection
     member do
@@ -130,6 +131,7 @@ Rails.application.routes.draw do
   get 'residential_listings/:residential_listing_id/unit_images/:id/display' => "unit_images#display", as: :display
   get 'residential_listings/index_streeteasy' => "residential_listings#index_streeteasy", as: :index_streeteasy
   get 'residential_listings/index_main' => "residential_listings#index_main", as: :index_main
+  get 'residential_listings/admin_csv' => "residential_listings#admin_csv", as: :admin_csv
   get 'rooms_image_delete/:id' => "rooms#room_image_delete", as: :room_image_delete
   post 'rooms/:id' => "rooms#room_update", as: :room_update
   post 'rooms/:id/send_inaccuracy' => "rooms#send_inaccuracy", as: :send_inaccuracy_room
@@ -229,6 +231,7 @@ Rails.application.routes.draw do
   end
 
   get "landlords/:id/delete_contact" => "landlords#delete_contact", as: :delete_contact
+  get 'landlords/admin_landlord_csv' => "landlords#admin_landlord_csv", as: :admin_landlord_csv
   resources :landlords do
     get :autocomplete_landlord_code, :on => :collection
     collection do
