@@ -36,6 +36,10 @@
               admin_csv_path(params.permit!.merge(format: 'csv')),
               class: 'btn btn-sm btn-warning link-as-button management-action-button',
               target: :_blank %>
+          <%= link_to 'Image CSV',
+              image_csv_path(params.permit!.merge(format: 'csv')),
+              class: 'btn btn-sm btn-warning link-as-button management-action-button',
+              target: :_blank %>
         <% end %>
       <% end %>
     </div>

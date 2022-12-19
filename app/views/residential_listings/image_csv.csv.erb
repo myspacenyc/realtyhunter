@@ -1,0 +1,7 @@
+<%- headers = [ 'Address', 'Unit', 'Alt Address', 'Alt Unit', 'Status', 'Public URL', 'large_image_url', 'thumb_image_url'] -%>
+<%= CSV.generate_line(headers).strip %>
+<% @retVal = [] %>
+<% @retstatus = [] %>
+<%- @residential_units.each do |listing| -%>
+  <%= ["#{listing.street_number} #{listing.route}", listing.building_unit,listing.alt_address ? listing.alt_address : '', listing.unit.streeteasy_unit ? listing.unit.streeteasy_unit : '', listing.unit.status, listing.unit.public_url ? listing.unit.public_url : '', listing.unit.images.all.map{|a| a.file.url(:large)}.join(","), listing.unit.images.all.map{|a| a.file.url(:thumb)}.join(",")].to_csv.strip.html_safe %>
+<%- end -%>

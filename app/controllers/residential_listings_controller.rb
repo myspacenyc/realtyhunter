@@ -79,6 +79,27 @@ class ResidentialListingsController < ApplicationController
     end
   end
 
+  def image_csv
+    respond_to do |format|
+      format.html.phone do
+        set_residential_listings
+      end
+      # tablets get treated the same as desktops
+      format.html.desktop do
+        set_residential_listings
+      end
+      format.js do
+        set_residential_listings
+      end
+      format.csv do
+        set_residential_listings_csv
+        headers['Content-Disposition'] = "attachment; filename=\"" +
+          current_user.name + " - Residential Listings.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+  end
+
   def index_streeteasy
     respond_to do |format|
       format.html.phone do
